@@ -16,10 +16,9 @@ import com.example.stayactive.R;
 import com.example.stayactive.adapter.AlertAdapter;
 import com.example.stayactive.databinding.FragmentAlertsBinding;
 import com.example.stayactive.model.Alert;
-import com.example.stayactive.model.Exercise;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AlertsFragment extends Fragment {
@@ -36,7 +35,7 @@ public class AlertsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAlertsBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -53,12 +52,9 @@ public class AlertsFragment extends Fragment {
     This method navigates to the create a new alert fragment.
      */
     private void onFABClicked() {
-        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavDirections action = AlertsFragmentDirections.actionAlertsfragmentToAddalertfragment();
-                Navigation.findNavController(view).navigate(action);
-            }
+        binding.floatingActionButton.setOnClickListener(view -> {
+            NavDirections action = AlertsFragmentDirections.actionAlertsfragmentToAddalertfragment();
+            Navigation.findNavController(view).navigate(action);
         });
     }
 
@@ -67,7 +63,7 @@ public class AlertsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         List<Alert> alerts = new ArrayList<>();
 
-        alerts.add(new Alert(1, "alert1", LocalTime.now(), LocalTime.now(), LocalTime.now(), new boolean[7], new ArrayList<Exercise>(), false, 3, true));
+        alerts.add(new Alert(1, "alert1", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),true));
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         alertAdapter.submitList(alerts);
 

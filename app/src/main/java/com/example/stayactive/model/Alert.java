@@ -1,37 +1,33 @@
 package com.example.stayactive.model;
 
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
-import java.time.LocalTime;
-import java.util.List;
+import java.util.Date;
 
+@Entity(
+        tableName = "alert")
 public class Alert {
+    @PrimaryKey
     private int alertId;
 
     private String name;
-    private LocalTime start; // start and end time when the alerts should go off
-    private LocalTime end;
-    private LocalTime alertInterval; // the interval of the alert: e.g. every 60 mins an alert to do x amount of exercies
-    private boolean[] repeatOnDays; // days to repeat the alert on size 7 -> 0 to 6
-    private List<Exercise> exercisesOnAlert; // exercises that needs to be done during the alert
-    private boolean randomExercises; // if the exercises should be generated on random
-    private int maxNumberOfExercises; // maximum number of exercise per alert
+    private Date start; // start and end time when the alerts should go off
+    private Date  end;
     private boolean isActive; // if an alert is active/ in use
 
+    @Ignore
     private static final int DEFAULT_ID = 0; // when I create new alert default ID
     /*
     Default constructor
      */
-    public Alert(int alertId, String name, LocalTime start, LocalTime end, LocalTime alertInterval, boolean[] repeatOnDays, List<Exercise> exercisesOnAlert, boolean randomExercises, int maxNumberOfExercises, boolean isActive) {
+    public Alert(int alertId, String name, Date  start, Date  end, boolean isActive) {
         this.alertId = alertId;
         this.name = name;
         this.start = start;
         this.end = end;
-        this.alertInterval = alertInterval;
-        this.repeatOnDays = repeatOnDays;
-        this.exercisesOnAlert = exercisesOnAlert;
-        this.randomExercises = randomExercises;
-        this.maxNumberOfExercises = maxNumberOfExercises;
         this.isActive = isActive;
     }
 
@@ -40,8 +36,8 @@ public class Alert {
     Used when I create a new alert
     The default id will be automatically incremented.
      */
-    public Alert(String name, LocalTime start, LocalTime end, LocalTime alertInterval, boolean[] repeatOnDays, List<Exercise> exercisesOnAlert, boolean randomExercises, int maxNumberOfExercises, boolean isActive) {
-        this(DEFAULT_ID, name, start, end, alertInterval, repeatOnDays, exercisesOnAlert, randomExercises, maxNumberOfExercises, isActive);
+    public Alert(String name, Date  start, Date  end, boolean isActive) {
+        this(DEFAULT_ID, name, start, end, isActive);
     }
 
     public int getAlertId() {
@@ -56,81 +52,26 @@ public class Alert {
         this.name = name;
     }
 
-    public LocalTime getStart() {
+    public Date  getStart() {
         return start;
     }
 
     /*
     Whenever you want to change the start time
      */
-    public void setStart(LocalTime start) {
+    public void setStart(Date  start) {
         this.start = start;
     }
 
-    public LocalTime getEnd() {
+    public Date  getEnd() {
         return end;
     }
 
     /*
     Whenever you want to change the end time
      */
-    public void setEnd(LocalTime end) {
+    public void setEnd(Date  end) {
         this.end = end;
-    }
-
-    public LocalTime getAlertInterval() {
-        return alertInterval;
-    }
-
-    /*
-    Whenever you want to change alert interval
-     */
-    public void setAlertInterval(LocalTime alertInterval) {
-        this.alertInterval = alertInterval;
-    }
-
-    public boolean[] getRepeatOnDays() {
-        return repeatOnDays;
-    }
-
-    /*
-    Whenever you want to change when it should repeat
-     */
-    public void setRepeatOnDays(boolean[] repeatOnDays) {
-        this.repeatOnDays = repeatOnDays;
-    }
-
-    public List<Exercise> getExercisesOnAlert() {
-        return exercisesOnAlert;
-    }
-
-    /*
-    Whenever you want to change the exercises you want to do on an alert
-     */
-    public void setExercisesOnAlert(List<Exercise> exercisesOnAlert) {
-        this.exercisesOnAlert = exercisesOnAlert;
-    }
-
-    public boolean isRandomExercises() {
-        return randomExercises;
-    }
-
-    /*
-    if the exercises should be randomly generated
-     */
-    public void setRandomExercises(boolean randomExercises) {
-        this.randomExercises = randomExercises;
-    }
-
-    public int getMaxNumberOfExercises() {
-        return maxNumberOfExercises;
-    }
-
-    /*
-    If you want to change the max number of exercises per alert
-     */
-    public void setMaxNumberOfExercises(int maxNumberOfExercises) {
-        this.maxNumberOfExercises = maxNumberOfExercises;
     }
 
     public boolean isActive() {
@@ -157,22 +98,14 @@ public class Alert {
 
             if (this.getAlertId() != alert.getAlertId()) {
                 return false;
-                // same id so some item, check if something has changed
+                // same id hence same item, check if something has changed
             } else {
-                if (!this.getName().equals(alert.getName()) ||
-                this.getStart() != alert.getStart() ||
-                this.getEnd() != alert.getEnd() ||
-                this.getAlertInterval() != getAlertInterval() ||
-                this.getRepeatOnDays() != alert.getRepeatOnDays() ||
-                this.getExercisesOnAlert() != alert.getExercisesOnAlert() ||
-                this.isRandomExercises() != alert.isRandomExercises() ||
-                this.getMaxNumberOfExercises() != alert.getMaxNumberOfExercises() ||
-                this.isActive() != alert.isActive()) {
-                    return false;
-                }
+                return this.getName().equals(alert.getName()) &&
+                        this.getStart() == alert.getStart() &&
+                        this.getEnd() == alert.getEnd() &&
+                        this.isActive() == alert.isActive();
             }
         }
         // item is the same
-        return true;
     }
 }
