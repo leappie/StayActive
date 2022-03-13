@@ -14,12 +14,14 @@ import androidx.room.PrimaryKey;
         indices = {@Index(value = {"username", "password"},
         unique = true)})
 public class User {
-    @PrimaryKey private int userId;
+    @PrimaryKey
+    private int userId;
 
     private String username;
     private String password;
 
-    @Ignore private static final int DEFAULT_ID = 0;
+    @Ignore
+    private static final int DEFAULT_ID = 0;
 
     /*
      * Default constructor

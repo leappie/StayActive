@@ -1,62 +1,61 @@
 package com.example.stayactive.model;
 
-import java.sql.Time;
-import java.util.HashMap;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
+@Entity(
+        tableName = "data")
 public class Data {
+    @PrimaryKey
     private int dataId;
 
-    private Time exerciseDate;
-    private HashMap<Exercise, Double> exercisesDone; // calories burned per exercises
-    private double totalKCaloriesBurned;
-    private Time totalAmountOfActivity;
+    private Date exerciseDate;
+    private double kCaloriesBurned;
+    private Date exerciseTime;
+    private int nrOfTimesDone; // how many times you have done the exercise on that day.
 
+    @Ignore
     private static final int DEFAULT_ID = 0;
 
-    public Data(int dataId, Time exerciseDate, HashMap<Exercise, Double> exercisesDone, double totalKCaloriesBurned, Time totalAmountOfActivity) {
+    public Data(int dataId, Date exerciseDate, double kCaloriesBurned, Date exerciseTime, int nrOfTimesDone) {
         this.dataId = dataId;
         this.exerciseDate = exerciseDate;
-        this.exercisesDone = exercisesDone;
-        this.totalKCaloriesBurned = totalKCaloriesBurned;
-        this.totalAmountOfActivity = totalAmountOfActivity;
+        this.kCaloriesBurned = kCaloriesBurned;
+        this.exerciseTime = exerciseTime;
+        this.nrOfTimesDone = nrOfTimesDone;
     }
 
-    public Data(Time exerciseDate, HashMap<Exercise, Double> exercisesDone, double totalKCaloriesBurned, Time totalAmountOfActivity) {
-        this(DEFAULT_ID, exerciseDate, exercisesDone, totalKCaloriesBurned, totalAmountOfActivity);
+    public Data(Date exerciseDate, double kCaloriesBurned, Date exerciseTime, int nrOfTimesDone) {
+        this(DEFAULT_ID, exerciseDate, kCaloriesBurned, exerciseTime, nrOfTimesDone);
     }
 
     public int getDataId() {
         return dataId;
     }
 
-    public Time getExerciseDate() {
+    public Date getExerciseDate() {
         return exerciseDate;
     }
 
-    public HashMap<Exercise, Double> getExercisesDone() {
-        return exercisesDone;
+    public double getKCaloriesBurned() {
+        return kCaloriesBurned;
     }
 
-    /*
-    List changes every time an exercise is done
-     */
-    public void setExercisesDone(HashMap<Exercise, Double> exercisesDone) {
-        this.exercisesDone = exercisesDone;
+    public Date getExerciseTime() {
+        return exerciseTime;
     }
 
-    public double getTotalKCaloriesBurned() {
-        return totalKCaloriesBurned;
+    public int getNrOfTimesDone() {
+        return nrOfTimesDone;
     }
 
-    public void setTotalKCaloriesBurned(double totalKCaloriesBurned) {
-        this.totalKCaloriesBurned = totalKCaloriesBurned;
+    public void setNrOfTimesDone(int nrOfTimesDone) {
+        this.nrOfTimesDone = nrOfTimesDone;
     }
 
-    public Time getTotalAmountOfActivity() {
-        return totalAmountOfActivity;
-    }
 
-    public void setTotalAmountOfActivity(Time totalAmountOfActivity) {
-        this.totalAmountOfActivity = totalAmountOfActivity;
-    }
+
 }
