@@ -1,0 +1,21 @@
+Gaining access to service instances
+For both the View and Controller instances (what you could call: "UI layer") to have access these services,
+there are two general approaches:
+1. You can inject the required services in the constructors of your views and controllers directly, preferably using a
+DI container.
+2. Using a factory for services as a mandatory dependency for all of your views and controllers.
+
+As you might suspect, the DI container is a lot more elegant solution (while not being the easiest for a beginner).
+The two libraries, that I recommend considering for this functionality would be Syfmony's standalone DependencyInjection component or Auryn.
+
+Both the solutions using a factory and a DI container would let you also share the instances of various servers to be
+shared between the selected controller and view for a given request-response cycle.
+
+
+
+Your controllers have a very clear task: take the user input and, based on this input, change the current state of
+business logic. In this example the states that are changed between are "anonymous user" and "logged in user".
+
+Controller is not responsible for validating user's input, because that is part of business rules and controller is
+definitely not calling SQL queries, like what you would see here or here (please don't hate on them, they are misguided,
+not evil).
