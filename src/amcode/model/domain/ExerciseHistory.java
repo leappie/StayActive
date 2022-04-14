@@ -8,4 +8,18 @@ public class ExerciseHistory {
     private LocalDate date;
     private LocalTime exerciseDuration;
 
+    public ExerciseHistory(int id, LocalDate date, LocalTime exerciseDuration) {
+        this.id = id;
+        this.date = date;
+        this.exerciseDuration = exerciseDuration;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getExerciseDuration() {
+        return exerciseDuration;
+    }
+
 }
