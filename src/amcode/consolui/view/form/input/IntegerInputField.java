@@ -5,6 +5,10 @@ public class IntegerInputField extends InputField<Integer> {
         super(value);
     }
 
+    @Override
+    protected Integer tryParse(String value) {
+        return null;
+    }
 
 
 }

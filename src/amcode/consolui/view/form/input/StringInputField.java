@@ -5,5 +5,10 @@ public class StringInputField extends InputField<String> {
         super(value);
     }
 
+    @Override
+    protected String tryParse(String value) {
+        return null;
+    }
+
 
 }

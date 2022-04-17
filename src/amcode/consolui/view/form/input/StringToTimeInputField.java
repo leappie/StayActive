@@ -7,6 +7,11 @@ public class StringToTimeInputField extends InputField<String>{
         super(value);
     }
 
+    @Override
+    protected String tryParse(String value) {
+        return null;
+    }
+
     public LocalTime getTimeValue() {
         LocalTime time = LocalTime.parse(getValue());
 
