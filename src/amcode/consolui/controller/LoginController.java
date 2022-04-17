@@ -11,6 +11,7 @@ import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.UserInputField;
 import amcode.domain.model.User;
+import amcode.domain.services.UserControl;
 
 import java.util.HashMap;
 
@@ -19,10 +20,10 @@ public class LoginController implements Controller<User> {
     @Override
     public Displayable execute(HashMap<String, InputField> inputField, User model) {
         HashMap<String, InputField> newInputField = new HashMap<>();
-        Authenticate authenticate = new Authenticate();
+        UserControl userControl = new UserControl();
         FormView formView;
 
-        final User user = authenticate.authenticateUser(model);
+        final User user = userControl.authenticateUser(model);
         newInputField.put("logged_in_user", new UserInputField(user));
 
         if (user != null) {
