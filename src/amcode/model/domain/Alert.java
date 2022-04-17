@@ -37,4 +37,19 @@ public class Alert {
     public List<Exercise> getExerciseList() {
         return exerciseList;
     }
+
+    @Override
+    public String toString() {
+        return this.name + " "
+                + "(" + interval.getStartTime()
+                + "-" + interval.getEndTime()
+                + ") " +  isActiveToString();
+    }
+
+    private String isActiveToString() {
+        if (isActive) {
+            return "On";
+        } else
+            return "Off";
+    }
 }

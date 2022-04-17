@@ -25,6 +25,7 @@ public class LoginView extends FormView<User> {
                 String username = getScanner().nextLine();
                 System.out.println("Enter password: ");
                 String password = getScanner().nextLine();
+                // TODO: Validate input
 
                 getInputFields().put("username", new StringInputField(username));
                 getInputFields().put("password", new StringInputField(password));
@@ -40,9 +41,13 @@ public class LoginView extends FormView<User> {
 
                 if(choice.equalsIgnoreCase("y")) {
                     display(DisplayEnum.MAIN);
+                } else {
+                    System.out.println("Create a new account? [Y/N]");
+
+                    choice = getScanner().nextLine();
+                    // TODO: Validate input
                 }
                 // else: Quit app
-
                 break;
             default:
                 break;
@@ -56,7 +61,7 @@ public class LoginView extends FormView<User> {
         final String password = (String) getInputFields().get("password").getValue();
         User user = new User(username, password);
 
-        controller.execute(user);
+        controller.execute(getInputFields(), user);
     }
 
 

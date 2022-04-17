@@ -1,12 +1,16 @@
 package amcode.view;
 
 import amcode.controller.Controller;
+import amcode.model.domain.Alert;
 import amcode.model.domain.User;
+import amcode.view.factory.ViewEnum;
+import amcode.view.factory.ViewFactory;
 import amcode.view.form.DisplayEnum;
 import amcode.view.form.FormView;
 import amcode.view.form.input.InputField;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class AlertListView extends FormView<User> {
 
@@ -18,6 +22,7 @@ public class AlertListView extends FormView<User> {
     public void display(DisplayEnum display) {
         switch (display) {
             case MAIN:
+                displayAlerts();
                 displayInfo();
                 int choice = getScanner().nextInt();
                 // TODO validate input
@@ -25,19 +30,22 @@ public class AlertListView extends FormView<User> {
 
                 switch (choice) {
                     case 1:
-                        // TODO: add new alert
+                        formView = ViewFactory.getView(getInputFields(), ViewEnum.NEW_ALERT_VIEW);
+                        formView.display(DisplayEnum.MAIN);
                         break;
                     case 2:
-                        // TODO: modify alert
+                        // TODO: Modify Alert
+//                        formView = ViewFactory.getView(getInputFields(), ViewEnum.MODIFY_ALERT_VIEW);
+//                        formView.display(DisplayEnum.MAIN);
                         break;
                     case 3:
-                        // TODO: back to mainview
+                        formView = ViewFactory.getView(getInputFields(), ViewEnum.MAIN_VIEW);
+                        formView.display(DisplayEnum.MAIN);
                         break;
                     case 4:
                         // Quit
                         break;
                     default:
-                        // Quit
                         break;
                 }
                 break;
@@ -56,10 +64,20 @@ public class AlertListView extends FormView<User> {
     protected void displayInfo() {
         System.out.println(
                 "Choose an option: +\n" +
-                        "\t1. Add new alert." +
-                        "\t2. Modify alert" +
-                        "\t3. Back." +
+                        "\t1. Add new alert.\n" +
+                        "\t2. Modify alert.\n" +
+                        "\t3. Back.\n" +
                         "\t4. Quit."
         );
+    }
+
+    private void displayAlerts() {
+        User loggedInUser = (User) getInputFields().get("logged_in_user").getValue();
+        List<Alert> alertList = loggedInUser.getAlertList();
+
+        System.out.println("Current alerts: ");
+        for (Alert alert: alertList) {
+            System.out.println("\t" + alert);
+        }
     }
 }

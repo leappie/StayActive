@@ -4,6 +4,8 @@ package amcode.view;
 import amcode.controller.AlertListController;
 import amcode.controller.Controller;
 import amcode.model.domain.User;
+import amcode.view.factory.ViewEnum;
+import amcode.view.factory.ViewFactory;
 import amcode.view.form.DisplayEnum;
 import amcode.view.form.FormView;
 import amcode.view.form.input.InputField;
@@ -28,14 +30,17 @@ public class MainView extends FormView<User> {
                 switch (choice) {
                     case 1:
                         // TODO: view profile
+//                        formView = ViewFactory.getView(getInputFields(), ViewEnum.PROFILE_VIEW);
+//                        formView.display(DisplayEnum.MAIN);
                         break;
                     case 2:
-                        Controller controller = new AlertListController();
-                        formView = new AlertListView(getInputFields(), controller);
+                        formView = ViewFactory.getView(getInputFields(), ViewEnum.ALERT_LIST_VIEW);
                         formView.display(DisplayEnum.MAIN);
                         break;
                     case 3:
-                        // TODO: view exercise hisotry
+                        // TODO: view exercise history
+//                        formView = ViewFactory.getView(getInputFields(), ViewEnum.EXERCISE_HISTORY_VIEW);
+//                        formView.display(DisplayEnum.MAIN);
                         break;
                     case 4:
                         // Quit

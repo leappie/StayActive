@@ -8,8 +8,8 @@ import amcode.view.form.input.InputField;
 
 import java.util.HashMap;
 
-public class ExerciseHistoryView extends FormView<User> {
-    public ExerciseHistoryView(HashMap<String, InputField> inputFields, Controller<User> controller) {
+public class NewAccountView extends FormView<User> {
+    public NewAccountView(HashMap<String, InputField> inputFields, Controller<User> controller) {
         super(inputFields, controller);
     }
 

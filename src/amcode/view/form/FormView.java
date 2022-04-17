@@ -19,9 +19,9 @@ public abstract class FormView<T> implements Displayable, Submittable<T> {
     protected void displayInfo() {
         System.out.println(
                 "Choose an option: +\n" +
-                        "\t1. View profile." +
-                        "\t2. View alerts." +
-                        "\t3. View exercise history." +
+                        "\t1. View profile.\n" +
+                        "\t2. View alerts.\n" +
+                        "\t3. View exercise history.\n" +
                         "\t4. Quit."
         );
 

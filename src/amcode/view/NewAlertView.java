@@ -2,13 +2,16 @@ package amcode.view;
 
 
 import amcode.controller.Controller;
+import amcode.model.domain.Alert;
 import amcode.model.domain.User;
 import amcode.view.form.DisplayEnum;
 import amcode.view.form.FormView;
 import amcode.view.form.input.InputField;
 import amcode.view.form.input.StringInputField;
+import amcode.view.form.input.StringToTimeInputField;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class NewAlertView extends FormView<User> {
 
@@ -21,31 +24,23 @@ public class NewAlertView extends FormView<User> {
 
         switch (display) {
             case MAIN:
-                System.out.println("Enter username: ");
-                String username = getScanner().nextLine();
-                System.out.println("Enter password: ");
-                String password = getScanner().nextLine();
+                System.out.println("Enter alert name: ");
+                String alertName = getScanner().nextLine();
+                System.out.println("Enter start time (ex. 08:00): ");
+                String startTime = getScanner().nextLine();
+                System.out.println("Enter end time (ex. 17:00): ");
+                String endTime = getScanner().nextLine();
+                // TODO: validate input
 
-                getInputFields().put("username", new StringInputField(username));
-                getInputFields().put("password", new StringInputField(password));
+                getInputFields().put("alertName", new StringInputField(alertName));
+                getInputFields().put("startTime", new StringToTimeInputField(startTime)); // TODO: convert to LocalTime (NOT HERE!)
+                getInputFields().put("endTime", new StringToTimeInputField(endTime));
 
                 submit(getInputFields(), getController());
                 break;
             case SUCCESS:
-
                 break;
             case FAIL:
-                System.out.println("Incorrect password or username.");
-                System.out.println("Try again? [Y/N]");
-
-                String choice = getScanner().nextLine();
-                // TODO: Validate input
-
-                if(choice.equalsIgnoreCase("y")) {
-                    display(DisplayEnum.MAIN);
-                }
-                // else: Quit app
-
                 break;
             default:
                 break;
@@ -55,10 +50,9 @@ public class NewAlertView extends FormView<User> {
 
     @Override
     public void submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
-        final String username = (String) getInputFields().get("username").getValue();
-        final String password = (String) getInputFields().get("password").getValue();
-        User user = new User(username, password);
-        controller.execute(user);
+        User loggedInUser = (User) getInputFields().get("logged_in_user").getValue();
+        controller.execute(getInputFields(), loggedInUser);
+
 
     }
 
