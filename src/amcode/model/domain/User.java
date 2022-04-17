@@ -1,6 +1,7 @@
 package amcode.model.domain;
 
-import amcode.enums.Level;
+
+import amcode.model.services.util.Level;
 
 import java.util.List;
 
@@ -11,5 +12,20 @@ public class User {
     private Level level;
     private List<Alert> alertList;
 
+    public User(int id, String username, String password, Level level, List<Alert> alertList) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.level = level;
+        this.alertList = alertList;
+    }
 
+    public User(String username, String password, List<Alert> alertList) {
+        this(0, username, password, null, alertList);
+    }
+
+
+    public User(String username, String password) {
+        this(username, password, null);
+    }
 }

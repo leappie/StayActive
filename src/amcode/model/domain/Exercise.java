@@ -1,6 +1,7 @@
 package amcode.model.domain;
 
-import amcode.enums.Level;
+
+import amcode.model.services.util.Level;
 
 import java.time.LocalTime;
 

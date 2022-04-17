@@ -1,7 +1,8 @@
 package amcode.model.services;
 
-import amcode.enums.Level;
+
 import amcode.model.domain.Exercise;
+import amcode.model.services.util.Level;
 
 import java.util.Set;
 

@@ -1,7 +1,5 @@
 package amcode.model.domain;
 
-import amcode.enums.Level;
-
 import java.util.List;
 import java.util.Set;
 
