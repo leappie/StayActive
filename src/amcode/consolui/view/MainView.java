@@ -44,7 +44,7 @@ public class MainView extends FormView<User> {
                         // Quit
                         break;
                     default:
-                        // Quit
+                        System.out.println("Invalid Option.");
                         break;
                 }
                 break;
@@ -56,6 +56,5 @@ public class MainView extends FormView<User> {
 
     @Override
     public void submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
-
     }
 }

@@ -19,18 +19,18 @@ public class LoginController implements Controller<User> {
 
     @Override
     public Displayable execute(HashMap<String, InputField> inputField, User model) {
-        HashMap<String, InputField> newInputField = new HashMap<>();
+        inputField = new HashMap<>();
         UserControl userControl = new UserControl();
         FormView formView;
 
         final User user = userControl.authenticateUser(model);
-        newInputField.put("logged_in_user", new UserInputField(user));
 
         if (user != null) {
-            formView = ViewFactory.getView(newInputField, View.MAIN_VIEW);
+            inputField.put("logged_in_user", new UserInputField(user));
+            formView = ViewFactory.getView(inputField, View.MAIN_VIEW);
             formView.display(Display.MAIN);
         } else {
-            formView = new LoginView(newInputField, this);
+            formView = new LoginView(inputField, this);
             formView.display(Display.FAIL);
         }
         return formView;

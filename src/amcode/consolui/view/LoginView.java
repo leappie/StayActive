@@ -1,7 +1,9 @@
 package amcode.consolui.view;
 
 import amcode.application.enums.Display;
+import amcode.application.enums.View;
 import amcode.application.interfaces.Controller;
+import amcode.consolui.view.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.StringInputField;
@@ -24,7 +26,6 @@ public class LoginView extends FormView<User> {
                 String username = getScanner().nextLine();
                 System.out.println("Enter password: ");
                 String password = getScanner().nextLine();
-                // TODO: Validate input
 
                 getInputFields().put("username", new StringInputField(username));
                 getInputFields().put("password", new StringInputField(password));
@@ -36,17 +37,7 @@ public class LoginView extends FormView<User> {
                 System.out.println("Try again? [Y/N]");
 
                 String choice = getScanner().nextLine();
-                // TODO: Validate input
-
-                if(choice.equalsIgnoreCase("y")) {
-                    display(Display.MAIN);
-                } else {
-                    System.out.println("Create a new account? [Y/N]");
-
-                    choice = getScanner().nextLine();
-                    // TODO: Validate input
-                }
-                // else: Quit app
+                displayFail(choice);
                 break;
             default:
                 break;
@@ -63,6 +54,29 @@ public class LoginView extends FormView<User> {
         controller.execute(getInputFields(), user);
     }
 
+    private void displayFail (String choice) {
+        if(choice.equalsIgnoreCase("y")) {
+            display(Display.MAIN);
+        } else if (choice.equalsIgnoreCase("n")){
+            System.out.println("Create a new account? [Y/N]");
+            String nextChoice = getScanner().nextLine();
+
+            manageOption(nextChoice);
+        } else {
+            System.out.println("Invalid input.");
+        }
+    }
+
+    private void manageOption(String choice) {
+        if(choice.equalsIgnoreCase("y")) {
+            FormView formView = ViewFactory.getView(View.NEW_ACCOUNT_VIEW);
+            formView.display(Display.MAIN);
+        } else if (choice.equalsIgnoreCase("n")){
+            System.out.println("App closed.");
+        } else {
+            System.out.println("Invalid input.");
+        }
+    }
 
 
 

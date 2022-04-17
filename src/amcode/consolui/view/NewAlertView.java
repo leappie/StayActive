@@ -29,9 +29,9 @@ public class NewAlertView extends FormView<User> {
                 String endTime = getScanner().nextLine();
                 // TODO: validate input
 
-                getInputFields().put("alertName", new StringInputField(alertName));
-                getInputFields().put("startTime", new StringToTimeInputField(startTime)); // TODO: convert to LocalTime (NOT HERE!)
-                getInputFields().put("endTime", new StringToTimeInputField(endTime));
+//                getInputFields().put("alertName", new StringInputField(alertName));
+//                getInputFields().put("startTime", new StringToTimeInputField(startTime)); // TODO: convert to LocalTime (NOT HERE!)
+//                getInputFields().put("endTime", new StringToTimeInputField(endTime));
 
                 submit(getInputFields(), getController());
                 break;
