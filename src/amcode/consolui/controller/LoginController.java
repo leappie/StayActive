@@ -29,7 +29,7 @@ public class LoginController implements Controller<User> {
         final User user = authenticate.authenticateUser(model);
 
         if (user != null) {
-            inputField.put("logged_in_user", new UserInputField(user));
+            inputField.put("loggedInUser", new UserInputField(user));
             formView = ViewFactory.getView(inputField, View.MAIN_VIEW);
             formView.display(Display.MAIN);
         } else {

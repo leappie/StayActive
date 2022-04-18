@@ -1,5 +1,7 @@
 package amcode.domain.model;
 
+import amcode.domain.common.Constants;
+
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
@@ -16,6 +18,10 @@ public class Interval {
         this.endTime = endTime;
         this.totalNotifications = calcTotalNotifications();
         this.notificationsTriggered = 0;
+    }
+
+    public Interval(LocalTime startTime, LocalTime endTime) {
+        this(Constants.DEFAULT_ID, startTime, endTime);
     }
 
     public LocalTime getStartTime() {

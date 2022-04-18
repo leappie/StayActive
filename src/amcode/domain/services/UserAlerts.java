@@ -1,23 +1,36 @@
 package amcode.domain.services;
 
+import amcode.domain.model.Alert;
 import amcode.domain.model.User;
 
 import java.util.List;
 
 public class UserAlerts {
-    public boolean tryAddAlert(User user) {
+    public boolean tryAddAlert(User user, Alert alert) {
+        //TODO: check alert interval startTime cant be equal to endTime
+        alert = incrementAlertName(user, alert);
+        user.getAlertList().add(alert);
+        return true;
+    }
+
+    public boolean updateAlert(User user, Alert alert) {
         return false;
     }
 
-    public boolean updateAlert(User user) {
+    public boolean deleteAlert(User user, Alert alert) {
         return false;
     }
 
-    public boolean deleteAlert(User user) {
-        return false;
-    }
+    private Alert incrementAlertName(User user, Alert alert) {
+        String alertName = alert.getName();
 
-    public List<Alert> getAlerts() {
-        return null;
+        if (alertName.equals("")) {
+            List<Alert> alertList = user.getAlertList();
+            int alertNumber = alertList.size() + 1;
+            alertName = "Alert " + alertNumber;
+            alert.setName(alertName);
+        }
+
+        return alert;
     }
 }

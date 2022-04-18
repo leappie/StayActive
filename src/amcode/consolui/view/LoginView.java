@@ -30,7 +30,7 @@ public class LoginView extends FormView<User> {
                 getInputFields().put("username", new StringInputField(username));
                 getInputFields().put("password", new StringInputField(password));
 
-                submit(getInputFields(), getController());
+                display(Display.SUCCESS);
                 break;
             case FAIL:
                 System.out.println("Incorrect password or username.");
@@ -38,6 +38,9 @@ public class LoginView extends FormView<User> {
 
                 String choice = getScanner().nextLine();
                 displayFail(choice);
+                break;
+            case SUCCESS:
+                submit(getInputFields(), getController());
                 break;
             default:
                 break;
@@ -62,6 +65,7 @@ public class LoginView extends FormView<User> {
             formView.display(Display.MAIN);
         } else {
             System.out.println("Invalid input.");
+            display(Display.MAIN);
         }
     }
 

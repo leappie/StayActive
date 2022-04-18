@@ -17,4 +17,18 @@ public class LevelInputField extends InputField<Level>{
         Level level = Level.valueOf(value);
         return level;
     }
+
+    public Level tryParseUserLevel(String value) {
+        Level level;
+        if (value.equalsIgnoreCase("b")) {
+            value = "EASY";
+            level = tryParse(value);
+        } else if (value.equalsIgnoreCase("e")) {
+            value = "MEDIUM";
+            level = tryParse(value);
+        } else {
+            level = null;
+        }
+        return level;
+    }
 }

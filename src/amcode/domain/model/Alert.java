@@ -1,5 +1,8 @@
 package amcode.domain.model;
 
+import amcode.domain.common.Constants;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Alert {
@@ -15,6 +18,10 @@ public class Alert {
         this.isActive = isActive;
         this.interval = interval;
         this.exerciseList = exerciseList;
+    }
+
+    public Alert(String name, Interval interval) {
+        this(Constants.DEFAULT_ID, name, Constants.DEFAULT_IS_ACTIVE, interval, new ArrayList<>());
     }
 
     public String getName() {

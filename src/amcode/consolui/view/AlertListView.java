@@ -78,7 +78,7 @@ public class AlertListView extends FormView<User> {
     }
 
     private void displayAlerts() {
-        User loggedInUser = (User) getInputFields().get("logged_in_user").getValue();
+        User loggedInUser = (User) getInputFields().get("loggedInUser").getValue();
         List<Alert> alertList = loggedInUser.getAlertList();
 
         System.out.println("Current alerts: ");
