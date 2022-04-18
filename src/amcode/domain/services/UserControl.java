@@ -15,10 +15,12 @@ public class UserControl {
     }
 
     public boolean updatePassword(User user) {
-        return false;
+        return true;
     }
 
     public boolean tryAddUser(User user) {
-        return false;
+        // TODO: implement database
+        // NOTE: IF USERNAME IS TAKEN RETURN FALSE:
+        return true;
     }
 }

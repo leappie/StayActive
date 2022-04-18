@@ -36,9 +36,6 @@ public class NewAccountView extends FormView<User> {
 
                 submit(getInputFields(), getController());
                 break;
-            case FAIL:
-
-                break;
             default:
                 break;
         }
@@ -53,7 +50,6 @@ public class NewAccountView extends FormView<User> {
         User user = new User(username, password, level);
 
         controller.execute(getInputFields(), user);
-
     }
 
     private String convertInput(String value) {

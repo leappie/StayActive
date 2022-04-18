@@ -58,27 +58,11 @@ public class LoginView extends FormView<User> {
         if(choice.equalsIgnoreCase("y")) {
             display(Display.MAIN);
         } else if (choice.equalsIgnoreCase("n")){
-            System.out.println("Create a new account? [Y/N]");
-            String nextChoice = getScanner().nextLine();
-
-            manageOption(nextChoice);
-        } else {
-            System.out.println("Invalid input.");
-        }
-    }
-
-    private void manageOption(String choice) {
-        if(choice.equalsIgnoreCase("y")) {
-            FormView formView = ViewFactory.getView(View.NEW_ACCOUNT_VIEW);
+            FormView formView = ViewFactory.getView(View.START_VIEW);
             formView.display(Display.MAIN);
-        } else if (choice.equalsIgnoreCase("n")){
-            System.out.println("App closed.");
         } else {
             System.out.println("Invalid input.");
         }
     }
-
-
-
 
 }

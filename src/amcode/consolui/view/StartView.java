@@ -6,14 +6,14 @@ import amcode.application.common.interfaces.Controller;
 import amcode.consolui.view.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
+import amcode.consolui.view.form.input.StringInputField;
 import amcode.domain.model.User;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
 
-public class MainView extends FormView<User> {
-
-    public MainView(HashMap<String, InputField> inputFields, Controller<User> controller) {
+public class StartView extends FormView<User> {
+    public StartView(HashMap<String, InputField> inputFields, Controller<User> controller) {
         super(inputFields, controller);
     }
 
@@ -29,21 +29,15 @@ public class MainView extends FormView<User> {
 
                     switch (choice) {
                         case 1:
-                            // TODO: view profile
-                            System.out.println("Nothing to find here ...");
-                            display(Display.MAIN);
+                            formView = ViewFactory.getView(View.LOGIN_VIEW);
+                            formView.display(Display.MAIN);
                             break;
                         case 2:
-                            /*
-                            use same input fields to include logged_in_user
-                             */
-                            formView = ViewFactory.getView(getInputFields(), View.ALERT_LIST_VIEW);
+                            formView = ViewFactory.getView(View.NEW_ACCOUNT_VIEW);
                             formView.display(Display.MAIN);
                             break;
                         case 3:
-                            // TODO: view exercise history
-                            System.out.println("Nothing to find here ...");
-                            display(Display.MAIN);
+                            // TODO: FORGOT PASSWORD
                             break;
                         case 4:
                             // Quit
@@ -54,17 +48,28 @@ public class MainView extends FormView<User> {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
-                    formView = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
+                    formView = ViewFactory.getView(View.START_VIEW);
                     formView.display(Display.MAIN);
                 }
                 break;
             default:
                 break;
         }
+    }
 
+    @Override
+    protected void displayInfo() {
+        System.out.println(
+                "Choose an option: \n" +
+                        "\t1. Login.\n" +
+                        "\t2. Create new account.\n" +
+                        "\t3. Forgot password.\n" +
+                        "\t4. Quit."
+        );
     }
 
     @Override
     public void submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
     }
+
 }

@@ -10,6 +10,7 @@ import amcode.domain.model.Alert;
 import amcode.domain.model.User;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class AlertListView extends FormView<User> {
@@ -24,29 +25,35 @@ public class AlertListView extends FormView<User> {
             case MAIN:
                 displayAlerts();
                 displayInfo();
-                int choice = getScanner().nextInt();
-                // TODO validate input
                 FormView formView;
 
-                switch (choice) {
-                    case 1:
-                        formView = ViewFactory.getView(getInputFields(), View.NEW_ALERT_VIEW);
-                        formView.display(Display.MAIN);
-                        break;
-                    case 2:
-                        // TODO: Modify Alert
-//                        formView = ViewFactory.getView(getInputFields(), ViewEnum.MODIFY_ALERT_VIEW);
-//                        formView.display(DisplayEnum.MAIN);
-                        break;
-                    case 3:
-                        formView = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
-                        formView.display(Display.MAIN);
-                        break;
-                    case 4:
-                        // Quit
-                        break;
-                    default:
-                        break;
+                try {
+                    int choice = getScanner().nextInt();
+
+                    switch (choice) {
+                        case 1:
+                            formView = ViewFactory.getView(getInputFields(), View.NEW_ALERT_VIEW);
+                            formView.display(Display.MAIN);
+                            break;
+                        case 2:
+                            // TODO: Modify Alert
+                            System.out.println("Nothing to find here ...");
+                            display(Display.MAIN);
+                            break;
+                        case 3:
+                            formView = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
+                            formView.display(Display.MAIN);
+                            break;
+                        case 4:
+                            // Quit
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input.");
+                    formView = ViewFactory.getView(getInputFields(), View.ALERT_LIST_VIEW);
+                    formView.display(Display.MAIN);
                 }
                 break;
             default:
@@ -79,5 +86,7 @@ public class AlertListView extends FormView<User> {
         for (Alert alert: alertList) {
             System.out.println("\t" + alert);
         }
+
+        System.out.println("------------------------------");
     }
 }

@@ -23,6 +23,11 @@ public class LoginController implements Controller<User> {
         UserControl userControl = new UserControl();
         FormView formView;
 
+        /*
+        try authenticate user
+        if successful get the user from the database and proceed to the main view
+        else go back and try again
+         */
         final User user = userControl.authenticateUser(model);
 
         if (user != null) {
@@ -30,7 +35,7 @@ public class LoginController implements Controller<User> {
             formView = ViewFactory.getView(inputField, View.MAIN_VIEW);
             formView.display(Display.MAIN);
         } else {
-            formView = new LoginView(inputField, this);
+            formView = ViewFactory.getView(inputField,this, View.LOGIN_VIEW);
             formView.display(Display.FAIL);
         }
         return formView;

@@ -53,6 +53,9 @@ public class ViewFactory {
             case NEW_ACCOUNT_VIEW:
                 view = new NewAccountView(inputField, controller);
                 break;
+            case START_VIEW:
+                view = new StartView(inputField, controller);
+                break;
 //            case NOTIFICATION_VIEW:
 //                view = new NotificationView(inputField, controller);
 //                break;
