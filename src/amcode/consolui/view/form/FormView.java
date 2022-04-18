@@ -26,7 +26,6 @@ public abstract class FormView<T> implements Displayable, Submittable<T> {
                         "\t3. View exercise history.\n" +
                         "\t4. Quit."
         );
-
     }
 
     public Scanner getScanner() {

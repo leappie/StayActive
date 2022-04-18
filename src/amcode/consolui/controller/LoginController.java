@@ -5,13 +5,11 @@ import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.interfaces.Displayable;
 import amcode.application.common.services.Authenticate;
-import amcode.consolui.view.LoginView;
-import amcode.consolui.view.factory.ViewFactory;
+import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.UserInputField;
 import amcode.domain.model.User;
-import amcode.domain.services.UserControl;
 
 import java.util.HashMap;
 
@@ -20,7 +18,7 @@ public class LoginController implements Controller<User> {
     @Override
     public Displayable execute(HashMap<String, InputField> inputField, User model) {
         inputField = new HashMap<>();
-        UserControl userControl = new UserControl();
+        Authenticate authenticate = new Authenticate();
         FormView formView;
 
         /*
@@ -28,7 +26,7 @@ public class LoginController implements Controller<User> {
         if successful get the user from the database and proceed to the main view
         else go back and try again
          */
-        final User user = userControl.authenticateUser(model);
+        final User user = authenticate.authenticateUser(model);
 
         if (user != null) {
             inputField.put("logged_in_user", new UserInputField(user));

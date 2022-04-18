@@ -3,7 +3,7 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
-import amcode.consolui.view.factory.ViewFactory;
+import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.domain.model.Alert;
@@ -64,13 +64,12 @@ public class AlertListView extends FormView<User> {
 
     @Override
     public void submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
-
     }
 
     @Override
     protected void displayInfo() {
         System.out.println(
-                "Choose an option: +\n" +
+                "Choose an option: \n" +
                         "\t1. Add new alert.\n" +
                         "\t2. Modify alert.\n" +
                         "\t3. Back.\n" +
@@ -87,6 +86,6 @@ public class AlertListView extends FormView<User> {
             System.out.println("\t" + alert);
         }
 
-        System.out.println("------------------------------");
+        System.out.println("--------------------------");
     }
 }

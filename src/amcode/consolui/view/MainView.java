@@ -3,7 +3,7 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
-import amcode.consolui.view.factory.ViewFactory;
+import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.domain.model.User;

@@ -1,7 +1,7 @@
 package amcode.domain.model;
 
 import amcode.domain.enums.Level;
-import amcode.application.common.services.Constants;
+import amcode.domain.common.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
 package amcode.domain.services;
 
-import amcode.domain.model.Alert;
 import amcode.domain.model.User;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package amcode.consolui.view.factory;
+package amcode.consolui.factory;
 
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;

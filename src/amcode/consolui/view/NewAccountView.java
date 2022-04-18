@@ -18,15 +18,17 @@ public class NewAccountView extends FormView<User> {
 
     @Override
     public void display(Display display) {
+        String username;
+        String password;
+        String value;
         switch (display) {
             case MAIN:
                 System.out.println("Set username: ");
-                String username = getScanner().nextLine();
+                username = getScanner().nextLine();
                 System.out.println("Set password: ");
-                String password = getScanner().nextLine();
-                System.out.println("Set user exercise experience, beginner or experienced. [B/E] ");
-                String value = getScanner().nextLine();
-                value = convertInput(value);
+                password = getScanner().nextLine();
+                value = displayInputLevel();
+                value = checkInput(value);
 
                 Level level = new LevelInputField().tryParse(value);
 
@@ -35,6 +37,14 @@ public class NewAccountView extends FormView<User> {
                 getInputFields().put("user_level", new LevelInputField(level));
 
                 submit(getInputFields(), getController());
+                break;
+            case FAIL:
+                value = displayInputLevel();
+                value = checkInput(value);
+
+                level = new LevelInputField().tryParse(value);
+                getInputFields().put("user_level", new LevelInputField(level));
+
                 break;
             default:
                 break;
@@ -52,15 +62,22 @@ public class NewAccountView extends FormView<User> {
         controller.execute(getInputFields(), user);
     }
 
-    private String convertInput(String value) {
+    private String checkInput(String value) {
         if (value.equalsIgnoreCase("b")) {
             value = "EASY";
         } else if (value.equalsIgnoreCase("e")) {
             value = "MEDIUM";
         } else {
-            System.out.println("Invalid input.");
-            display(Display.MAIN);
+            System.out.println("Invalid input for level. Try again.");
+            display(Display.FAIL);
         }
+        return value;
+    }
+
+    private String displayInputLevel() {
+        System.out.println("Set user exercise experience, beginner or experienced. [B/E] ");
+        String value = getScanner().nextLine();
+
         return value;
     }
 }

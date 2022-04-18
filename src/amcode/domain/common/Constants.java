@@ -1,4 +1,4 @@
-package amcode.application.common.services;
+package amcode.domain.common;
 
 import amcode.domain.enums.Level;
 
