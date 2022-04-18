@@ -1,6 +1,6 @@
 package amcode.consolui.view.form.input.validation;
 
-import amcode.application.interfaces.Validator;
+import amcode.application.common.interfaces.Validator;
 
 public class StringRequiredValidation implements Validator<String> {
     @Override

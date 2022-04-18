@@ -1,7 +1,7 @@
 package amcode.consolui.view.factory;
 
-import amcode.application.enums.View;
-import amcode.application.interfaces.Controller;
+import amcode.application.common.enums.View;
+import amcode.application.common.interfaces.Controller;
 import amcode.consolui.view.*;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;

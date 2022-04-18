@@ -1,4 +1,4 @@
-package amcode.application.enums;
+package amcode.application.common.enums;
 
 public enum View {
     LOGIN_VIEW,

@@ -1,4 +1,4 @@
-package amcode.application.interfaces;
+package amcode.application.common.interfaces;
 
 import amcode.consolui.view.form.input.InputField;
 

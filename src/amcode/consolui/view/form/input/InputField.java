@@ -1,15 +1,21 @@
 package amcode.consolui.view.form.input;
 
-import amcode.application.interfaces.Validator;
-
-import java.util.ArrayList;
-import java.util.List;
+import amcode.application.common.interfaces.Validator;
 
 public abstract class InputField<T> {
     private T value;
 
     public InputField(T value) {
         this.value = value;
+    }
+
+    public InputField() {
+        this.value = null;
+    }
+
+    public boolean trySetValue(T value) {
+        this.value = value;
+        return true;
     }
 
 

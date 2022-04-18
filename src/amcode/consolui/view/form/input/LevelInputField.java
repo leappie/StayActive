@@ -8,6 +8,10 @@ public class LevelInputField extends InputField<Level>{
         super(value);
     }
 
+    public LevelInputField() {
+        super(null);
+    }
+
     @Override
     public Level tryParse(String value) {
         Level level = Level.valueOf(value);

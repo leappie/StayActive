@@ -1,4 +1,4 @@
-package amcode.application.services;
+package amcode.application.common.services;
 
 import amcode.domain.model.User;
 

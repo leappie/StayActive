@@ -1,10 +1,10 @@
 package amcode.consolui.controller;
 
-import amcode.application.enums.Display;
-import amcode.application.enums.View;
-import amcode.application.interfaces.Controller;
-import amcode.application.interfaces.Displayable;
-import amcode.application.services.Authenticate;
+import amcode.application.common.enums.Display;
+import amcode.application.common.enums.View;
+import amcode.application.common.interfaces.Controller;
+import amcode.application.common.interfaces.Displayable;
+import amcode.application.common.services.Authenticate;
 import amcode.consolui.view.LoginView;
 import amcode.consolui.view.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;

@@ -1,6 +1,7 @@
 package amcode.domain.model;
 
 import amcode.domain.enums.Level;
+import amcode.application.common.services.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +24,14 @@ public class User {
         this.exerciseList = exerciseList;
     }
 
-    public User(String username, String password, List<Alert> alertList, List<Exercise> exerciseList) {
-        this(0, username, password, null, alertList, exerciseList);
-    }
 
+    public User(String username, String password, Level level) {
+        this(Constants.DEFAULT_ID,username, password, level, new ArrayList<>(), new ArrayList<>());
+    }
 
     public User(String username, String password) {
-        this(username, password, new ArrayList<>(), new ArrayList<>());
+        this(username, password, Constants.DEFAULT_LEVEL);
     }
-
 
     public String getUsername() {
         return username;

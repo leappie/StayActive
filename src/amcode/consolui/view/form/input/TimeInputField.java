@@ -2,8 +2,8 @@ package amcode.consolui.view.form.input;
 
 import java.time.LocalTime;
 
-public class StringToTimeInputField extends InputField<String>{
-    public StringToTimeInputField(String value) {
+public class TimeInputField extends InputField<String>{
+    public TimeInputField(String value) {
         super(value);
     }
 

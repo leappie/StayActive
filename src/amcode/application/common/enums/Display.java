@@ -1,4 +1,4 @@
-package amcode.application.enums;
+package amcode.application.common.enums;
 
 public enum Display {
     MAIN,

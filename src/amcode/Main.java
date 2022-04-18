@@ -1,7 +1,7 @@
 package amcode;
 
-import amcode.application.enums.Display;
-import amcode.application.enums.View;
+import amcode.application.common.enums.Display;
+import amcode.application.common.enums.View;
 import amcode.consolui.view.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 
