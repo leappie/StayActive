@@ -3,6 +3,7 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
@@ -13,15 +14,16 @@ import java.util.HashMap;
 
 public class LoginView extends FormView<User> {
 
-    public LoginView(HashMap<String, InputField> inputFields, Controller<User> controller) {
-        super(inputFields, controller);
+    public LoginView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+        super(inputFields, controller, screenTitle);
     }
 
     @Override
     public void display(Display display) {
-
         switch (display) {
             case MAIN:
+                createTitle();
+
                 System.out.println("Enter username: ");
                 String username = getScanner().nextLine();
                 System.out.println("Enter password: ");
@@ -40,7 +42,11 @@ public class LoginView extends FormView<User> {
                 displayFail(choice);
                 break;
             case SUCCESS:
-                submit(getInputFields(), getController());
+                DisplayScreen displayScreen = submit(getInputFields(), getController());
+                FormView formView = (FormView) displayScreen.getFormView();
+                Display screen = displayScreen.getDisplay();
+
+                formView.display(screen);
                 break;
             default:
                 break;
@@ -49,12 +55,12 @@ public class LoginView extends FormView<User> {
 
 
     @Override
-    public void submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
         final String username = (String) getInputFields().get("username").getValue();
         final String password = (String) getInputFields().get("password").getValue();
         User user = new User(username, password);
 
-        controller.execute(getInputFields(), user);
+        return controller.execute(getInputFields(), user);
     }
 
     private void displayFail (String choice) {

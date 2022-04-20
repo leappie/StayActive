@@ -3,6 +3,7 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
@@ -12,14 +13,15 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 
 public class StartView extends FormView<User> {
-    public StartView(HashMap<String, InputField> inputFields, Controller<User> controller) {
-        super(inputFields, controller);
+    public StartView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+        super(inputFields, controller, screenTitle);
     }
 
     @Override
     public void display(Display display) {
         switch (display) {
             case MAIN:
+                createTitle();
                 displayInfo();
                 FormView formView;
 
@@ -68,7 +70,8 @@ public class StartView extends FormView<User> {
     }
 
     @Override
-    public void submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+        return null;
     }
 
 }

@@ -12,10 +12,12 @@ public abstract class FormView<T> implements Displayable, Submittable<T> {
     private Scanner scanner = new Scanner(System.in);
     private HashMap<String, InputField> inputFields;
     private Controller<T> controller;
+    private String screenTitle;
 
-    public FormView(HashMap<String, InputField> inputFields, Controller<T> controller) {
+    public FormView(HashMap<String, InputField> inputFields, Controller<T> controller, String screenTitle) {
         this.controller = controller;
         this.inputFields = inputFields;
+        this.screenTitle = screenTitle;
     }
 
     protected void displayInfo() {
@@ -38,5 +40,44 @@ public abstract class FormView<T> implements Displayable, Submittable<T> {
 
     public Controller<T> getController() {
         return controller;
+    }
+
+    protected void createTitle() {
+        final int TOTAL_CHARS = 30;
+        int totalCharsLeft = TOTAL_CHARS - this.screenTitle.length();
+        int charsRightSide = totalCharsLeft / 2;
+        int charsLeftSide;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (charsRightSide == (totalCharsLeft - charsRightSide)) {
+            // even chars each side
+            charsLeftSide = charsRightSide;
+        } else {
+            // uneven chars each side
+            charsLeftSide = charsRightSide + 1;
+        }
+
+        for (int i = 1; i < charsLeftSide; i++) {
+            if (i == charsLeftSide - 1) {
+                stringBuilder.append(" ");
+            } else if (i == charsLeftSide - 2) {
+                stringBuilder.append(">");
+            } else {
+                stringBuilder.append("-");
+            }
+        }
+        stringBuilder.append(this.screenTitle);
+
+        for (int i = 1; i < charsLeftSide; i++) {
+            if (i == 1) {
+                stringBuilder.append(" ");
+            } else if (i == 2) {
+                stringBuilder.append("<");
+            } else {
+                stringBuilder.append("-");
+            }
+        }
+
+        System.out.println(stringBuilder);
     }
 }

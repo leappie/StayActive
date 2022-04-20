@@ -30,31 +30,31 @@ public class ViewFactory {
 
         switch (viewName) {
             case ALERT_LIST_VIEW:
-                view = new AlertListView(inputField, controller);
+                view = new AlertListView(inputField, controller, "Alerts list");
                 break;
             case MAIN_VIEW:
-                view = new MainView(inputField, controller);
+                view = new MainView(inputField, controller, "Home");
                 break;
             case EXERCISE_HISTORY_VIEW:
-                view = new ExerciseHistoryView(inputField, controller);
+                view = new ExerciseHistoryView(inputField, controller, "Exercise history");
                 break;
             case MODIFY_ALERT_VIEW:
-                view = new ModifyAlertView(inputField, controller);
+                view = new ModifyAlertView(inputField, controller, "Change alert");
                 break;
             case LOGIN_VIEW:
-                view = new LoginView(inputField, controller);
+                view = new LoginView(inputField, controller, "Login");
                 break;
             case NEW_ALERT_VIEW:
-                view = new NewAlertView(inputField, controller);
+                view = new NewAlertView(inputField, controller, "New alert");
                 break;
             case PROFILE_VIEW:
-                view = new ProfileView(inputField, controller);
+                view = new ProfileView(inputField, controller, "Profile");
                 break;
             case NEW_ACCOUNT_VIEW:
-                view = new NewAccountView(inputField, controller);
+                view = new NewAccountView(inputField, controller, "Create account");
                 break;
             case START_VIEW:
-                view = new StartView(inputField, controller);
+                view = new StartView(inputField, controller, "StayActive");
                 break;
 //            case NOTIFICATION_VIEW:
 //                view = new NotificationView(inputField, controller);

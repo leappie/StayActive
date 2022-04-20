@@ -2,6 +2,7 @@ package amcode.consolui.view;
 
 import amcode.application.common.enums.Display;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.StringInputField;
@@ -16,26 +17,30 @@ public class NewAlertView extends FormView<Alert> {
     private LocalTime startTime = null;
     private LocalTime endTime = null;
 
-    public NewAlertView(HashMap<String, InputField> inputFields, Controller<Alert> controller) {
-        super(inputFields, controller);
+    public NewAlertView(HashMap<String, InputField> inputFields, Controller<Alert> controller, String screenTitle) {
+        super(inputFields, controller, screenTitle);
     }
 
     @Override
     public void display(Display display) {
-
         switch (display) {
             case MAIN:
+                createTitle();
+
                 System.out.println("Enter alert name: ");
                 String alertName = getScanner().nextLine();
                 getInputFields().put("alertName", new StringInputField(alertName));
                 displayEnterTime();
-
                 break;
             case FAIL:
                 displayEnterTime();
                 break;
             case SUCCESS:
-                submit(getInputFields(), getController());
+                DisplayScreen displayScreen = submit(getInputFields(), getController());
+                FormView formView = (FormView) displayScreen.getFormView();
+                Display screen = displayScreen.getDisplay();
+
+                formView.display(screen);
                 break;
             default:
                 break;
@@ -44,7 +49,7 @@ public class NewAlertView extends FormView<Alert> {
 
 
     @Override
-    public void submit(HashMap<String, InputField> inputFields, Controller<Alert> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<Alert> controller) {
         final String alertName = (String) getInputFields().get("alertName").getValue();
         final LocalTime startTime = (LocalTime) getInputFields().get("startTime").getValue();
         final LocalTime endTime = (LocalTime) getInputFields().get("endTime").getValue();
@@ -52,7 +57,7 @@ public class NewAlertView extends FormView<Alert> {
         Interval interval = new Interval(startTime, endTime);
         Alert alert = new Alert(alertName, interval);
 
-        controller.execute(getInputFields(), alert);
+        return controller.execute(getInputFields(), alert);
     }
 
 
