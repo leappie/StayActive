@@ -6,15 +6,15 @@ import amcode.domain.model.User;
 import java.util.List;
 
 public class UserAlerts {
-    public boolean tryAddAlert(User user, Alert alert) {
+    public Alert tryAddAlert(User user, Alert alert) {
         //TODO: check alert interval startTime cant be equal to endTime
         alert = incrementAlertName(user, alert);
         user.getAlertList().add(alert);
-        return true;
+        return alert;
     }
 
-    public boolean updateAlert(User user, Alert alert) {
-        return false;
+    public Alert updateAlert(User user, Alert alert) {
+        return null;
     }
 
     public boolean deleteAlert(User user, Alert alert) {
