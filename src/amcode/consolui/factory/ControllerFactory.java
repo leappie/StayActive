@@ -25,6 +25,9 @@ public class ControllerFactory {
             case TRIGGER_ALERT_VIEW:
                 controller = new TriggerAlertController();
                 break;
+            case NOTIFICATION_VIEW:
+                controller = new NotificationController();
+                break;
             default:
                 controller = null;
                 break;

@@ -4,6 +4,7 @@ import amcode.domain.common.Constants;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 public class Interval {
     private int id;
@@ -52,20 +53,34 @@ public class Interval {
 
     public LocalTime calcNextNotificationTime() {
         final int ONE_NOTIFICATION = 1;
-        LocalTime alertLow;
-        LocalTime alertHigh;
+        LocalTime notificationTimeLow;
+        LocalTime notificationTimeHigh;
 
-        if (this.totalNotifications == ONE_NOTIFICATION) {
-            alertLow = this.startTime;
-            alertHigh = this.endTime;
+        notificationTimeLow = this.startTime.plus(
+                (long) Constants.INTERVAL_LENGTH_MINUTES * this.notificationsTriggered, ChronoUnit.MINUTES);
+
+        // if all notifications triggered -> end
+        if (this.notificationsTriggered == this.totalNotifications) {
+            return null;
+        // if it is the last notification
+        } else if (this.notificationsTriggered == this.totalNotifications - 1) {
+            notificationTimeHigh = this.endTime;
         } else {
-
+            notificationTimeHigh = notificationTimeLow.plus(Constants.INTERVAL_LENGTH_MINUTES, ChronoUnit.MINUTES);
         }
 
+        // calc notification time
+        int secondsLow = notificationTimeLow.toSecondOfDay();
+        int secondsHigh = notificationTimeHigh.toSecondOfDay();
+        Random random = new Random();
+        int randomSeconds = secondsLow + random.nextInt(secondsHigh - secondsLow + 1);
+        LocalTime time = LocalTime.ofSecondOfDay(randomSeconds);
 
+        // update fields
+        this.notificationsTriggered ++;
 
-        return null;
-    }
+        return time;
+        }
 
 
 }

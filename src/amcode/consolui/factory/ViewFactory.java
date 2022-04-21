@@ -58,9 +58,9 @@ public class ViewFactory {
             case TRIGGER_ALERT_VIEW:
                 view = new TriggerAlertView(inputField, controller, "Trigger alert");
                 break;
-//            case NOTIFICATION_VIEW:
-//                view = new NotificationView(inputField, controller);
-//                break;
+            case NOTIFICATION_VIEW:
+                view = new NotificationView(inputField, controller,"!!Notification!!");
+                break;
 //            case ON_EXERCISE_VIEW:
 //                view = new OnExerciseView(inputField, controller);
 //                break;
