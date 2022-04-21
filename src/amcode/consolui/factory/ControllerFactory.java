@@ -22,6 +22,9 @@ public class ControllerFactory {
             case NEW_ACCOUNT_VIEW:
                 controller = new NewAccountController();
                 break;
+            case TRIGGER_ALERT_VIEW:
+                controller = new TriggerAlertController();
+                break;
             default:
                 controller = null;
                 break;

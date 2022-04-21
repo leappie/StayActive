@@ -47,8 +47,8 @@ public class AlertListView extends InfoView<User> {
                             break;
                         case 3:
                             // TODO trigger alert
-                            System.out.println("Nothing to find here ...");
-                            display(Display.MAIN);
+                            formView = ViewFactory.getView(getInputFields(), View.TRIGGER_ALERT_VIEW);
+                            formView.display(Display.MAIN);
                             break;
                         case 4:
                             formView = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
