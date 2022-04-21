@@ -2,10 +2,9 @@ package amcode.consolui.view;
 
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
-import amcode.application.common.interfaces.Controller;
-import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
+import amcode.consolui.view.form.InfoView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.domain.model.Alert;
 import amcode.domain.model.User;
@@ -14,10 +13,14 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class AlertListView extends FormView<User> {
+public class AlertListView extends InfoView<User> {
+    private User loggedInUser;
+    private List<Alert> alertList;
 
-    public AlertListView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
-        super(inputFields, controller, screenTitle);
+    public AlertListView(HashMap<String, InputField> inputFields, String screenTitle) {
+        super(inputFields, screenTitle);
+        this.loggedInUser = (User) getInputFields().get("loggedInUser").getValue();
+        this.alertList = loggedInUser.getAlertList();
     }
 
     @Override
@@ -43,10 +46,15 @@ public class AlertListView extends FormView<User> {
                             display(Display.MAIN);
                             break;
                         case 3:
+                            // TODO trigger alert
+                            System.out.println("Nothing to find here ...");
+                            display(Display.MAIN);
+                            break;
+                        case 4:
                             formView = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
                             formView.display(Display.MAIN);
                             break;
-                        case 4:
+                        case 5:
                             // Quit
                             break;
                         default:
@@ -65,18 +73,14 @@ public class AlertListView extends FormView<User> {
     }
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
-        return null;
-    }
-
-    @Override
     protected void displayInfo() {
         System.out.println(
                 "Choose an option: \n" +
                         "\t1. Add new alert.\n" +
                         "\t2. Modify alert.\n" +
-                        "\t3. Back.\n" +
-                        "\t4. Quit."
+                        "\t3. Trigger alert.\n" +
+                        "\t4. Back.\n" +
+                        "\t5. Quit."
         );
     }
 

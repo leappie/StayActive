@@ -21,10 +21,16 @@ public class NewAlertController implements Controller<Alert> {
         Display display;
 
         UserAlerts userAlerts = new UserAlerts();
-        userAlerts.tryAddAlert(user, model);
+        Alert alert = userAlerts.tryAddAlert(user, model);
+        //TODO: add alert in DB
 
-        formView = ViewFactory.getView(inputField, View.ALERT_LIST_VIEW);
-        display = Display.MAIN;
+        if (alert == null) {
+            formView = ViewFactory.getView(inputField, View.NEW_ALERT_VIEW);
+            display = Display.FAIL;
+        } else {
+            formView = ViewFactory.getView(inputField, View.ALERT_LIST_VIEW);
+            display = Display.MAIN;
+        }
 
         return new DisplayScreen(formView, display);
     }

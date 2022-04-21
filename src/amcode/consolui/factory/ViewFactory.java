@@ -18,7 +18,6 @@ public class ViewFactory {
     }
 
     public static FormView getView(HashMap<String, InputField> inputField, View viewName) {
-        FormView view;
         Controller controller = ControllerFactory.getController(viewName);
         FormView formView = getView(inputField, controller, viewName);
 
@@ -30,10 +29,10 @@ public class ViewFactory {
 
         switch (viewName) {
             case ALERT_LIST_VIEW:
-                view = new AlertListView(inputField, controller, "Alerts list");
+                view = new AlertListView(inputField, "Alerts list");
                 break;
             case MAIN_VIEW:
-                view = new MainView(inputField, controller, "Home");
+                view = new MainView(inputField, "Home");
                 break;
             case EXERCISE_HISTORY_VIEW:
                 view = new ExerciseHistoryView(inputField, controller, "Exercise history");
@@ -54,7 +53,10 @@ public class ViewFactory {
                 view = new NewAccountView(inputField, controller, "Create account");
                 break;
             case START_VIEW:
-                view = new StartView(inputField, controller, "StayActive");
+                view = new StartView(inputField, "StayActive");
+                break;
+            case TRIGGER_ALERT_VIEW:
+                view = new TriggerAlertView(inputField, controller, "Trigger alert");
                 break;
 //            case NOTIFICATION_VIEW:
 //                view = new NotificationView(inputField, controller);

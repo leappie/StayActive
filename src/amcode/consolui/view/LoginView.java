@@ -71,7 +71,7 @@ public class LoginView extends FormView<User> {
             formView.display(Display.MAIN);
         } else {
             System.out.println("Invalid input.");
-            display(Display.MAIN);
+            display(Display.FAIL);
         }
     }
 

@@ -1,16 +1,26 @@
 package amcode.domain.services;
 
 import amcode.domain.model.Alert;
+import amcode.domain.model.Interval;
 import amcode.domain.model.User;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class UserAlerts {
     public Alert tryAddAlert(User user, Alert alert) {
-        //TODO: check alert interval startTime cant be equal to endTime
-        alert = incrementAlertName(user, alert);
-        user.getAlertList().add(alert);
-        return alert;
+        Interval interval = alert.getInterval();
+
+        // Difference startTime and endTime must be greater than 0
+        if (interval.getStartTime().until(interval.getEndTime(), ChronoUnit.MINUTES) <= 0) {
+            return null;
+        } else {
+            // if no name entered, create new name
+            alert = incrementAlertName(user, alert);
+
+            user.getAlertList().add(alert);
+            return alert;
+        }
     }
 
     public Alert updateAlert(User user, Alert alert) {

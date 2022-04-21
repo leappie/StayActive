@@ -1,7 +1,5 @@
 package amcode.consolui.view.form.input;
 
-import amcode.application.common.interfaces.Validator;
-
 public abstract class InputField<T> {
     private T value;
 

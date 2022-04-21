@@ -2,19 +2,18 @@ package amcode.consolui.view;
 
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
-import amcode.application.common.interfaces.Controller;
-import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
+import amcode.consolui.view.form.InfoView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.domain.model.User;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
 
-public class StartView extends FormView<User> {
-    public StartView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
-        super(inputFields, controller, screenTitle);
+public class StartView extends InfoView<User> {
+    public StartView(HashMap<String, InputField> inputFields, String screenTitle) {
+        super(inputFields, screenTitle);
     }
 
     @Override
@@ -69,9 +68,5 @@ public class StartView extends FormView<User> {
         );
     }
 
-    @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
-        return null;
-    }
 
 }

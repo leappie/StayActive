@@ -33,6 +33,7 @@ public class NewAlertView extends FormView<Alert> {
                 displayEnterTime();
                 break;
             case FAIL:
+                System.out.println("Invalid time input. Try again.");
                 displayEnterTime();
                 break;
             case SUCCESS:
@@ -70,12 +71,11 @@ public class NewAlertView extends FormView<Alert> {
         LocalTime startTime = new TimeInputField().tryParse(startTimeString);
         LocalTime endTime = new TimeInputField().tryParse(endTimeString);
 
-        if (startTime != null || endTime != null) {
+        if (startTime != null && endTime != null) {
             getInputFields().put("startTime", new TimeInputField(startTime));
             getInputFields().put("endTime", new TimeInputField(endTime));
             display(Display.SUCCESS);
         } else {
-            System.out.println("Invalid time input. Try again.");
             display(Display.FAIL);
         }
     }

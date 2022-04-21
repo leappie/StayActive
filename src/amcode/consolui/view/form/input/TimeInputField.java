@@ -16,13 +16,17 @@ public class TimeInputField extends InputField<LocalTime>{
     public LocalTime tryParse(String value) {
         LocalTime time;
 
-        String[] splitValue = value.split(":");
-        boolean checked = checkChars(splitValue);
-
-        if (checked) {
-            time = LocalTime.parse(value);
-        } else {
+        if (value.isEmpty() || value.length() < 5) {
             time = null;
+        } else {
+            String[] splitValue = value.split(":");
+            boolean checked = checkChars(splitValue);
+
+            if (checked) {
+                time = LocalTime.parse(value);
+            } else {
+                time = null;
+            }
         }
         return time;
     }

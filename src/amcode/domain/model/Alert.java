@@ -36,6 +36,10 @@ public class Alert {
         return isActive;
     }
 
+    public Interval getInterval() {
+        return interval;
+    }
+
     public void setActive(boolean active) {
         isActive = active;
     }
