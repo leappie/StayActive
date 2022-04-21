@@ -28,6 +28,8 @@ public class ControllerFactory {
             case NOTIFICATION_VIEW:
                 controller = new NotificationController();
                 break;
+            case ON_EXERCISE_VIEW:
+                controller = new OnExerciseController();
             default:
                 controller = null;
                 break;

@@ -50,16 +50,11 @@ public class Alert {
 
     @Override
     public String toString() {
+        String isActiveString = this.isActive ? "On" : "Off";
         return this.name + " "
                 + "(" + interval.getStartTime()
                 + "-" + interval.getEndTime()
-                + ") " +  isActiveToString();
+                + ") " +  isActiveString;
     }
 
-    private String isActiveToString() {
-        if (isActive) {
-            return "On";
-        } else
-            return "Off";
-    }
 }

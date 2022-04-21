@@ -1,10 +1,12 @@
 package amcode.domain.model;
 
 import amcode.domain.common.Constants;
+import amcode.domain.interfaces.Notifiable;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Interval {
     private int id;
@@ -12,33 +14,51 @@ public class Interval {
     private LocalTime endTime;
     private int totalNotifications;
     private int notificationsTriggered;
+    private List<Notification> notificationList;
 
-    public Interval(int id, LocalTime startTime, LocalTime endTime) {
+    public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.totalNotifications = calcTotalNotifications();
         this.notificationsTriggered = 0;
+        this.notificationList = notificationList;
     }
 
     public Interval(LocalTime startTime, LocalTime endTime) {
-        this(Constants.DEFAULT_ID, startTime, endTime);
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
+        this(Constants.DEFAULT_ID, startTime, endTime, new ArrayList<>());
     }
 
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public List<Notification> getNotificationList() {
+        return notificationList;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
     public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public int getTotalNotifications() {
+        return totalNotifications;
+    }
+
+    public int getNotificationsTriggered() {
+        return notificationsTriggered;
+    }
+
+    public void setNotificationsTriggered(int notificationsTriggered) {
+        this.notificationsTriggered = notificationsTriggered;
     }
 
     private int calcTotalNotifications() {
@@ -50,37 +70,21 @@ public class Interval {
         return 0;
     }
 
+    public LocalTime calcNextNotificationTime(Notifiable notifiable) {
+        LocalTime notificationTime = notifiable.calcNotificationTime(this);
+        this.notificationList.add(new Notification(notificationTime, false));
 
-    public LocalTime calcNextNotificationTime() {
-        final int ONE_NOTIFICATION = 1;
-        LocalTime notificationTimeLow;
-        LocalTime notificationTimeHigh;
+        return notificationTime;
+    }
 
-        notificationTimeLow = this.startTime.plus(
-                (long) Constants.INTERVAL_LENGTH_MINUTES * this.notificationsTriggered, ChronoUnit.MINUTES);
-
-        // if all notifications triggered -> end
-        if (this.notificationsTriggered == this.totalNotifications) {
-            return null;
-        // if it is the last notification
-        } else if (this.notificationsTriggered == this.totalNotifications - 1) {
-            notificationTimeHigh = this.endTime;
-        } else {
-            notificationTimeHigh = notificationTimeLow.plus(Constants.INTERVAL_LENGTH_MINUTES, ChronoUnit.MINUTES);
-        }
-
-        // calc notification time
-        int secondsLow = notificationTimeLow.toSecondOfDay();
-        int secondsHigh = notificationTimeHigh.toSecondOfDay();
-        Random random = new Random();
-        int randomSeconds = secondsLow + random.nextInt(secondsHigh - secondsLow + 1);
-        LocalTime time = LocalTime.ofSecondOfDay(randomSeconds);
-
-        // update fields
-        this.notificationsTriggered ++;
-
-        return time;
-        }
-
-
+    @Override
+    public String toString() {
+        return "Interval{" + "\n" +
+                "startTime=" + startTime + "\n" +
+                ", endTime=" + endTime + "\n" +
+                ", totalNotifications=" + totalNotifications + "\n" +
+                ", notificationsTriggered=" + notificationsTriggered + "\n" +
+                ", notificationList=" + notificationList + "\n" +
+                '}';
+    }
 }
