@@ -1,26 +1,27 @@
 package amcode.application.common.services;
 
+import amcode.domain.interfaces.Authenticator;
 import amcode.domain.model.User;
 
-public class Authenticate {
+public class Authenticate implements Authenticator {
 
     public User authenticateUser(User user) {
         // TODO: implement database
         // NOTE: NO DEPENDENCY ON INFRASTRUCTURE!
-//        int randomNum = ThreadLocalRandom.current().nextInt(1, 11);
-//        if (randomNum < 5) {
-//            user = null;
-//        }
+
         return user;
     }
 
+    @Override
     public boolean updatePassword(User user) {
-        return true;
+        return false;
     }
+
 
     public boolean tryAddUser(User user) {
         // TODO: implement database
         // NOTE: IF USERNAME IS TAKEN RETURN FALSE:
+
         return true;
     }
 }

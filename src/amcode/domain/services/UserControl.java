@@ -1,26 +1,18 @@
 package amcode.domain.services;
 
+import amcode.domain.interfaces.Authenticator;
 import amcode.domain.model.User;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class UserControl {
-    public User authenticateUser(User user) {
-        // TODO: implement database
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 11);
-        if (randomNum < 5) {
-            user = null;
-        }
-        return user;
+    public User authenticateUser(Authenticator authenticator, User user) {
+        return authenticator.authenticateUser(user);
     }
 
-    public boolean updatePassword(User user) {
-        return true;
+    public boolean updatePassword(Authenticator authenticator, User user) {
+        return authenticator.updatePassword(user);
     }
 
-    public boolean tryAddUser(User user) {
-        // TODO: implement database
-        // NOTE: IF USERNAME IS TAKEN RETURN FALSE:
-        return true;
+    public boolean tryAddUser(Authenticator authenticator, User user) {
+        return authenticator.tryAddUser(user);
     }
 }
