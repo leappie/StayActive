@@ -19,7 +19,19 @@ public class Notification {
         this(Constants.DEFAULT_ID, notificationTime, accepted);
     }
 
+    public Notification(LocalTime notificationTime) {
+        this(notificationTime, Constants.DEFAULT_ACCEPTED);
+    }
+
     public LocalTime getNotificationTime() {
         return notificationTime;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
     }
 }

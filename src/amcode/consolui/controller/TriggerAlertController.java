@@ -10,7 +10,8 @@ import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.TimeInputField;
 import amcode.domain.model.Alert;
 import amcode.domain.model.Interval;
-import amcode.domain.services.NotificationTimeCreatorA;
+import amcode.domain.services.interval.notification.IntervalNotification;
+import amcode.domain.services.interval.notification.NotificationTimeCreatorA;
 
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -24,7 +25,9 @@ public class TriggerAlertController implements Controller<Alert> {
         // calculate notification time
         Alert chosenAlert = (Alert) inputField.get("chosenTriggerAlert").getValue();
         Interval interval = chosenAlert.getInterval();
-        LocalTime notificationTime = interval.calcNextNotificationTime(new NotificationTimeCreatorA());
+        IntervalNotification intervalNotification = new IntervalNotification();
+        LocalTime notificationTime = intervalNotification.calcNextNotificationTime(
+                new NotificationTimeCreatorA(), interval);
         inputField.put("notificationTime", new TimeInputField(notificationTime));
 
         formView = ViewFactory.getView(inputField, View.NOTIFICATION_VIEW);

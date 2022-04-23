@@ -1,7 +1,6 @@
 package amcode.domain.model;
 
 import amcode.domain.common.Constants;
-import amcode.domain.interfaces.Notifiable;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -63,19 +62,16 @@ public class Interval {
 
     private int calcTotalNotifications() {
         if (this.startTime != null && this.endTime != null) {
-            double diffMinutes = this.startTime.until(this.endTime, ChronoUnit.MINUTES);
-
-            return (int) Math.ceil(diffMinutes / Constants.INTERVAL_LENGTH_MINUTES);
+            // if the end time is greater or equal to start time return 0
+            if (startTime.compareTo(endTime) > 0) {
+                double diffMinutes = this.startTime.until(this.endTime, ChronoUnit.MINUTES);
+                return (int) Math.ceil(diffMinutes / Constants.INTERVAL_LENGTH_MINUTES);
+            }
         }
         return 0;
     }
 
-    public LocalTime calcNextNotificationTime(Notifiable notifiable) {
-        LocalTime notificationTime = notifiable.calcNotificationTime(this);
-        this.notificationList.add(new Notification(notificationTime, false));
 
-        return notificationTime;
-    }
 
     @Override
     public String toString() {

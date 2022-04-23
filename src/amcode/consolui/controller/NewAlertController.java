@@ -9,7 +9,7 @@ import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.domain.model.Alert;
 import amcode.domain.model.User;
-import amcode.domain.services.UserAlerts;
+import amcode.domain.services.user.UserAlerts;
 
 import java.util.HashMap;
 

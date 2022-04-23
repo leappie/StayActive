@@ -1,4 +1,4 @@
-package amcode.domain.services;
+package amcode.domain.services.user;
 
 import amcode.domain.model.Alert;
 import amcode.domain.model.Interval;
