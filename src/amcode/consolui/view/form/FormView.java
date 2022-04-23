@@ -3,6 +3,7 @@ package amcode.consolui.view.form;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.interfaces.Displayable;
 import amcode.application.common.interfaces.Submittable;
+import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.view.form.input.InputField;
 
 import java.util.HashMap;
@@ -79,5 +80,10 @@ public abstract class FormView<T> implements Displayable, Submittable<T> {
         }
 
         System.out.println(stringBuilder);
+    }
+
+    @Override
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<T> controller) {
+        return null;
     }
 }

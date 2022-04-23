@@ -29,10 +29,10 @@ public class ViewFactory {
 
         switch (viewName) {
             case ALERT_LIST_VIEW:
-                view = new AlertListView(inputField, "Alerts list");
+                view = new AlertListView(inputField, controller,"Alerts list");
                 break;
             case MAIN_VIEW:
-                view = new MainView(inputField, "Home");
+                view = new MainView(inputField, controller,"Home");
                 break;
             case EXERCISE_HISTORY_VIEW:
                 view = new ExerciseHistoryView(inputField, controller, "Exercise history");
@@ -53,7 +53,7 @@ public class ViewFactory {
                 view = new NewAccountView(inputField, controller, "Create account");
                 break;
             case START_VIEW:
-                view = new StartView(inputField, "StayActive");
+                view = new StartView(inputField, controller,"StayActive");
                 break;
             case TRIGGER_ALERT_VIEW:
                 view = new TriggerAlertView(inputField, controller, "Trigger alert");
