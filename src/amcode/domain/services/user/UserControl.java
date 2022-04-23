@@ -1,4 +1,4 @@
-package amcode.domain.services;
+package amcode.domain.services.user;
 
 import amcode.domain.interfaces.Authenticator;
 import amcode.domain.model.User;
