@@ -13,9 +13,10 @@ import java.util.List;
 
 public class ExerciseLevelCreatorA implements Exercisable {
     @Override
-    public Level getExerciseDifficulty(Interval interval) {
+    public List<Level> getExerciseDifficulty(Interval interval) {
         List<Notification> notificationList = interval.getNotificationList();
-        Level level = null;
+        List<Level> levels = new ArrayList<>();
+        Level level;
         int minutes;
 
         if (notificationList.size() == 1 ) {
@@ -24,6 +25,7 @@ public class ExerciseLevelCreatorA implements Exercisable {
             if (notification.isAccepted()) {
                 minutes = notification.getNotificationTime().getMinute();
                 level = getExerciseLevel(minutes);
+                levels.add(level);
             }
         } else {
             // get de last two accepted notifications;
@@ -43,27 +45,25 @@ public class ExerciseLevelCreatorA implements Exercisable {
 
                 minutes = (int) timeA.until(timeB, ChronoUnit.MINUTES);
                 level  = getExerciseLevel(minutes);
+                levels.add(level);
             }
         }
-        return level;
+        return levels;
     }
 
     @Override
-    public List<Level> updateExerciseDifficulty(User user, Level level) {
+    public List<Level> getExerciseDifficulty(Interval interval, User user) {
         Level userLevel = user.getLevel();
-        List<Level> exerciseLevels = new ArrayList<>();
+        List<Level> exerciseLevels = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
+        Level level = exerciseLevels.get(exerciseLevels.size() - 1);
 
         switch (userLevel) {
             // include more easy exercises
             case EASY:
-                if (level == Level.EASY) {
+                if (level == Level.MEDIUM) {
                     exerciseLevels.add(Level.EASY);
-                } else if (level == Level.MEDIUM) {
-                    exerciseLevels.add(Level.EASY);
+                } else if (level == Level.HARD) {
                     exerciseLevels.add(Level.MEDIUM);
-                } else {
-                    exerciseLevels.add(Level.MEDIUM);
-                    exerciseLevels.add(Level.HARD);
                 }
                 break;
             case MEDIUM:
