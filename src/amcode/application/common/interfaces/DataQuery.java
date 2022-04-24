@@ -1,4 +1,4 @@
 package amcode.application.common.interfaces;
 
-public interface DatabaseQuery {
+public interface DataQuery {
 }

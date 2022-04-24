@@ -4,15 +4,21 @@ import amcode.domain.interfaces.Authenticator;
 import amcode.domain.model.User;
 
 public class UserControl {
-    public User authenticateUser(Authenticator authenticator, User user) {
-        return authenticator.authenticateUser(user);
+    private Authenticator authenticator;
+
+    public UserControl(Authenticator authenticator) {
+        this.authenticator = authenticator;
     }
 
-    public boolean updatePassword(Authenticator authenticator, User user) {
-        return authenticator.updatePassword(user);
+    public User authenticateUser(User user) {
+        return this.authenticator.authenticateUser(user);
     }
 
-    public boolean tryAddUser(Authenticator authenticator, User user) {
-        return authenticator.tryAddUser(user);
+    public boolean updatePassword(User user) {
+        return this.authenticator.updatePassword(user);
+    }
+
+    public boolean tryAddUser(User user) {
+        return this.authenticator.tryAddUser(user);
     }
 }

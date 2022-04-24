@@ -1,4 +1,4 @@
-package amcode.domain.services.interval.exerciselevel;
+package amcode.domain.services.intervalexerciselevel;
 
 import amcode.domain.enums.Level;
 import amcode.domain.interfaces.Levelable;

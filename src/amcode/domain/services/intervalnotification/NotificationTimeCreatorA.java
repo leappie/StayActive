@@ -1,4 +1,4 @@
-package amcode.domain.services.interval.notification;
+package amcode.domain.services.intervalnotification;
 
 import amcode.domain.common.Constants;
 import amcode.domain.interfaces.Notifiable;
