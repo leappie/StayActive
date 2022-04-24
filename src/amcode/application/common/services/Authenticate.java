@@ -9,7 +9,11 @@ public class Authenticate implements Authenticator {
         // TODO: implement database
         // NOTE: NO DEPENDENCY ON INFRASTRUCTURE!
 
-        return user;
+        //HARD CODED:
+        if (user.getUsername() == "a" && user.getPassword() == "m") {
+            return user;
+        }
+        return null;
     }
 
     @Override
