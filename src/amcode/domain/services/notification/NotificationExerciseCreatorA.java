@@ -9,16 +9,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class NotificationExercise {
-    public Exercise getExerciseOnNotification(
-            Exercisable exercisable, List<Exercise> exerciseList , List<Level> levelList) {
+public class NotificationExerciseCreatorA implements Exercisable {
+    @Override
+    public Exercise getExerciseOnNotification(List<Exercise> exerciseList , List<Level> levelList) {
         List<Exercise> toDoExercises = new ArrayList<>();
 
         for (Level level: levelList) {
             for (Exercise exercise: exerciseList) {
                 if (exercise.getLevel() == level) {
                     for (int i = 1; i <= exercise.getWeight(); i++)
-                    toDoExercises.add(exercise);
+                        toDoExercises.add(exercise);
                 }
             }
         }
@@ -31,7 +31,11 @@ public class NotificationExercise {
         final int randomIndex = listMin + random.nextInt(listMax - listMin + 1);
         Exercise exercise = toDoExercises.get(randomIndex);
 
+        if (exercise != null) {
+            exercise.updateWeight();
+        }
 
         return exercise;
     }
+
 }

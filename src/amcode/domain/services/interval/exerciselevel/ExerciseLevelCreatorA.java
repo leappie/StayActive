@@ -1,7 +1,7 @@
 package amcode.domain.services.interval.exerciselevel;
 
 import amcode.domain.enums.Level;
-import amcode.domain.interfaces.Exercisable;
+import amcode.domain.interfaces.Levelable;
 import amcode.domain.model.Interval;
 import amcode.domain.model.Notification;
 import amcode.domain.model.User;
@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseLevelCreatorA implements Exercisable {
+public class ExerciseLevelCreatorA implements Levelable {
     @Override
     public List<Level> getExerciseDifficulty(Interval interval) {
         List<Notification> notificationList = interval.getNotificationList();
