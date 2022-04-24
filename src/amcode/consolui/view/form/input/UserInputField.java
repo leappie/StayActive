@@ -1,6 +1,6 @@
 package amcode.consolui.view.form.input;
 
-import amcode.domain.model.User;
+import amcode.domain.entity.User;
 
 public class UserInputField extends InputField<User> {
     public UserInputField(User value) {

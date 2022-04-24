@@ -1,8 +1,8 @@
 package amcode.domain.services.user;
 
-import amcode.domain.model.Alert;
-import amcode.domain.model.Interval;
-import amcode.domain.model.User;
+import amcode.domain.entity.Alert;
+import amcode.domain.entity.Interval;
+import amcode.domain.entity.User;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;

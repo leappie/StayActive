@@ -7,8 +7,8 @@ import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.StringInputField;
 import amcode.consolui.view.form.input.TimeInputField;
-import amcode.domain.model.Alert;
-import amcode.domain.model.Interval;
+import amcode.domain.entity.Alert;
+import amcode.domain.entity.Interval;
 
 import java.time.LocalTime;
 import java.util.HashMap;

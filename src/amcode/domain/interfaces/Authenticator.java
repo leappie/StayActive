@@ -1,6 +1,6 @@
 package amcode.domain.interfaces;
 
-import amcode.domain.model.User;
+import amcode.domain.entity.User;
 
 public interface Authenticator {
     User authenticateUser(User user);

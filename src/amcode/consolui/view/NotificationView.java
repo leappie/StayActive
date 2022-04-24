@@ -8,7 +8,7 @@ import amcode.consolui.controller.TriggerAlertController;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.model.Alert;
+import amcode.domain.entity.Alert;
 
 import java.time.LocalTime;
 import java.util.HashMap;

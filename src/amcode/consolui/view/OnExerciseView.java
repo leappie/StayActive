@@ -5,7 +5,7 @@ import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.model.Exercise;
+import amcode.domain.entity.Exercise;
 
 import java.util.HashMap;
 

@@ -2,9 +2,9 @@ package amcode.domain.services.intervalexerciselevel;
 
 import amcode.domain.enums.Level;
 import amcode.domain.interfaces.Levelable;
-import amcode.domain.model.Interval;
-import amcode.domain.model.Notification;
-import amcode.domain.model.User;
+import amcode.domain.entity.Interval;
+import amcode.domain.entity.Notification;
+import amcode.domain.entity.User;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;

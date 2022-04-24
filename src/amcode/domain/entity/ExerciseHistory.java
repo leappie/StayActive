@@ -1,4 +1,4 @@
-package amcode.domain.model;
+package amcode.domain.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

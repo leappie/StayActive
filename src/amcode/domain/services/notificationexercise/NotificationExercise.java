@@ -2,7 +2,7 @@ package amcode.domain.services.notificationexercise;
 
 import amcode.domain.enums.Level;
 import amcode.domain.interfaces.Exercisable;
-import amcode.domain.model.Exercise;
+import amcode.domain.entity.Exercise;
 
 import java.util.List;
 

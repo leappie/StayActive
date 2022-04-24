@@ -7,8 +7,8 @@ import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.model.Alert;
-import amcode.domain.model.User;
+import amcode.domain.entity.Alert;
+import amcode.domain.entity.User;
 import amcode.domain.services.user.UserAlerts;
 
 import java.util.HashMap;

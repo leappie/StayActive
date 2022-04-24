@@ -1,7 +1,7 @@
 package amcode.domain.services.intervalnotification;
 
 import amcode.domain.interfaces.Notifiable;
-import amcode.domain.model.Interval;
+import amcode.domain.entity.Interval;
 
 import java.time.LocalTime;
 

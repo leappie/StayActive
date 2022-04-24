@@ -1,7 +1,7 @@
 package amcode.domain.services.user;
 
 import amcode.domain.interfaces.Authenticator;
-import amcode.domain.model.User;
+import amcode.domain.entity.User;
 
 public class UserControl {
     private Authenticator authenticator;

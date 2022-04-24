@@ -1,8 +1,8 @@
 package amcode.domain.interfaces;
 
 import amcode.domain.enums.Level;
-import amcode.domain.model.Interval;
-import amcode.domain.model.User;
+import amcode.domain.entity.Interval;
+import amcode.domain.entity.User;
 
 import java.util.List;
 

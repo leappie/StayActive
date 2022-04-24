@@ -2,7 +2,7 @@ package amcode.domain.services.intervalexerciselevel;
 
 import amcode.domain.enums.Level;
 import amcode.domain.interfaces.Levelable;
-import amcode.domain.model.Alert;
+import amcode.domain.entity.Alert;
 
 import java.time.LocalTime;
 import java.util.List;

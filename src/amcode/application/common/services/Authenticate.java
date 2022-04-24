@@ -1,7 +1,7 @@
 package amcode.application.common.services;
 
 import amcode.domain.interfaces.Authenticator;
-import amcode.domain.model.User;
+import amcode.domain.entity.User;
 
 public class Authenticate implements Authenticator {
 
@@ -10,7 +10,7 @@ public class Authenticate implements Authenticator {
         // NOTE: NO DEPENDENCY ON INFRASTRUCTURE!
 
         //HARD CODED:
-        if (user.getUsername() == "a" && user.getPassword() == "m") {
+        if (user.getUsername().equals("a") && user.getPassword().equals("m")) {
             return user;
         }
         return null;

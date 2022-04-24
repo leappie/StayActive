@@ -1,6 +1,6 @@
 package amcode.application.common.interfaces.repositories;
 
-import amcode.domain.model.Alert;
+import amcode.domain.entity.Alert;
 
 public interface AlertRepository {
     Alert getAlert(int id);

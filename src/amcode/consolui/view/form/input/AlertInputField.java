@@ -1,6 +1,6 @@
 package amcode.consolui.view.form.input;
 
-import amcode.domain.model.Alert;
+import amcode.domain.entity.Alert;
 
 public class AlertInputField extends InputField<Alert> {
     public AlertInputField(Alert value) {

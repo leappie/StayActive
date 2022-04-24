@@ -1,7 +1,7 @@
 package amcode.application.common.interfaces.repositories;
 
-import amcode.domain.model.Exercise;
-import amcode.domain.model.ExerciseHistory;
+import amcode.domain.entity.Exercise;
+import amcode.domain.entity.ExerciseHistory;
 
 import java.util.List;
 
