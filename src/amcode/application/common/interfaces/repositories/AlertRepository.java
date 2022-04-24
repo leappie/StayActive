@@ -3,11 +3,9 @@ package amcode.application.common.interfaces.repositories;
 import amcode.domain.entity.Alert;
 
 public interface AlertRepository {
-    Alert getAlert(int id);
-    Alert getAlert(Alert alert);
-    boolean addAlert(Alert alert);
-    boolean updateAlert(Alert alert);
-    boolean deleteAlert(Alert alert);
+    void addAlert(Alert alert);
+    void updateAlert(Alert alert);
+    void removeAlert(Alert alert);
 
 
 }
