@@ -9,7 +9,7 @@ public class LevelInputField extends InputField<Level>{
     }
 
     public LevelInputField() {
-        super(null);
+        this(null);
     }
 
     @Override

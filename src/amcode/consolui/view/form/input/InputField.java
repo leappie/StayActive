@@ -8,12 +8,11 @@ public abstract class InputField<T> {
     }
 
     public InputField() {
-        this.value = null;
+        this(null);
     }
 
-    public boolean trySetValue(T value) {
+    public void SetValue(T value) {
         this.value = value;
-        return true;
     }
 
 
