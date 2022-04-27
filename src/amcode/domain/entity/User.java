@@ -24,12 +24,20 @@ public class User {
         this.exerciseList = exerciseList;
     }
 
+    public User(int id, String username, String password, Level level) {
+        this(id, username, password, level, new ArrayList<>(), new ArrayList<>());
+    }
+
     public User(String username, String password, Level level) {
-        this(Constants.DEFAULT_ID,username, password, level, new ArrayList<>(), new ArrayList<>());
+        this(Constants.DEFAULT_ID, username, password, level, new ArrayList<>(), new ArrayList<>());
     }
 
     public User(String username, String password) {
         this(username, password, Constants.DEFAULT_LEVEL);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -51,5 +59,17 @@ public class User {
     // TODO: Apart class voor exercise history update?
     public List<Exercise> getExerciseList() {
         return exerciseList;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", level=" + level +
+                ", alertList=" + alertList +
+                ", exerciseList=" + exerciseList +
+                '}';
     }
 }

@@ -3,17 +3,18 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.interfaces.Displayable;
 import amcode.consolui.factory.ViewFactory;
+import amcode.consolui.model.UserLoginViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.User;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
 
-public class StartView extends FormView<User> {
+public class StartView extends FormView<UserLoginViewModel> {
 
-    public StartView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+    public StartView(HashMap<String, InputField> inputFields, Controller<UserLoginViewModel> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
@@ -23,19 +24,20 @@ public class StartView extends FormView<User> {
             case MAIN:
                 createTitle();
                 displayInfo();
-                FormView formView;
+                Displayable displayable;
 
                 try {
                     int choice = getScanner().nextInt();
 
                     switch (choice) {
                         case 1:
-                            formView = ViewFactory.getView(View.LOGIN_VIEW);
-                            formView.display(Display.MAIN);
+                            displayable = ViewFactory.getView(View.LOGIN_VIEW);
+                            displayable.display(Display.MAIN);
                             break;
                         case 2:
-                            formView = ViewFactory.getView(View.NEW_ACCOUNT_VIEW);
-                            formView.display(Display.MAIN);
+//                            //TODO
+//                            displayable = ViewFactory.getView(View.NEW_ACCOUNT_VIEW);
+//                            displayable.display(Display.MAIN);
                             break;
                         case 3:
                             // TODO: FORGOT PASSWORD
@@ -49,8 +51,8 @@ public class StartView extends FormView<User> {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
-                    formView = ViewFactory.getView(View.START_VIEW);
-                    formView.display(Display.MAIN);
+                    displayable = ViewFactory.getView(View.START_VIEW);
+                    displayable.display(Display.MAIN);
                 }
                 break;
             default:

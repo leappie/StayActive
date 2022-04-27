@@ -8,7 +8,6 @@ import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.StringInputField;
 import amcode.consolui.view.form.input.TimeInputField;
 import amcode.domain.entity.Alert;
-import amcode.domain.entity.Interval;
 
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -51,14 +50,15 @@ public class NewAlertView extends FormView<Alert> {
 
     @Override
     public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<Alert> controller) {
-        final String alertName = (String) getInputFields().get("alertName").getValue();
-        final LocalTime startTime = (LocalTime) getInputFields().get("startTime").getValue();
-        final LocalTime endTime = (LocalTime) getInputFields().get("endTime").getValue();
-
-        Interval interval = new Interval(startTime, endTime);
-        Alert alert = new Alert(alertName, interval);
-
-        return controller.execute(getInputFields(), alert);
+//        final String alertName = (String) getInputFields().get("alertName").getValue();
+//        final LocalTime startTime = (LocalTime) getInputFields().get("startTime").getValue();
+//        final LocalTime endTime = (LocalTime) getInputFields().get("endTime").getValue();
+//
+//        Interval interval = new Interval(startTime, endTime);
+//        Alert alert = new Alert(alertName, interval);
+//
+//        return controller.execute(getInputFields(), alert);
+        return null;
     }
 
 
