@@ -3,6 +3,7 @@ package amcode.domain.entity;
 import amcode.domain.enums.Level;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public class Exercise {
     private int id;
@@ -12,8 +13,10 @@ public class Exercise {
     private LocalTime exerciseTime;
     private Level level;
     private int weight;
+    private List<ExerciseHistory> exerciseHistoryList;
 
-    public Exercise(int id, String name, int reps, int sets, LocalTime exerciseTime, Level level, int weight) {
+    public Exercise(int id, String name, int reps, int sets, LocalTime exerciseTime, Level level,
+                    int weight, List<ExerciseHistory> exerciseHistoryList) {
         this.id = id;
         this.name = name;
         this.reps = reps;
@@ -21,6 +24,7 @@ public class Exercise {
         this.exerciseTime = exerciseTime;
         this.level = level;
         this.weight = weight;
+        this.exerciseHistoryList = exerciseHistoryList;
     }
 
     public String getName() {

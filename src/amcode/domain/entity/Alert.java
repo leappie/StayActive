@@ -2,7 +2,6 @@ package amcode.domain.entity;
 
 import amcode.domain.common.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Alert {
@@ -18,8 +17,8 @@ public class Alert {
         this.exerciseList = exerciseList;
     }
 
-    public Alert(String name, Interval interval) {
-        this(Constants.DEFAULT_ID, name, interval, new ArrayList<>());
+    public Alert(String name, Interval interval, List<Exercise> exerciseList) {
+        this(Constants.DEFAULT_ID, name, interval, exerciseList);
     }
 
     public String getName() {

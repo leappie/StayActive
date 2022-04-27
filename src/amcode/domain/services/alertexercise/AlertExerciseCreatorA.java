@@ -1,5 +1,6 @@
-package amcode.domain.services.notificationexercise;
+package amcode.domain.services.alertexercise;
 
+import amcode.domain.entity.Alert;
 import amcode.domain.enums.Level;
 import amcode.domain.interfaces.Exercisable;
 import amcode.domain.entity.Exercise;
@@ -9,9 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class NotificationExerciseCreatorA implements Exercisable {
+public class AlertExerciseCreatorA implements Exercisable {
     @Override
-    public Exercise getExerciseOnNotification(List<Exercise> exerciseList , List<Level> levelList) {
+    public Exercise getExerciseOnNotification(Alert alert, List<Level> levelList) {
+        List<Exercise> exerciseList = alert.getExerciseList();
         List<Exercise> toDoExercises = new ArrayList<>();
 
         for (Level level: levelList) {
