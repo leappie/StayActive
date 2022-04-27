@@ -5,6 +5,7 @@ import amcode.domain.entity.User;
 
 public class UserControl {
     private Authenticator authenticator;
+    // TODO: How to improve?
 
     public UserControl(Authenticator authenticator) {
         this.authenticator = authenticator;

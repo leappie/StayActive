@@ -24,7 +24,6 @@ public class User {
         this.exerciseList = exerciseList;
     }
 
-
     public User(String username, String password, Level level) {
         this(Constants.DEFAULT_ID,username, password, level, new ArrayList<>(), new ArrayList<>());
     }
@@ -49,6 +48,7 @@ public class User {
         return alertList;
     }
 
+    // TODO: Apart class voor exercise history update?
     public List<Exercise> getExerciseList() {
         return exerciseList;
     }
