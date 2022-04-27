@@ -2,19 +2,19 @@ package amcode.infrastructure.persistence.sql.user.commands;
 
 import amcode.domain.entity.User;
 import amcode.infrastructure.persistence.sql.DatabaseCommand;
-import amcode.infrastructure.persistence.sql.user.interfaces.UserTable;
+import amcode.infrastructure.persistence.sql.interfaces.UserTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UserInsertCommand extends DatabaseCommand<User> implements UserTable {
+public class InsertUserCommand extends DatabaseCommand<User> implements UserTable {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "INSERT INTO %s" +
                 "(%s, %s, %s) " +
                 "VALUES(?, ?, ?)",
-                TABLE, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_LEVEL);
+                U_TABLE, U_COLUMN_USERNAME, U_COLUMN_PASSWORD, U_COLUMN_LEVEL);
         return query;
     }
 

@@ -56,6 +56,14 @@ public class User {
         return alertList;
     }
 
+    public void setAlertList(List<Alert> alertList) {
+        this.alertList = alertList;
+    }
+
+    public void setExerciseList(List<Exercise> exerciseList) {
+        this.exerciseList = exerciseList;
+    }
+
     // TODO: Apart class voor exercise history update?
     public List<Exercise> getExerciseList() {
         return exerciseList;
