@@ -3,6 +3,7 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.interfaces.Displayable;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
@@ -13,11 +14,9 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class AlertListView extends FormView<User> {
-    private User loggedInUser;
-    private List<Alert> alertList;
+public class AlertListView extends FormView<AlertListView> {
 
-    public AlertListView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+    public AlertListView(HashMap<String, InputField> inputFields, Controller<AlertListView> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
@@ -28,29 +27,29 @@ public class AlertListView extends FormView<User> {
                 createTitle();
                 displayAlerts();
                 displayInfo();
-                FormView formView;
+                Displayable displayable;
 
                 try {
                     int choice = getScanner().nextInt();
 
                     switch (choice) {
                         case 1:
-                            formView = ViewFactory.getView(getInputFields(), View.NEW_ALERT_VIEW);
-                            formView.display(Display.MAIN);
+                            displayable = ViewFactory.getView(getInputFields(), View.NEW_ALERT_VIEW);
+                            displayable.display(Display.MAIN);
                             break;
                         case 2:
                             // TODO: Modify Alert
-                            System.out.println("Nothing to find here ...");
+                            System.out.println("TODO: Modify Alert");
                             display(Display.MAIN);
                             break;
                         case 3:
                             // TODO trigger alert
-                            formView = ViewFactory.getView(getInputFields(), View.TRIGGER_ALERT_VIEW);
-                            formView.display(Display.MAIN);
+                            displayable = ViewFactory.getView(getInputFields(), View.TRIGGER_ALERT_VIEW);
+                            displayable.display(Display.MAIN);
                             break;
                         case 4:
-                            formView = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
-                            formView.display(Display.MAIN);
+                            displayable = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
+                            displayable.display(Display.MAIN);
                             break;
                         case 5:
                             // Quit
@@ -60,8 +59,8 @@ public class AlertListView extends FormView<User> {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
-                    formView = ViewFactory.getView(getInputFields(), View.ALERT_LIST_VIEW);
-                    formView.display(Display.MAIN);
+                    displayable = ViewFactory.getView(getInputFields(), View.ALERT_LIST_VIEW);
+                    displayable.display(Display.MAIN);
                 }
                 break;
             default:

@@ -2,7 +2,7 @@ package amcode.application.common.interfaces.daos;
 
 import amcode.domain.entity.User;
 
-public interface IUserDao {
+public interface IUserDao extends Dao<User>{
     long insertUser(User user);
     long updateUser(User user);
     long deleteUser(User user);
