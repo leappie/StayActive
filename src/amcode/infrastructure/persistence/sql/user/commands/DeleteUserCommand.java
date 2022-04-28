@@ -2,7 +2,7 @@ package amcode.infrastructure.persistence.sql.user.commands;
 
 import amcode.domain.entity.User;
 import amcode.infrastructure.persistence.sql.DatabaseCommand;
-import amcode.infrastructure.persistence.sql.interfaces.UserTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.UserTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

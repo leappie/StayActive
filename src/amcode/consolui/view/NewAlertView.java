@@ -37,7 +37,7 @@ public class NewAlertView extends FormView<AlertViewModel> {
 
                 if (statusName.equals("true")) {
                     getInputFields().put("nameFail", new StringInputField("false"));
-                    System.out.println("Name taken. Try again.");
+                    System.out.println("Invalid name or alert interval. Try again.");
                     display(Display.MAIN);
                 } else {
                     System.out.println("Invalid time input. Try again.");

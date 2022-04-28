@@ -5,12 +5,11 @@ import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.User;
 
 import java.util.HashMap;
 
-public class ExerciseHistoryView extends FormView<User> {
-    public ExerciseHistoryView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+public class ExerciseHistoryView extends FormView<ExerciseHistoryView> {
+    public ExerciseHistoryView(HashMap<String, InputField> inputFields, Controller<ExerciseHistoryView> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
@@ -20,7 +19,7 @@ public class ExerciseHistoryView extends FormView<User> {
     }
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<ExerciseHistoryView> controller) {
         return null;
     }
 }

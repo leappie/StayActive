@@ -5,7 +5,7 @@ import amcode.domain.entity.Alert;
 import amcode.domain.entity.Interval;
 import amcode.domain.entity.User;
 import amcode.infrastructure.persistence.sql.DatabaseQuery;
-import amcode.infrastructure.persistence.sql.interfaces.AlertTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.AlertTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

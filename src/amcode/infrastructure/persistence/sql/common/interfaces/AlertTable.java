@@ -1,4 +1,4 @@
-package amcode.infrastructure.persistence.sql.interfaces;
+package amcode.infrastructure.persistence.sql.common.interfaces;
 
 public interface AlertTable {
     String A_TABLE = "alert";

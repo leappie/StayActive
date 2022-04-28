@@ -4,10 +4,12 @@ import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
+import amcode.consolui.common.services.CurrentUserService;
 import amcode.consolui.factory.ViewFactory;
+import amcode.consolui.model.AlertViewModel;
 import amcode.consolui.view.form.FormView;
-import amcode.consolui.view.form.input.AlertInputField;
 import amcode.consolui.view.form.input.InputField;
+import amcode.consolui.view.form.input.IntegerInputField;
 import amcode.domain.entity.Alert;
 import amcode.domain.entity.User;
 
@@ -15,14 +17,10 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class TriggerAlertView extends FormView<Alert> {
-    private User loggedInUser;
-    private List<Alert> alertList;
+public class TriggerAlertView extends FormView<AlertViewModel> {
 
-    public TriggerAlertView(HashMap<String, InputField> inputFields, Controller<Alert> controller, String screenTitle) {
+    public TriggerAlertView(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
-        this.loggedInUser = (User) getInputFields().get("loggedInUser").getValue();
-        this.alertList = this.loggedInUser.getAlertList();
     }
 
     @Override
@@ -48,20 +46,23 @@ public class TriggerAlertView extends FormView<Alert> {
     }
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<Alert> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller) {
         final Alert chosenAlert = (Alert) inputFields.get("chosenTriggerAlert").getValue();
 
-        return controller.execute(getInputFields(), chosenAlert);
+        return controller.execute(getInputFields(), null);
     }
 
     private void displayAlerts() {
+        User loggedInUser = CurrentUserService.getLoggedInUser();
+        List<Alert> alertList = loggedInUser.getAlertList();
+
         System.out.println("Choose an alert number: ");
-        if (this.alertList.size() > 0) {
-            for (int i = 0; i < this.alertList.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". " + this.alertList.get(i));
+        if (alertList.size() > 0) {
+            for (int i = 0; i < alertList.size(); i++) {
+                System.out.println("\t" + (i + 1) + ". " + alertList.get(i));
             }
             System.out.println("_____________________________");
-            displayChoice();
+            displayChoice(alertList);
         } else {
             System.out.println("\tNo alerts ...");
             FormView formView = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
@@ -70,19 +71,18 @@ public class TriggerAlertView extends FormView<Alert> {
         }
     }
 
-    private void displayChoice() {
+    private void displayChoice(List<Alert> alertList) {
         int chosenNumber;
 
         try {
             chosenNumber = getScanner().nextInt();
-            System.out.println("chosen: " + chosenNumber);
+            System.out.println("chosen alert number: " + chosenNumber);
 
-            if (chosenNumber < 1 || chosenNumber > this.alertList.size()) {
+            if (chosenNumber < 1 || chosenNumber > alertList.size()) {
                 display(Display.FAIL);
             } else {
-                System.out.println(this.alertList);
-                Alert chosenAlert = this.alertList.get(chosenNumber - 1);
-                getInputFields().put("chosenTriggerAlert", new AlertInputField(chosenAlert));
+//                Alert chosenAlert = alertList.get(chosenNumber - 1);
+                getInputFields().put("chosenAlertIndex", new IntegerInputField(chosenNumber - 1));
                 display(Display.SUCCESS);
             }
         } catch (InputMismatchException e) {

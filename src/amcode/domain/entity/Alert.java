@@ -19,7 +19,7 @@ public class Alert {
     }
 
     public Alert(int id, String name, Interval interval) {
-        this(Constants.DEFAULT_ID, name, interval, new ArrayList<>());
+        this(id, name, interval, new ArrayList<>());
     }
 
     public Alert(String name, Interval interval) {
@@ -56,10 +56,11 @@ public class Alert {
 
     @Override
     public String toString() {
-        return this.name + " "
-                + "(" + interval.getStartTime()
-                + "-" + interval.getEndTime()
-                + ")";
+        return "Alert{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", interval=" + interval +
+                ", exerciseList=" + exerciseList +
+                '}';
     }
-
 }

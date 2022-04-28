@@ -5,8 +5,8 @@
 //import amcode.domain.entity.Exercise;
 //import amcode.domain.enums.Level;
 //import amcode.infrastructure.persistence.sql.DatabaseQuery;
-//import amcode.infrastructure.persistence.sql.interfaces.AlertExerciseTable;
-//import amcode.infrastructure.persistence.sql.interfaces.ExerciseTable;
+//import amcode.infrastructure.persistence.sql.common.interfaces.AlertExerciseTable;
+//import amcode.infrastructure.persistence.sql.common.interfaces.ExerciseTable;
 //
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;

@@ -4,7 +4,7 @@ import amcode.application.common.util.LevelConverter;
 import amcode.domain.entity.Exercise;
 import amcode.domain.enums.Level;
 import amcode.infrastructure.persistence.sql.DatabaseQuery;
-import amcode.infrastructure.persistence.sql.interfaces.ExerciseTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.ExerciseTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +19,7 @@ public class SelectExerciseQuery extends DatabaseQuery<Exercise> implements Exer
         String query = String.format(
                 "SELECT %s, %s, %s, %s, %s, %s  " +
                 "FROM %s",
-                E_COLUMN_ID, E_COLUMN_NAME, E_COLUMN_REPS, E_COLUMN_SETS, E_COLUMN_LEVEL, E_COLUMN_TIME);
+                E_COLUMN_ID, E_COLUMN_NAME, E_COLUMN_REPS, E_COLUMN_SETS, E_COLUMN_LEVEL, E_COLUMN_TIME, E_TABLE);
 
         return query;
     }

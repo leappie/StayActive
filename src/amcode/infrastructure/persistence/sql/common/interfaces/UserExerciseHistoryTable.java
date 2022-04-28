@@ -1,4 +1,4 @@
-package amcode.infrastructure.persistence.sql.interfaces;
+package amcode.infrastructure.persistence.sql.common.interfaces;
 
 public interface UserExerciseHistoryTable {
     String UEH_TABLE = "user_exercise_history";

@@ -2,7 +2,7 @@ package amcode.infrastructure.persistence.sql.alert.commands;
 
 import amcode.domain.entity.Alert;
 import amcode.infrastructure.persistence.sql.DatabaseCommand;
-import amcode.infrastructure.persistence.sql.interfaces.AlertTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.AlertTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -1,28 +1,33 @@
 package amcode.application.common.util;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
 public class LocalTimeConverter {
     public LocalTime tryParse(String value) {
         LocalTime time;
 
-        if (value.isEmpty() || value.length() < 5) {
-            time = null;
-        } else {
-            String[] splitValue = value.split(":");
-            boolean checked = checkChars(splitValue);
-
-            if (checked) {
-                time = LocalTime.parse(value);
-            } else {
+        try {
+            if (value.isEmpty() || value.length() < 5) {
                 time = null;
+            } else {
+                String[] splitValue = value.split(":");
+                boolean checked = checkChars(splitValue);
+
+                if (checked) {
+                    time = LocalTime.parse(value);
+                } else {
+                    time = null;
+                }
             }
+        } catch (DateTimeException e) {
+            time = null;
         }
         return time;
     }
 
     private static boolean checkChars(String[] array) {
-        for (String item: array) {
+        for (String item : array) {
             int itemLength = item.length();
 
             if (itemLength > 2) {

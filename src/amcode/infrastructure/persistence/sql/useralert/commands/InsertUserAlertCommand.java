@@ -3,7 +3,7 @@ package amcode.infrastructure.persistence.sql.useralert.commands;
 import amcode.domain.entity.Alert;
 import amcode.domain.entity.User;
 import amcode.infrastructure.persistence.sql.DatabaseCommand;
-import amcode.infrastructure.persistence.sql.interfaces.AlertTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.AlertTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,23 +25,46 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> implements Ale
     protected void setParams(PreparedStatement preparedStatement, User data) {
         try {
             List<Alert> alertList = data.getAlertList();
-            int count = 0;
 
-            for (Alert alert : alertList) {
-                preparedStatement.setInt(1, data.getId());
-                preparedStatement.setString(2, alert.getName());
-                preparedStatement.setString(3, alert.getInterval().getStartTime().toString());
-                preparedStatement.setString(4, alert.getInterval().getEndTime().toString());
+            // insert only last item
+            Alert alert = alertList.get(alertList.size() - 1);
 
-                preparedStatement.addBatch();
-                count++;
-            }
+            preparedStatement.setInt(1, data.getId());
+            preparedStatement.setString(2, alert.getName());
+            preparedStatement.setString(3, alert.getInterval().getStartTime().toString());
+            preparedStatement.setString(4, alert.getInterval().getEndTime().toString());
 
-            if (count % 100 == 0 || count == alertList.size()) {
-                preparedStatement.executeBatch();
-            }
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error setting insert statement user alerts: " + e);
         }
     }
 }
+
+
+
+//        try {
+//                List<Alert> alertList = data.getAlertList();
+//        int count = 0;
+//        boolean customBreak = false; // insert only last item
+//
+//        for (Alert alert : alertList) {
+//        if (count == 1) {
+//        customBreak = true;
+//        break;
+//        }
+//        preparedStatement.setInt(1, data.getId());
+//        preparedStatement.setString(2, alert.getName());
+//        preparedStatement.setString(3, alert.getInterval().getStartTime().toString());
+//        preparedStatement.setString(4, alert.getInterval().getEndTime().toString());
+//
+//        preparedStatement.addBatch();
+//        count++;
+//        }
+//
+//        if (count % 100 == 0 || count == alertList.size() || customBreak) {
+//        preparedStatement.executeBatch();
+//        }
+//        } catch (SQLException e) {
+//        System.out.println("Error setting insert statement user alerts: " + e);
+//        }

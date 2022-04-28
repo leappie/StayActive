@@ -4,7 +4,7 @@ import amcode.application.common.util.LevelConverter;
 import amcode.domain.entity.User;
 import amcode.domain.enums.Level;
 import amcode.infrastructure.persistence.sql.DatabaseQuery;
-import amcode.infrastructure.persistence.sql.interfaces.UserTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.UserTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

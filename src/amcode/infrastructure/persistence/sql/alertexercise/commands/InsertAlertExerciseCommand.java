@@ -3,7 +3,7 @@ package amcode.infrastructure.persistence.sql.alertexercise.commands;
 import amcode.domain.entity.Alert;
 import amcode.domain.entity.Exercise;
 import amcode.infrastructure.persistence.sql.DatabaseCommand;
-import amcode.infrastructure.persistence.sql.interfaces.AlertExerciseTable;
+import amcode.infrastructure.persistence.sql.common.interfaces.AlertExerciseTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

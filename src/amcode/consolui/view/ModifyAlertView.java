@@ -3,15 +3,15 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
+import amcode.consolui.model.AlertViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.User;
 
 import java.util.HashMap;
 
-public class ModifyAlertView extends FormView<User> {
+public class ModifyAlertView extends FormView<AlertViewModel> {
 
-    public ModifyAlertView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+    public ModifyAlertView(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
@@ -32,7 +32,7 @@ public class ModifyAlertView extends FormView<User> {
 
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller) {
         return null;
     }
 

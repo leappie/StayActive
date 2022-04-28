@@ -2,14 +2,14 @@ package amcode.consolui.controller;
 
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
+import amcode.consolui.model.NewUserViewModel;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.User;
 
 import java.util.HashMap;
 
-public class NewAccountController implements Controller<User> {
+public class NewAccountController implements Controller<NewUserViewModel> {
     @Override
-    public DisplayScreen execute(HashMap<String, InputField> inputField, User model) {
+    public DisplayScreen execute(HashMap<String, InputField> inputField, NewUserViewModel model) {
 //        Authenticate authenticate = new Authenticate();
 //        FormView formView;
 //        Display display;

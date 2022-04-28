@@ -3,6 +3,7 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
+import amcode.consolui.model.NewUserViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.LevelInputField;
@@ -12,8 +13,8 @@ import amcode.domain.entity.User;
 
 import java.util.HashMap;
 
-public class NewAccountView extends FormView<User> {
-    public NewAccountView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+public class NewAccountView extends FormView<NewUserViewModel> {
+    public NewAccountView(HashMap<String, InputField> inputFields, Controller<NewUserViewModel> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
@@ -51,14 +52,15 @@ public class NewAccountView extends FormView<User> {
     }
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<NewUserViewModel> controller) {
         final String username = (String) getInputFields().get("username").getValue();
         final String password = (String) getInputFields().get("password").getValue();
         final Level level = (Level) getInputFields().get("userLevel").getValue();
 
         User user = new User(username, password, level);
 
-        return controller.execute(getInputFields(), user);
+//        return controller.execute(getInputFields(), user);
+        return null;
     }
 
 

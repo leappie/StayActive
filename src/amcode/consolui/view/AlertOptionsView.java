@@ -43,7 +43,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
                             displayable.display(Display.MAIN);
                             break;
                         case 2:
-                            // TODO: Modify Alert
+                            // TODO: Modify Alert -> include delete alert
                             System.out.println("TODO: Modify Alert");
                             display(Display.MAIN);
                             break;

@@ -3,14 +3,14 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
+import amcode.consolui.model.UserMainViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.User;
 
 import java.util.HashMap;
 
-public class ProfileView extends FormView<User> {
-    public ProfileView(HashMap<String, InputField> inputFields, Controller<User> controller, String screenTitle) {
+public class ProfileView extends FormView<UserMainViewModel> {
+    public ProfileView(HashMap<String, InputField> inputFields, Controller<UserMainViewModel> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
@@ -20,7 +20,7 @@ public class ProfileView extends FormView<User> {
     }
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<User> controller) {
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<UserMainViewModel> controller) {
         return null;
     }
 }
