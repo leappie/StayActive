@@ -52,6 +52,11 @@ public class TriggerAlertController implements Controller<NotificationViewModel>
             displayable = ViewFactory.getView(inputField, View.NOTIFICATION_VIEW);
             display = Display.MAIN;
         } else {
+            // reset triggers
+            interval.setNotificationsTriggered(0);
+            interval.getIntermediateInterval().setStartTime(interval.getStartTime());
+            interval.getIntermediateInterval().setEndTime(interval.getEndTime());
+
             displayable = ViewFactory.getView(inputField, View.ALERT_OPTIONS_VIEW);
             display = Display.MAIN;
         }

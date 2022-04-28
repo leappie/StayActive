@@ -25,9 +25,9 @@ public class ExerciseLevelCreatorA implements Levelable {
             Notification notification = notificationList.get(notificationList.size() - 1);
 
             if (notification.isAccepted()) {
-                LocalTime now = LocalTime.now();
-                LocalTime notTime = notification.getNotificationTime();
-
+//                LocalTime now = LocalTime.now();
+//                LocalTime notTime = notification.getNotificationTime();
+//
 //                if (notTime.compareTo(now) < 0) {
 //                    minutes = (int) ChronoUnit.MINUTES.between(now, now.truncatedTo(ChronoUnit.HOURS).
 //                            plusMinutes(Constants.INTERVAL_LENGTH_MINUTES));
@@ -36,30 +36,29 @@ public class ExerciseLevelCreatorA implements Levelable {
 //                }
 
                 minutes = notification.getNotificationTime().getMinute();
-
                 level = getExerciseLevel(minutes);
                 levels.add(level);
 
 //                System.out.println(TAG + ": minutes ->" + minutes);
             }
         } else {
-            // get de last two accepted notifications;
+            // get de last two 'accepted' notifications;
             int listSize = notificationList.size();
             Notification acceptedNotificationA;
-            Notification acceptedNotificationB;
+            Notification acceptedOrNotNotificationB;
 
             acceptedNotificationA = getAcceptedNotification(listSize, notificationList);
 
             // check from index of acceptedNotificationA
             int index = notificationList.indexOf(acceptedNotificationA);
-            acceptedNotificationB = getAcceptedNotification(index, notificationList);
+            acceptedOrNotNotificationB = getAcceptedNotification(index, notificationList);
 
 //            System.out.println(TAG + ": acceptedNotificationA ->" + acceptedNotificationA);
 //            System.out.println(TAG + ": acceptedNotificationB ->" + acceptedNotificationB);
 
-            if (acceptedNotificationA != null && acceptedNotificationB != null) {
+            if (acceptedNotificationA != null && acceptedOrNotNotificationB != null) {
                 LocalTime timeA = acceptedNotificationA.getNotificationTime();
-                LocalTime timeB = acceptedNotificationB.getNotificationTime();
+                LocalTime timeB = acceptedOrNotNotificationB.getNotificationTime();
 
                 minutes = (int) timeB.until(timeA, ChronoUnit.MINUTES);
                 level = getExerciseLevel(minutes);
@@ -81,7 +80,7 @@ public class ExerciseLevelCreatorA implements Levelable {
     }
 
     private Notification getAcceptedNotification(int listSize, List<Notification> notificationList) {
-        Notification notification;
+        Notification notification = null;
         for (int i = listSize - 1; i >= 0; i--) {
             notification = notificationList.get(i);
 
@@ -89,6 +88,6 @@ public class ExerciseLevelCreatorA implements Levelable {
                 return notification;
             }
         }
-        return null;
+        return notification; // return the last not accepted notification
     }
 }

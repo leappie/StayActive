@@ -17,7 +17,7 @@ public class NotificationTimeCreatorA implements Notifiable {
         LocalTime notificationTimeHigh;
 
 //        System.out.println(interval);
-        // if all notifications triggered -> end
+        // if all notifications trigger ed -> end
         if (interval.getNotificationsTriggered() == interval.getTotalNotifications()) {
             return null;
         } else {
@@ -37,10 +37,13 @@ public class NotificationTimeCreatorA implements Notifiable {
         }
 
         interval.getIntermediateInterval().setStartTime(notificationTimeHigh);
+//        System.out.println(TAG + ": -> notificationTimeLow " + notificationTimeLow);
+//        System.out.println(TAG + ": -> notificationTimeHigh " + notificationTimeHigh);
 
         // calc notification time
         int secondsLow = notificationTimeLow.toSecondOfDay();
         int secondsHigh = notificationTimeHigh.toSecondOfDay();
+
         Random random = new Random();
         int randomSeconds = secondsLow + random.nextInt(secondsHigh - secondsLow + 1);
         LocalTime time = LocalTime.ofSecondOfDay(randomSeconds);

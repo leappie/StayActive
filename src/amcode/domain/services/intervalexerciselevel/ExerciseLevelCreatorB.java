@@ -20,27 +20,30 @@ public class ExerciseLevelCreatorB implements Levelable {
     public List<Level> getExerciseDifficulty(Interval interval) {
         Level userLevel = this.user.getLevel();
         List<Level> exerciseLevels = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
-        Level level = exerciseLevels.get(exerciseLevels.size() - 1);
 
-        switch (userLevel) {
-            // include more easy exercises
-            case EASY:
-                if (level == Level.MEDIUM) {
-                    exerciseLevels.add(Level.EASY);
-                } else if (level == Level.HARD) {
-                    exerciseLevels.add(Level.MEDIUM);
-                }
-                break;
-            case MEDIUM:
-                // include more difficult exercises
-                if (level == Level.EASY) {
-                    exerciseLevels.add(Level.MEDIUM);
-                } else if (level == Level.MEDIUM) {
-                    exerciseLevels.add(Level.HARD);
-                }
-                break;
-            default:
-                break;
+        if (exerciseLevels.size() > 0) {
+            Level level = exerciseLevels.get(exerciseLevels.size() - 1);
+
+            switch (userLevel) {
+                // include more easy exercises
+                case EASY:
+                    if (level == Level.MEDIUM) {
+                        exerciseLevels.add(Level.EASY);
+                    } else if (level == Level.HARD) {
+                        exerciseLevels.add(Level.MEDIUM);
+                    }
+                    break;
+                case MEDIUM:
+                    // include more difficult exercises
+                    if (level == Level.EASY) {
+                        exerciseLevels.add(Level.MEDIUM);
+                    } else if (level == Level.MEDIUM) {
+                        exerciseLevels.add(Level.HARD);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
         return exerciseLevels;
     }

@@ -22,6 +22,11 @@ public class NotificationTimeCreatorB implements Notifiable {
         // notification from 09:00
         if (startTime.compareTo(now) < 0) {
             interval.getIntermediateInterval().setStartTime(now);
+
+            // reset total notifications because now is later than start interval
+            int total = interval.getIntermediateInterval().getTotalNotifications();
+            interval.setTotalNotifications(total);
+            System.out.println(total);
         }
 
         NotificationTimeCreatorA notificationTimeCreatorA = new NotificationTimeCreatorA();

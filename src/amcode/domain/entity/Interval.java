@@ -16,26 +16,19 @@ public class Interval {
     private List<Notification> notificationList;
     private Interval intermediateInterval; // used for calculating notification time
 
-    public Interval(int id, LocalTime startTime, LocalTime endTime, int totalNotifications,
-                    int notificationsTriggered, List<Notification> notificationList, Interval intermediateInterval) {
+    public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList, Interval intermediateInterval) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.totalNotifications = totalNotifications;
-        this.notificationsTriggered = notificationsTriggered;
+        this.totalNotifications = calcTotalNotifications();
+        this.notificationsTriggered = Constants.DEFAULT_ZERO;
         this.notificationList = notificationList;
         this.intermediateInterval = intermediateInterval;
     }
 
     public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList) {
-        this.id = id;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.totalNotifications = calcTotalNotifications();
-        this.notificationsTriggered = 0;
-        this.notificationList = notificationList;
-        this.intermediateInterval = new Interval(Constants.DEFAULT_ID, startTime, endTime, Constants.DEFAULT_ZERO,
-                Constants.DEFAULT_ZERO, null, null);
+        this(id, startTime, endTime, notificationList,
+                new Interval(Constants.DEFAULT_ID, startTime, endTime, new ArrayList<>(), null));
     }
 
     public Interval(LocalTime startTime, LocalTime endTime) {
@@ -49,10 +42,12 @@ public class Interval {
 
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
+        this.totalNotifications = calcTotalNotifications();
     }
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
+        this.totalNotifications = calcTotalNotifications();
     }
 
     public List<Notification> getNotificationList() {
@@ -82,6 +77,10 @@ public class Interval {
 
     public Interval getIntermediateInterval() {
         return intermediateInterval;
+    }
+
+    public void setTotalNotifications(int totalNotifications) {
+        this.totalNotifications = totalNotifications;
     }
 
     private int calcTotalNotifications() {
