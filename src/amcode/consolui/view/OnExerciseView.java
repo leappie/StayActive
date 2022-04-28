@@ -1,28 +1,34 @@
 package amcode.consolui.view;
 
 import amcode.application.common.enums.Display;
-import amcode.application.common.interfaces.Controller;
-import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.model.ExerciseViewModel;
-import amcode.consolui.view.form.FormView;
-import amcode.consolui.view.form.input.InputField;
+import amcode.consolui.view.data.DataView;
 
-import java.util.HashMap;
+public class OnExerciseView extends DataView<ExerciseViewModel> {
 
-public class OnExerciseView extends FormView<ExerciseViewModel> {
-
-
-    public OnExerciseView(HashMap<String, InputField> inputFields, Controller<ExerciseViewModel> controller, String screenTitle) {
-        super(inputFields, controller, screenTitle);
+    public OnExerciseView(ExerciseViewModel model, String screenTitle) {
+        super(model, screenTitle);
     }
 
     @Override
     public void display(Display display) {
-
+        switch (display) {
+            case MAIN:
+                displayExercise();
+                returnToMainMenu();
+                break;
+        }
     }
 
-    @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<ExerciseViewModel> controller) {
-        return null;
+    private void displayExercise() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder
+                .append("\t").append(getModel().getExerciseName()).append(":\n")
+                .append("\t").append("Reps:").append(getModel().getReps())
+                .append("\t").append("Sets:").append(getModel().getSets())
+                .append("\t").append("Duration minutes:").append(getModel().getExerciseTime())
+                .append("\t").append("Level:").append(getModel().getLevel());
+
     }
 }

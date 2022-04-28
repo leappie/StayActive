@@ -28,4 +28,9 @@ public class AlertViewModel {
     public String getEndTime() {
         return endTime;
     }
+
+    @Override
+    public String toString() {
+        return alertName + ": (" + startTime + "-" + endTime + ")";
+    }
 }

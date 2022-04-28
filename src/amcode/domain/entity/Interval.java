@@ -62,8 +62,8 @@ public class Interval {
 
     private int calcTotalNotifications() {
         if (this.startTime != null && this.endTime != null) {
-            // if the end time is greater or equal to start time return 0
-            if (startTime.compareTo(endTime) > 0) {
+            // if the end time is greater than start time continue
+            if (startTime.compareTo(endTime) < 0) {
                 double diffMinutes = this.startTime.until(this.endTime, ChronoUnit.MINUTES);
                 return (int) Math.ceil(diffMinutes / Constants.INTERVAL_LENGTH_MINUTES);
             }

@@ -2,12 +2,12 @@ package amcode.consolui.view;
 
 import amcode.application.common.enums.Display;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.interfaces.Displayable;
 import amcode.application.common.models.DisplayScreen;
 import amcode.consolui.controller.TriggerAlertController;
 import amcode.consolui.model.NotificationViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.Alert;
 
 import java.util.HashMap;
 
@@ -19,7 +19,8 @@ public class NotificationView extends FormView<NotificationViewModel> {
 
     @Override
     public void display(Display display) {
-        FormView formView;
+        DisplayScreen displayScreen;
+        Displayable displayable;
         Display screen;
 
         switch (display) {
@@ -31,16 +32,18 @@ public class NotificationView extends FormView<NotificationViewModel> {
                 break;
             case FAIL:
                 // if notification rejected, new notification
-                DisplayScreen displayScreen = submit(getInputFields(), new TriggerAlertController());
-                formView = (FormView) displayScreen.getFormView();
+                displayScreen = submit(getInputFields(), new TriggerAlertController());
+                displayable = displayScreen.getFormView();
                 screen = displayScreen.getDisplay();
-                formView.display(screen);
+                displayable.display(screen);
                 break;
             case SUCCESS:
-                // TODO: if notification accepted, show exercise
-                // TODO update notification to accepted
-//                formView = ViewFactory.getView(View.ON_EXERCISE_VIEW);
-//                formView.display(Display.MAIN);
+                // if notification accepted, show exercise
+                // update notification to accepted
+                displayScreen = submit(getInputFields(), getController());
+                displayable = displayScreen.getFormView();
+                screen = displayScreen.getDisplay();
+                displayable.display(screen);
                 break;
         }
     }
@@ -48,10 +51,7 @@ public class NotificationView extends FormView<NotificationViewModel> {
 
     @Override
     public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<NotificationViewModel> controller) {
-        final Alert chosenAlert = (Alert) inputFields.get("chosenTriggerAlert").getValue();
-
-//        return controller.execute(getInputFields(), chosenAlert);
-        return null;
+        return controller.execute(getInputFields(), null);
     }
 
     private void displayOptions() {

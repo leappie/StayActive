@@ -1,10 +1,9 @@
 package amcode.domain.services.intervalexerciselevel;
 
+import amcode.domain.entity.Interval;
 import amcode.domain.enums.Level;
 import amcode.domain.interfaces.Levelable;
-import amcode.domain.entity.Alert;
 
-import java.time.LocalTime;
 import java.util.List;
 
 public class IntervalExerciseLevel {
@@ -14,11 +13,8 @@ public class IntervalExerciseLevel {
         this.levelable = levelable;
     }
 
-    public Level getExerciseDifficulty(LocalTime time) {
-        return null;
-    }
 
-    public List<Level> updateExerciseDifficulty(Alert alert, Level level) {
-        return null;
+    public List<Level> getExerciseDifficulty(Interval interval) {
+        return this.levelable.getExerciseDifficulty(interval);
     }
 }

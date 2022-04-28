@@ -60,6 +60,7 @@ public class NewAlertController implements Controller<AlertViewModel> {
 
                 // pair exercises to alert
                 checkAlert.setExerciseList(exerciseList);
+                System.out.println(loggedInUser);
 
                 // add to alert_exercise table -> pairing exercise weight to alert in db
                 new AlertExerciseRepository(new AlertExerciseDao()).addAlertExercise(checkAlert);

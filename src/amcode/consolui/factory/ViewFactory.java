@@ -61,9 +61,9 @@ public class ViewFactory {
             case NOTIFICATION_VIEW:
                 view = new NotificationView(inputField, controller,"!!Notification!!");
                 break;
-            case ON_EXERCISE_VIEW:
-                view = new OnExerciseView(inputField, controller, "Exercise");
-                break;
+//            case ON_EXERCISE_VIEW:
+//                view = new OnExerciseView(inputField, controller, "Exercise");
+//                break;
             default:
                 view = null;
                 break;

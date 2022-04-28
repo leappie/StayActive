@@ -3,10 +3,13 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
+import amcode.application.common.interfaces.Displayable;
 import amcode.application.common.models.DisplayScreen;
+import amcode.consolui.common.mapping.AlertViewMapping;
 import amcode.consolui.common.services.CurrentUserService;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.model.AlertViewModel;
+import amcode.consolui.model.NotificationViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.consolui.view.form.input.IntegerInputField;
@@ -17,17 +20,19 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class TriggerAlertView extends FormView<AlertViewModel> {
+public class TriggerAlertView extends FormView<NotificationViewModel> {
 
-    public TriggerAlertView(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller, String screenTitle) {
+    public TriggerAlertView(HashMap<String, InputField> inputFields, Controller<NotificationViewModel> controller, String screenTitle) {
         super(inputFields, controller, screenTitle);
     }
 
     @Override
     public void display(Display display) {
+        Displayable displayable;
+        Display screen;
+
         switch (display) {
             case MAIN:
-                FormView formView;
                 createTitle();
                 displayAlerts();
                 break;
@@ -37,18 +42,16 @@ public class TriggerAlertView extends FormView<AlertViewModel> {
                 break;
             case SUCCESS:
                 DisplayScreen displayScreen = submit(getInputFields(), getController());
-                formView = (FormView) displayScreen.getFormView();
-                Display screen = displayScreen.getDisplay();
-                formView.display(screen);
+//                displayable = displayScreen.getFormView();
+//                screen = displayScreen.getDisplay();
+//                displayable.display(screen);
             default:
                 break;
         }
     }
 
     @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller) {
-        final Alert chosenAlert = (Alert) inputFields.get("chosenTriggerAlert").getValue();
-
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<NotificationViewModel> controller) {
         return controller.execute(getInputFields(), null);
     }
 
@@ -59,7 +62,8 @@ public class TriggerAlertView extends FormView<AlertViewModel> {
         System.out.println("Choose an alert number: ");
         if (alertList.size() > 0) {
             for (int i = 0; i < alertList.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". " + alertList.get(i));
+                AlertViewModel alertViewModel = new AlertViewMapping().mapFrom(alertList.get(i));
+                System.out.println("\t" + (i + 1) + ". " + alertViewModel);
             }
             System.out.println("_____________________________");
             displayChoice(alertList);

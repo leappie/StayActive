@@ -36,6 +36,10 @@ public class Exercise {
         this(id, name, reps, sets, exerciseTimeMinutes, level, Constants.DEFAULT_WEIGHT);
     }
 
+    public Exercise(String name, int reps, int sets, int exerciseTimeMinutes, Level level) {
+        this(Constants.DEFAULT_ID, name, reps, sets, exerciseTimeMinutes, level, Constants.DEFAULT_WEIGHT);
+    }
+
     public int getId() {
         return id;
     }
