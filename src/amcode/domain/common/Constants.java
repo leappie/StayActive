@@ -11,4 +11,6 @@ public class Constants {
     public static final Level DEFAULT_LEVEL = null;
     public static final boolean DEFAULT_ACCEPTED = false;
     public static final int INTERVAL_LENGTH_MINUTES = 60;
+    public static final int DEFAULT_WEIGHT = 10;
+
 }

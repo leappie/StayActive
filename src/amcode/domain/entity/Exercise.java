@@ -1,5 +1,6 @@
 package amcode.domain.entity;
 
+import amcode.domain.common.Constants;
 import amcode.domain.enums.Level;
 
 import java.util.ArrayList;
@@ -29,6 +30,10 @@ public class Exercise {
 
     public Exercise(int id, String name, int reps, int sets, int exerciseTimeMinutes, Level level, int weight) {
         this(id, name, reps, sets, exerciseTimeMinutes, level, weight, new ArrayList<>());
+    }
+
+    public Exercise(int id, String name, int reps, int sets, int exerciseTimeMinutes, Level level) {
+        this(id, name, reps, sets, exerciseTimeMinutes, level, Constants.DEFAULT_WEIGHT);
     }
 
     public int getId() {
