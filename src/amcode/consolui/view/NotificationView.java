@@ -1,16 +1,14 @@
 package amcode.consolui.view;
 
 import amcode.application.common.enums.Display;
-import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.models.DisplayScreen;
-import amcode.consolui.factory.ViewFactory;
+import amcode.consolui.controller.TriggerAlertController;
 import amcode.consolui.model.NotificationViewModel;
 import amcode.consolui.view.form.FormView;
 import amcode.consolui.view.form.input.InputField;
 import amcode.domain.entity.Alert;
 
-import java.time.LocalTime;
 import java.util.HashMap;
 
 public class NotificationView extends FormView<NotificationViewModel> {
@@ -26,22 +24,17 @@ public class NotificationView extends FormView<NotificationViewModel> {
 
         switch (display) {
             case MAIN:
-                LocalTime localTime = (LocalTime) getInputFields().get("notificationTime").getValue();
+                String notificationTimeString = (String) getInputFields().get("notificationTime").getValue();
 
-                if (localTime == null) {
-                    formView = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
-                    formView.display(Display.MAIN);
-                }
-
-                System.out.println("Notification time: " + localTime);
+                System.out.println("Notification time: " + notificationTimeString);
                 displayOptions();
                 break;
             case FAIL:
-//                // TODO: if notification rejected, new notification
-//                DisplayScreen displayScreen = submit(getInputFields(), new TriggerAlertController());
-//                formView = (FormView) displayScreen.getFormView();
-//                screen = displayScreen.getDisplay();
-//                formView.display(screen);
+                // if notification rejected, new notification
+                DisplayScreen displayScreen = submit(getInputFields(), new TriggerAlertController());
+                formView = (FormView) displayScreen.getFormView();
+                screen = displayScreen.getDisplay();
+                formView.display(screen);
                 break;
             case SUCCESS:
                 // TODO: if notification accepted, show exercise

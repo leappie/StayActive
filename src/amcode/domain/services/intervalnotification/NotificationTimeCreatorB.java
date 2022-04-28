@@ -15,7 +15,7 @@ public class NotificationTimeCreatorB implements Notifiable {
         // Example if startTime is 08:00 but now is 09:00, show only
         // notification from 09:00
         if (startTime.compareTo(now) < 0) {
-            interval.setStartTime(now);
+            interval = new Interval(startTime, now);
         }
 
         NotificationTimeCreatorA notificationTimeCreatorA = new NotificationTimeCreatorA();

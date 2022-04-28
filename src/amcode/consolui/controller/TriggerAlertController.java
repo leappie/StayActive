@@ -9,7 +9,7 @@ import amcode.consolui.common.services.CurrentUserService;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.model.AlertViewModel;
 import amcode.consolui.view.form.input.InputField;
-import amcode.consolui.view.form.input.TimeInputField;
+import amcode.consolui.view.form.input.StringInputField;
 import amcode.domain.entity.Alert;
 import amcode.domain.entity.Interval;
 import amcode.domain.entity.User;
@@ -34,7 +34,7 @@ public class TriggerAlertController implements Controller<AlertViewModel> {
         Interval interval = alert.getInterval();
         IntervalNotification intervalNotification = new IntervalNotification(new NotificationTimeCreatorB());
         LocalTime notificationTime = intervalNotification.calcNextNotificationTime(interval);
-        inputField.put("notificationTime", new TimeInputField(notificationTime));
+        inputField.put("notificationTime", new StringInputField(notificationTime.toString()));
 
         displayable = ViewFactory.getView(inputField, View.NOTIFICATION_VIEW);
         display = Display.MAIN;
