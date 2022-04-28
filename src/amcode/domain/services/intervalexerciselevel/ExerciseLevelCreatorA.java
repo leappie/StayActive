@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseLevelCreatorA implements Levelable {
+    public static final String TAG = "ExerciseLevelCreatorA";
+
     @Override
     public List<Level> getExerciseDifficulty(Interval interval) {
         List<Notification> notificationList = interval.getNotificationList();
@@ -18,13 +20,27 @@ public class ExerciseLevelCreatorA implements Levelable {
         Level level;
         int minutes;
 
-        if (notificationList.size() == 1 ) {
+        // if first notification
+        if (notificationList.size() == 1) {
             Notification notification = notificationList.get(notificationList.size() - 1);
 
             if (notification.isAccepted()) {
+                LocalTime now = LocalTime.now();
+                LocalTime notTime = notification.getNotificationTime();
+
+//                if (notTime.compareTo(now) < 0) {
+//                    minutes = (int) ChronoUnit.MINUTES.between(now, now.truncatedTo(ChronoUnit.HOURS).
+//                            plusMinutes(Constants.INTERVAL_LENGTH_MINUTES));
+//                } else {
+//                    minutes = notification.getNotificationTime().getMinute();
+//                }
+
                 minutes = notification.getNotificationTime().getMinute();
+
                 level = getExerciseLevel(minutes);
                 levels.add(level);
+
+//                System.out.println(TAG + ": minutes ->" + minutes);
             }
         } else {
             // get de last two accepted notifications;
@@ -38,20 +54,24 @@ public class ExerciseLevelCreatorA implements Levelable {
             int index = notificationList.indexOf(acceptedNotificationA);
             acceptedNotificationB = getAcceptedNotification(index, notificationList);
 
+//            System.out.println(TAG + ": acceptedNotificationA ->" + acceptedNotificationA);
+//            System.out.println(TAG + ": acceptedNotificationB ->" + acceptedNotificationB);
+
             if (acceptedNotificationA != null && acceptedNotificationB != null) {
                 LocalTime timeA = acceptedNotificationA.getNotificationTime();
                 LocalTime timeB = acceptedNotificationB.getNotificationTime();
 
-                minutes = (int) timeA.until(timeB, ChronoUnit.MINUTES);
-                level  = getExerciseLevel(minutes);
+                minutes = (int) timeB.until(timeA, ChronoUnit.MINUTES);
+                level = getExerciseLevel(minutes);
                 levels.add(level);
+//                System.out.println(TAG + ": minutes ->" + minutes);
             }
         }
         return levels;
     }
 
     private Level getExerciseLevel(int minutes) {
-        if (minutes >=0 && minutes < 20) {
+        if (minutes >= 0 && minutes < 20) {
             return Level.EASY;
         } else if (minutes >= 20 && minutes < 40) {
             return Level.MEDIUM;

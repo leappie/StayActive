@@ -4,17 +4,21 @@ import amcode.application.common.enums.Display;
 import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Displayable;
 import amcode.consolui.factory.ViewFactory;
+import amcode.consolui.view.form.input.InputField;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public abstract class DataView<T> implements Displayable {
     private Scanner scanner = new Scanner(System.in);
     private T model;
     private String screenTitle;
+    private HashMap<String, InputField> inputFields;
 
-    public DataView(T model, String screenTitle) {
+    public DataView(HashMap<String, InputField> inputFields, T model, String screenTitle) {
         this.model = model;
         this.screenTitle = screenTitle;
+        this.inputFields = inputFields;
     }
 
     public Scanner getScanner() {
@@ -25,8 +29,12 @@ public abstract class DataView<T> implements Displayable {
         return model;
     }
 
+    public HashMap<String, InputField> getInputFields() {
+        return inputFields;
+    }
+
     protected void returnToMainMenu() {
-        Displayable displayable = ViewFactory.getView(View.MAIN_VIEW);
+        Displayable displayable = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
         Display screen = Display.MAIN;
 
         displayable.display(screen);

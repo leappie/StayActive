@@ -1,5 +1,6 @@
 package amcode.consolui.controller;
 
+import amcode.application.alert.AlertExerciseRepository;
 import amcode.application.common.enums.Display;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.interfaces.Displayable;
@@ -16,6 +17,7 @@ import amcode.domain.services.alertexercise.AlertExercise;
 import amcode.domain.services.alertexercise.AlertExerciseCreatorA;
 import amcode.domain.services.intervalexerciselevel.ExerciseLevelCreatorB;
 import amcode.domain.services.intervalexerciselevel.IntervalExerciseLevel;
+import amcode.infrastructure.persistence.sql.alertexercise.AlertExerciseDao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,11 +50,14 @@ public class NotificationController implements Controller<NotificationViewModel>
         // get exercise
         Exercise exercise = new AlertExercise(new AlertExerciseCreatorA()).getExerciseOnNotification(alert, levelList);
 
+        // update exercise weight
+        long id = new AlertExerciseRepository(new AlertExerciseDao()).updateAlertExercise(alert);
+
         // map exercise to viewModel
         ExerciseViewModel exerciseViewModel = new OnExerciseViewMapping().mapFrom(exercise);
 
         // show display
-        displayable = new OnExerciseView(exerciseViewModel, "Todo exericse");
+        displayable = new OnExerciseView(inputField, exerciseViewModel, "Todo exercise");
         display = Display.MAIN;
 
         return new DisplayScreen(displayable, display);

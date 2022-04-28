@@ -10,20 +10,22 @@ public class NotificationTimeCreatorB implements Notifiable {
 
     @Override
     public LocalTime calcNotificationTime(Interval interval) {
-        LocalTime startTime = interval.getStartTime();
-        LocalTime endTime = interval.getEndTime();
+        LocalTime startTime = interval.getIntermediateInterval().getStartTime();
+        LocalTime endTime = interval.getIntermediateInterval().getEndTime();
         LocalTime now = parseLocalTime(LocalTime.now().toString());
-        Interval chosenInterval = new Interval(startTime, endTime);
+
+//        System.out.println(TAG + " -> " + interval);
+//        System.out.println(TAG + " -> " + chosenInterval);
 
         // if now > startTime, start notifications from now
         // Example if startTime is 08:00 but now is 09:00, show only
         // notification from 09:00
         if (startTime.compareTo(now) < 0) {
-            chosenInterval = new Interval(now, endTime);
+            interval.getIntermediateInterval().setStartTime(now);
         }
 
         NotificationTimeCreatorA notificationTimeCreatorA = new NotificationTimeCreatorA();
-        return notificationTimeCreatorA.calcNotificationTime(chosenInterval);
+        return notificationTimeCreatorA.calcNotificationTime(interval);
     }
 
     private LocalTime parseLocalTime(String value) {

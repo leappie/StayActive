@@ -8,6 +8,8 @@ import amcode.domain.interfaces.Levelable;
 import java.util.List;
 
 public class ExerciseLevelCreatorB implements Levelable {
+    public static final String TAG = "ExerciseLevelCreatorB";
+
     private User user;
 
     public ExerciseLevelCreatorB(User user) {
@@ -32,19 +34,15 @@ public class ExerciseLevelCreatorB implements Levelable {
             case MEDIUM:
                 // include more difficult exercises
                 if (level == Level.EASY) {
-                    exerciseLevels.add(Level.EASY);
                     exerciseLevels.add(Level.MEDIUM);
                 } else if (level == Level.MEDIUM) {
-                    exerciseLevels.add(Level.MEDIUM);
-                    exerciseLevels.add(Level.HARD);
-                } else {
                     exerciseLevels.add(Level.HARD);
                 }
                 break;
             default:
                 break;
         }
-        return null;
+        return exerciseLevels;
     }
 
 }

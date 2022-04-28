@@ -14,6 +14,18 @@ public class Interval {
     private int totalNotifications;
     private int notificationsTriggered;
     private List<Notification> notificationList;
+    private Interval intermediateInterval; // used for calculating notification time
+
+    public Interval(int id, LocalTime startTime, LocalTime endTime, int totalNotifications,
+                    int notificationsTriggered, List<Notification> notificationList, Interval intermediateInterval) {
+        this.id = id;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.totalNotifications = totalNotifications;
+        this.notificationsTriggered = notificationsTriggered;
+        this.notificationList = notificationList;
+        this.intermediateInterval = intermediateInterval;
+    }
 
     public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList) {
         this.id = id;
@@ -22,10 +34,17 @@ public class Interval {
         this.totalNotifications = calcTotalNotifications();
         this.notificationsTriggered = 0;
         this.notificationList = notificationList;
+        this.intermediateInterval = new Interval(Constants.DEFAULT_ID, startTime, endTime, Constants.DEFAULT_ZERO,
+                Constants.DEFAULT_ZERO, null, null);
     }
 
     public Interval(LocalTime startTime, LocalTime endTime) {
         this(Constants.DEFAULT_ID, startTime, endTime, new ArrayList<>());
+    }
+
+    public Interval(LocalTime startTime, LocalTime endTime, int notificationsTriggered) {
+        this(Constants.DEFAULT_ID, startTime, endTime, new ArrayList<>());
+        this.notificationsTriggered = notificationsTriggered;
     }
 
     public void setStartTime(LocalTime startTime) {
@@ -52,12 +71,17 @@ public class Interval {
         return totalNotifications;
     }
 
+
     public int getNotificationsTriggered() {
         return notificationsTriggered;
     }
 
     public void setNotificationsTriggered(int notificationsTriggered) {
         this.notificationsTriggered = notificationsTriggered;
+    }
+
+    public Interval getIntermediateInterval() {
+        return intermediateInterval;
     }
 
     private int calcTotalNotifications() {
@@ -73,12 +97,7 @@ public class Interval {
 
     @Override
     public String toString() {
-        return "Interval{" + "\n" +
-                "startTime=" + startTime + "\n" +
-                ", endTime=" + endTime + "\n" +
-                ", totalNotifications=" + totalNotifications + "\n" +
-                ", notificationsTriggered=" + notificationsTriggered + "\n" +
-                ", notificationList=" + notificationList + "\n" +
-                '}';
+        return "Interval: (" + startTime + "-" + endTime + ")|" + totalNotifications + "|" + notificationsTriggered + ":\n" +
+                "\t" + notificationList;
     }
 }

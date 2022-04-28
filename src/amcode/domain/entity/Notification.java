@@ -34,4 +34,9 @@ public class Notification {
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
+
+    @Override
+    public String toString() {
+        return notificationTime + "->" + accepted;
+    }
 }

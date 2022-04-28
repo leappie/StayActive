@@ -23,6 +23,8 @@ import java.time.LocalTime;
 import java.util.HashMap;
 
 public class TriggerAlertController implements Controller<NotificationViewModel> {
+    public static final String TAG = "TriggerAlertController";
+
     @Override
     public DisplayScreen execute(HashMap<String, InputField> inputField, NotificationViewModel model) {
         Displayable displayable;

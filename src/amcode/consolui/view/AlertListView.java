@@ -3,14 +3,16 @@ package amcode.consolui.view;
 import amcode.application.common.enums.Display;
 import amcode.consolui.model.AlertViewModel;
 import amcode.consolui.view.data.DataView;
+import amcode.consolui.view.form.input.InputField;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class AlertListView extends DataView<List<AlertViewModel>> {
-    public AlertListView(List<AlertViewModel> model, String screenTitle) {
-        super(model, screenTitle);
-    }
 
+    public AlertListView(HashMap<String, InputField> inputFields, List<AlertViewModel> model, String screenTitle) {
+        super(inputFields, model, screenTitle);
+    }
 
     @Override
     public void display(Display display) {

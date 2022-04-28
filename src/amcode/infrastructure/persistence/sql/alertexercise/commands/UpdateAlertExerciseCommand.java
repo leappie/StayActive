@@ -14,7 +14,7 @@ public class UpdateAlertExerciseCommand extends DatabaseCommand<Alert> implement
     protected String getCommandText() {
         String query = String.format(
                 "UPDATE %s " +
-                        "SET %s = ?, %s = ? " +
+                        "SET %s = ? " +
                         "WHERE %s = ? AND %s = ? ",
                 AE_TABLE, AE_COLUMN_EXERCISE_WEIGHT, AE_COLUMN_ALERT_ID, AE_COLUMN_EXERCISE_ID);
         return query;
@@ -27,16 +27,14 @@ public class UpdateAlertExerciseCommand extends DatabaseCommand<Alert> implement
             int count = 0;
 
             for (Exercise exercise : exerciseList) {
-                preparedStatement.setInt(1, data.getId());
-                preparedStatement.setInt(2, exercise.getWeight());
+                preparedStatement.setInt(1, exercise.getWeight());
+                preparedStatement.setInt(2, data.getId());
+                preparedStatement.setInt(3, exercise.getId());
 
                 preparedStatement.addBatch();
                 count++;
             }
-
-            if (count % 100 == 0 || count == exerciseList.size()) {
-                preparedStatement.executeBatch();
-            }
+            preparedStatement.executeBatch();
         } catch (SQLException e) {
             System.out.println("Error setting update statement: " + e);
         }

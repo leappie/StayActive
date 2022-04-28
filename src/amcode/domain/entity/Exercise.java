@@ -80,5 +80,12 @@ public class Exercise {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "id=" + id +
+                ", weight=" + weight +
+                ", exerciseHistoryList=" + exerciseHistoryList +
+                '}';
+    }
 }

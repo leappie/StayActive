@@ -25,6 +25,7 @@ public class NotificationView extends FormView<NotificationViewModel> {
 
         switch (display) {
             case MAIN:
+                createTitle();
                 String notificationTimeString = (String) getInputFields().get("notificationTime").getValue();
 
                 System.out.println("Notification time: " + notificationTimeString);
@@ -51,6 +52,7 @@ public class NotificationView extends FormView<NotificationViewModel> {
 
     @Override
     public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<NotificationViewModel> controller) {
+
         return controller.execute(getInputFields(), null);
     }
 

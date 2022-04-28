@@ -42,9 +42,9 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
                 break;
             case SUCCESS:
                 DisplayScreen displayScreen = submit(getInputFields(), getController());
-//                displayable = displayScreen.getFormView();
-//                screen = displayScreen.getDisplay();
-//                displayable.display(screen);
+                displayable = displayScreen.getFormView();
+                screen = displayScreen.getDisplay();
+                displayable.display(screen);
             default:
                 break;
         }
@@ -80,8 +80,6 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
 
         try {
             chosenNumber = getScanner().nextInt();
-            System.out.println("chosen alert number: " + chosenNumber);
-
             if (chosenNumber < 1 || chosenNumber > alertList.size()) {
                 display(Display.FAIL);
             } else {

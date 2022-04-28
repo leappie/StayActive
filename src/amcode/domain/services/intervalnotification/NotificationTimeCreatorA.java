@@ -9,23 +9,34 @@ import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class NotificationTimeCreatorA implements Notifiable {
+    public static final String TAG = "NotificationTimeCreatorB"; // for debugging
+
     @Override
     public LocalTime calcNotificationTime(Interval interval) {
         LocalTime notificationTimeLow;
         LocalTime notificationTimeHigh;
 
-        notificationTimeLow = interval.getStartTime().plus(
-                (long) Constants.INTERVAL_LENGTH_MINUTES * interval.getNotificationsTriggered(), ChronoUnit.MINUTES);
-
+//        System.out.println(interval);
         // if all notifications triggered -> end
         if (interval.getNotificationsTriggered() == interval.getTotalNotifications()) {
             return null;
-            // if it is the last notification
-        } else if (interval.getNotificationsTriggered() == interval.getTotalNotifications() - 1) {
-            notificationTimeHigh = interval.getEndTime();
         } else {
-            notificationTimeHigh = notificationTimeLow.plus(Constants.INTERVAL_LENGTH_MINUTES, ChronoUnit.MINUTES);
+            notificationTimeLow = interval.getIntermediateInterval().getStartTime();
+            if (interval.getNotificationsTriggered() == 0) {
+                // First notification ex. 08.21 -> 09:00
+                notificationTimeHigh = notificationTimeLow.truncatedTo(ChronoUnit.HOURS).
+                        plusMinutes(Constants.INTERVAL_LENGTH_MINUTES);
+            } else if (interval.getNotificationsTriggered() == interval.getTotalNotifications() - 1) {
+                // Last notification 16:00 -> 16:30
+                notificationTimeHigh = interval.getIntermediateInterval().getEndTime();
+            } else {
+                // every other notification
+                notificationTimeHigh = notificationTimeLow.plus(Constants.INTERVAL_LENGTH_MINUTES, ChronoUnit.MINUTES);
+
+            }
         }
+
+        interval.getIntermediateInterval().setStartTime(notificationTimeHigh);
 
         // calc notification time
         int secondsLow = notificationTimeLow.toSecondOfDay();

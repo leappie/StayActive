@@ -97,7 +97,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
             alertViewModelList.add(alertViewModel);
         }
 
-        Displayable displayable = new AlertListView(alertViewModelList, "Alerts list");
+        Displayable displayable = new AlertListView(getInputFields(), alertViewModelList, "Alerts list");
         displayable.display(Display.MAIN);
 
         System.out.println("_____________________________");
