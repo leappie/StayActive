@@ -64,7 +64,7 @@ public class TriggerAlertView extends FormView<Alert> {
             displayChoice();
         } else {
             System.out.println("\tNo alerts ...");
-            FormView formView = ViewFactory.getView(getInputFields(), View.ALERT_LIST_VIEW);
+            FormView formView = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
             formView.display(Display.MAIN);
             System.out.println("_____________________________");
         }

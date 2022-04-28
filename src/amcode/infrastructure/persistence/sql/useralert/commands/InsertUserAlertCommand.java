@@ -15,9 +15,9 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> implements Ale
     protected String getCommandText() {
         String query = String.format(
                 "INSERT OR IGNORE INTO %s" +
-                        "(%s, %s, %s, %s, %s) " +
-                        "VALUES(?, ?, ?, ?, ?)",
-                A_TABLE, A_COLUMN_ID, A_COLUMN_USER_ID, A_COLUMN_NAME, A_COLUMN_START_TIME, A_COLUMN_END_TIME);
+                        "(%s, %s, %s, %s) " +
+                        "VALUES(?, ?, ?, ?)",
+                A_TABLE, A_COLUMN_USER_ID, A_COLUMN_NAME, A_COLUMN_START_TIME, A_COLUMN_END_TIME);
         return query;
     }
 
@@ -28,11 +28,10 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> implements Ale
             int count = 0;
 
             for (Alert alert : alertList) {
-                preparedStatement.setInt(1, alert.getId());
-                preparedStatement.setInt(2, data.getId());
-                preparedStatement.setString(3, alert.getName());
-                preparedStatement.setString(4, alert.getInterval().getStartTime().toString());
-                preparedStatement.setString(5, alert.getInterval().getEndTime().toString());
+                preparedStatement.setInt(1, data.getId());
+                preparedStatement.setString(2, alert.getName());
+                preparedStatement.setString(3, alert.getInterval().getStartTime().toString());
+                preparedStatement.setString(4, alert.getInterval().getEndTime().toString());
 
                 preparedStatement.addBatch();
                 count++;
@@ -43,7 +42,6 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> implements Ale
             }
         } catch (SQLException e) {
             System.out.println("Error setting insert statement user alerts: " + e);
-
         }
     }
 }

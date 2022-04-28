@@ -7,7 +7,7 @@ import amcode.application.common.interfaces.Displayable;
 import amcode.application.common.models.DisplayScreen;
 import amcode.application.user.UserRepository;
 import amcode.application.user.services.Authenticate;
-import amcode.consolui.common.mapping.UserLoginMapping;
+import amcode.consolui.common.mapping.UserLoginViewMapping;
 import amcode.consolui.common.services.CurrentUserService;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.model.UserLoginViewModel;
@@ -24,7 +24,7 @@ public class LoginController implements Controller<UserLoginViewModel> {
         Displayable displayable;
         Display display;
 
-        User user = new UserLoginMapping().mapTo(model);
+        User user = new UserLoginViewMapping().mapTo(model);
         user = new Authenticate(new UserRepository(new UserDao())).authenticateUser(user);
 
         if (user != null) {

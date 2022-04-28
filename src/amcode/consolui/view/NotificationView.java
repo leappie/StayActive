@@ -29,7 +29,7 @@ public class NotificationView extends FormView<Alert> {
                 LocalTime localTime = (LocalTime) getInputFields().get("notificationTime").getValue();
 
                 if (localTime == null) {
-                    formView = ViewFactory.getView(getInputFields(), View.ALERT_LIST_VIEW);
+                    formView = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
                     formView.display(Display.MAIN);
                 }
 

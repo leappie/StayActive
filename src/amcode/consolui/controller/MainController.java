@@ -5,15 +5,15 @@ import amcode.application.common.enums.View;
 import amcode.application.common.interfaces.Controller;
 import amcode.application.common.interfaces.Displayable;
 import amcode.application.common.models.DisplayScreen;
+import amcode.application.user.UserAlertRepository;
 import amcode.consolui.common.services.CurrentUserService;
 import amcode.consolui.factory.ViewFactory;
 import amcode.consolui.model.UserMainViewModel;
 import amcode.consolui.view.form.input.InputField;
-import amcode.domain.entity.Alert;
 import amcode.domain.entity.User;
+import amcode.infrastructure.persistence.sql.useralert.UserAlertDao;
 
 import java.util.HashMap;
-import java.util.List;
 
 import static amcode.application.common.enums.Display.MAIN;
 
@@ -28,27 +28,29 @@ public class MainController implements Controller<UserMainViewModel> {
         switch (view) {
             case PROFILE_VIEW:
                 // TODO
+                displayable = ViewFactory.getView(inputField, View.PROFILE_VIEW);
                 break;
-            case ALERT_LIST_VIEW:
-                // get all alert for current user
+            case ALERT_OPTIONS_VIEW:
+                // get all alerts for current user
                 User loggedInUser = CurrentUserService.getLoggedInUser();
-//                loggedInUser = new UserRepository(new UserDao()).getUserAlerts(loggedInUser);
+                loggedInUser = new UserAlertRepository(new UserAlertDao()).getUserAlerts(loggedInUser);
 
-                // get all alert exercises for all alerts
-                List<Alert> alertList = loggedInUser.getAlertList();
+                // update current User; TODO ?? NIET NODIG ??
+                CurrentUserService.setLoggedInUser(loggedInUser);
 
-                displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
-                display = MAIN;
-
-
-
-
+                displayable = ViewFactory.getView(inputField, View.ALERT_OPTIONS_VIEW);
                 break;
             case EXERCISE_HISTORY_VIEW:
                 // TODO
+                displayable = ViewFactory.getView(inputField, View.EXERCISE_HISTORY_VIEW);
+                break;
+            default:
+                displayable = null;
                 break;
         }
 
-        return null;
+        display = MAIN;
+
+        return new DisplayScreen(displayable, display);
     }
 }

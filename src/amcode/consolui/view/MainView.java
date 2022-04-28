@@ -27,6 +27,7 @@ public class MainView extends FormView<UserMainViewModel> {
                 createTitle();
                 displayInfo();
                 Displayable displayable;
+                Display screen;
 
                 try {
                     int choice = getScanner().nextInt();
@@ -39,7 +40,11 @@ public class MainView extends FormView<UserMainViewModel> {
                             display(Display.MAIN);
                             break;
                         case 2:
-                            getInputFields().put("showNextView", new StringInputField(View.ALERT_LIST_VIEW.toString()));
+                            getInputFields().put("showNextView", new StringInputField(View.ALERT_OPTIONS_VIEW.toString()));
+                            DisplayScreen displayScreen = submit(getInputFields(), getController());
+                            displayable = displayScreen.getFormView();
+                            screen = displayScreen.getDisplay();
+                            displayable.display(screen);
                             break;
                         case 3:
                             // TODO: view exercise history
@@ -52,8 +57,10 @@ public class MainView extends FormView<UserMainViewModel> {
                             break;
                         default:
                             System.out.println("Invalid Option.");
+                            display(Display.MAIN);
                             break;
                     }
+
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
                     displayable = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
@@ -67,7 +74,8 @@ public class MainView extends FormView<UserMainViewModel> {
 
     @Override
     public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<UserMainViewModel> controller) {
-        return super.submit(inputFields, controller);
+        UserMainViewModel userMainViewModel = new UserMainViewModel();
+        return controller.execute(inputFields, userMainViewModel);
     }
 
 

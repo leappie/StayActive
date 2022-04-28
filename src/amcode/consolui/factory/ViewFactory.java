@@ -28,8 +28,8 @@ public class ViewFactory {
         FormView view;
 
         switch (viewName) {
-            case ALERT_LIST_VIEW:
-                view = new AlertListView(inputField, controller,"Alerts list");
+            case ALERT_OPTIONS_VIEW:
+                view = new AlertOptionsView(inputField, controller,"Alerts");
                 break;
             case MAIN_VIEW:
                 view = new MainView(inputField, controller,"Home");

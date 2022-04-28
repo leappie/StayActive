@@ -1,5 +1,6 @@
 package amcode.consolui.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserMainViewModel {
@@ -15,6 +16,10 @@ public class UserMainViewModel {
         this.level = level;
         this.alertViewModelList = alertViewModelList;
         this.exerciseHistoryViewModels = exerciseHistoryViewModels;
+    }
+
+    public UserMainViewModel() {
+        this("", "", new ArrayList<>(), new ArrayList<>());
     }
 
     public String getUsername() {

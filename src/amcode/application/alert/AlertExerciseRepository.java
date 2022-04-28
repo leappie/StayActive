@@ -30,4 +30,5 @@ public class AlertExerciseRepository implements IAlertExerciseRepository {
     public Alert getAlertExercises(Alert alert) {
         return this.alertExerciseDao.getAlertExercises(alert);
     }
+
 }

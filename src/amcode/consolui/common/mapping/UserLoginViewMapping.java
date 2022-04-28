@@ -5,7 +5,7 @@ import amcode.consolui.model.UserLoginViewModel;
 import amcode.domain.entity.User;
 
 
-public class UserLoginMapping implements Mapping<UserLoginViewModel, User> {
+public class UserLoginViewMapping implements Mapping<UserLoginViewModel, User> {
 
     @Override
     public User mapTo(UserLoginViewModel viewModel) {

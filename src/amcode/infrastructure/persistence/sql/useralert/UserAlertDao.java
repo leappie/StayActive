@@ -45,7 +45,7 @@ public class UserAlertDao implements IUserAlertDao {
 
     @Override
     public User getUserAlerts(User user) {
-        List<User> userList = this.userAlertQueryList.get("insert").execute(user);
+        List<User> userList = this.userAlertQueryList.get("getUserAlerts").execute(user);
 
         return userList.get(userList.size() - 1);
     }

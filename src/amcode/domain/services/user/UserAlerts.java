@@ -18,7 +18,12 @@ public class UserAlerts {
             // if no name entered, create new name
             alert = incrementAlertName(user, alert);
 
-            user.getAlertList().add(alert);
+            // check name duplicates
+            alert = checkNameDuplicate(user, alert);
+
+            if (alert != null) {
+                user.getAlertList().add(alert);
+            }
             return alert;
         }
     }
@@ -39,6 +44,18 @@ public class UserAlerts {
             int alertNumber = alertList.size() + 1;
             alertName = "Alert " + alertNumber;
             alert.setName(alertName);
+        }
+
+        return alert;
+    }
+
+    private Alert checkNameDuplicate(User user, Alert alert) {
+        String alertName = alert.getName();
+
+        for (Alert userAlert : user.getAlertList()) {
+            if (userAlert.getName().equals(alertName)) {
+                return null;
+            }
         }
 
         return alert;
