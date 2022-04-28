@@ -7,7 +7,6 @@ import amcode.infrastructure.persistence.sql.DatabaseQuery;
 import amcode.infrastructure.persistence.sql.user.commands.DeleteUserCommand;
 import amcode.infrastructure.persistence.sql.user.commands.InsertUserCommand;
 import amcode.infrastructure.persistence.sql.user.commands.UpdateUserCommand;
-import amcode.infrastructure.persistence.sql.user.queries.SelectUserAlertsQuery;
 import amcode.infrastructure.persistence.sql.user.queries.SelectUserQuery;
 
 import java.util.HashMap;
@@ -29,7 +28,6 @@ public class UserDao implements IUserDao {
          */
         this.userDatabaseQueryList = new HashMap<>();
         this.userDatabaseQueryList.put("getUser", new SelectUserQuery());
-        this.userDatabaseQueryList.put("getUserAlerts", new SelectUserAlertsQuery());
 
         this.userDatabaseCommandList = new HashMap<>();
         this.userDatabaseCommandList.put("insert", new InsertUserCommand());
@@ -68,23 +66,6 @@ public class UserDao implements IUserDao {
         } else {
             foundUser = null;
         }
-        return foundUser;
-    }
-
-    @Override
-    public User getUserAlerts(User user) {
-        List<User> userList = this.userDatabaseQueryList.get("getUserAlerts").execute(user);
-        User foundUser;
-
-        if (userList.size() > 0) {
-            foundUser = userList.get(userList.size() - 1);
-        } else {
-            /*
-            if list is empty, no alerts found return current user
-             */
-            foundUser = user;
-        }
-
         return foundUser;
     }
 

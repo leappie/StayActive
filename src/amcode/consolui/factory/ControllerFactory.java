@@ -10,6 +10,9 @@ public class ControllerFactory {
         Controller controller;
 
         switch (viewName) {
+            case MAIN_VIEW:
+                controller = new MainController();
+                break;
             case MODIFY_ALERT_VIEW:
                 controller = new ModifyAlertController();
                 break;
@@ -30,6 +33,7 @@ public class ControllerFactory {
                 break;
             case ON_EXERCISE_VIEW:
                 controller = new OnExerciseController();
+                break;
             default:
                 controller = null;
                 break;

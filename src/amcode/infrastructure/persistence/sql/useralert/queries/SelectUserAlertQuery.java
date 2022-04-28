@@ -1,4 +1,4 @@
-package amcode.infrastructure.persistence.sql.user.queries;
+package amcode.infrastructure.persistence.sql.alert.queries;
 
 import amcode.application.common.util.LocalTimeConverter;
 import amcode.domain.entity.Alert;
@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-public class SelectUserAlertsQuery extends DatabaseQuery<User> implements AlertTable {
+public class SelectUserAlertQuery extends DatabaseQuery<User> implements AlertTable {
     private User user;
 
     @Override

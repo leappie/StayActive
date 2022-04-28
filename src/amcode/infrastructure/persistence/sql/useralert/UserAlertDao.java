@@ -1,56 +1,52 @@
-//package amcode.infrastructure.persistence.sql.useralert;
-//
-//import amcode.application.common.dtos.UserAlertsDTO;
-//import amcode.application.common.interfaces.daos.IUserAlertDao;
-//import amcode.infrastructure.persistence.sql.DatabaseCommand;
-//import amcode.infrastructure.persistence.sql.DatabaseQuery;
-//import amcode.infrastructure.persistence.sql.useralert.commands.DeleteUserAlertCommand;
-//import amcode.infrastructure.persistence.sql.useralert.commands.InsertUserAlertCommand;
-//import amcode.infrastructure.persistence.sql.useralert.commands.UpdateUserAlertCommand;
-//import amcode.infrastructure.persistence.sql.useralert.queries.SelectUserAlertsQuery;
-//
-//import java.util.HashMap;
-//import java.util.List;
-//
-//public class UserAlertDao implements IUserAlertDao {
-//    private DatabaseQuery<UserAlertsDTO> userAlertsDTOQuery;
-//    private HashMap<String, DatabaseCommand<UserAlertsDTO>> userAlertsDTOCommandList;
-//
-//    public UserAlertDao(DatabaseQuery<UserAlertsDTO> userAlertsDTOQuery, HashMap<String,
-//            DatabaseCommand<UserAlertsDTO>> userAlertsDTOCommandList) {
-//        this.userAlertsDTOQuery = userAlertsDTOQuery;
-//        this.userAlertsDTOCommandList = userAlertsDTOCommandList;
-//    }
-//
-//    public UserAlertDao() {
-//        /*
-//        For convenience
-//         */
-//        this.userAlertsDTOQuery = new SelectUserAlertsQuery();
-//        this.userAlertsDTOCommandList = new HashMap<>();
-//        this.userAlertsDTOCommandList.put("insert", new InsertUserAlertCommand());
-//        this.userAlertsDTOCommandList.put("update", new UpdateUserAlertCommand());
-//        this.userAlertsDTOCommandList.put("delete", new DeleteUserAlertCommand());
-//    }
-//
-//
-//    @Override
-//    public long insertUser(UserAlertsDTO userAlertsDTO) {
-//        return this.userAlertsDTOCommandList.get("insert").execute(userAlertsDTO);
-//    }
-//
-//    @Override
-//    public long updateUser(UserAlertsDTO userAlertsDTO) {
-//        return this.userAlertsDTOCommandList.get("update").execute(userAlertsDTO);
-//    }
-//
-//    @Override
-//    public long deleteUser(UserAlertsDTO userAlertsDTO) {
-//        return this.userAlertsDTOCommandList.get("delete").execute(userAlertsDTO);
-//    }
-//
-//    @Override
-//    public List<UserAlertsDTO> getUserAlerts(UserAlertsDTO userAlertsDTO) {
-//        return this.userAlertsDTOQuery.execute(userAlertsDTO);
-//    }
-//}
+package amcode.infrastructure.persistence.sql.useralert;
+
+import amcode.application.common.interfaces.daos.IUserAlertDao;
+import amcode.domain.entity.User;
+import amcode.infrastructure.persistence.sql.DatabaseCommand;
+import amcode.infrastructure.persistence.sql.DatabaseQuery;
+import amcode.infrastructure.persistence.sql.alert.queries.SelectUserAlertQuery;
+import amcode.infrastructure.persistence.sql.useralert.commands.InsertUserAlertCommand;
+
+import java.util.HashMap;
+import java.util.List;
+
+public class UserAlertDao implements IUserAlertDao {
+    private HashMap<String, DatabaseQuery<User>> userAlertQueryList;
+    private HashMap<String, DatabaseCommand<User>> userAlertCommandList;
+
+    public UserAlertDao(HashMap<String, DatabaseQuery<User>> userAlertQueryList,
+                        HashMap<String, DatabaseCommand<User>> userAlertCommandList) {
+        this.userAlertQueryList = userAlertQueryList;
+        this.userAlertCommandList = userAlertCommandList;
+    }
+
+    public UserAlertDao() {
+        this.userAlertQueryList = new HashMap<>();
+        this.userAlertCommandList = new HashMap<>();
+
+        this.userAlertCommandList.put("insert", new InsertUserAlertCommand());
+        this.userAlertQueryList.put("getUserAlerts", new SelectUserAlertQuery());
+    }
+
+    @Override
+    public long insertUserAlert(User user) {
+        return this.userAlertCommandList.get("insert").execute(user);
+    }
+
+    @Override
+    public long updateUseAlert(User user) {
+        return 0;
+    }
+
+    @Override
+    public long deleteUserAlert(User user) {
+        return 0;
+    }
+
+    @Override
+    public User getUserAlerts(User user) {
+        List<User> userList = this.userAlertQueryList.get("insert").execute(user);
+
+        return userList.get(userList.size() - 1);
+    }
+}

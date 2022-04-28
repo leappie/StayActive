@@ -1,15 +1,11 @@
 package amcode.application.common.interfaces.repositories;
 
-import amcode.application.common.dtos.UserAlertsDTO;
-
-import java.util.List;
+import amcode.domain.entity.User;
 
 public interface IUserAlertRepository {
-    long addUserAlert(UserAlertsDTO userAlertsDTO);
-    long updateUserAlert(UserAlertsDTO userAlertsDTO);
-    long removeUserAlert(UserAlertsDTO userAlertsDTO);
+    long addUserAlert(User user);
+    long updateUserAlert(User user);
+    long removeUserAlert(User user);
 
-    List<UserAlertsDTO> getUserAlerts(UserAlertsDTO userAlertsDTO);
-
-
+    User getUserAlerts(User user);
 }

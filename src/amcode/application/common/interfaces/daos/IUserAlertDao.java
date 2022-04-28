@@ -1,13 +1,11 @@
 package amcode.application.common.interfaces.daos;
 
-import amcode.application.common.dtos.UserAlertsDTO;
-
-import java.util.List;
+import amcode.domain.entity.User;
 
 public interface IUserAlertDao {
-    long insertUser(UserAlertsDTO userAlertsDTO);
-    long updateUser(UserAlertsDTO userAlertsDTO);
-    long deleteUser(UserAlertsDTO userAlertsDTO);
+    long insertUserAlert(User user);
+    long updateUseAlert(User user);
+    long deleteUserAlert(User user);
 
-    List<UserAlertsDTO> getUserAlerts(UserAlertsDTO userAlertsDTO);
+    User getUserAlerts(User user);
 }

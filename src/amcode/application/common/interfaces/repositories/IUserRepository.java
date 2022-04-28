@@ -8,5 +8,5 @@ public interface IUserRepository {
     long removeUser(User user);
 
     User getUser(User user);
-    User getUserAlerts(User user);
+
 }

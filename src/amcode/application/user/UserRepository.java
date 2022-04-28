@@ -32,8 +32,4 @@ public class UserRepository implements IUserRepository {
         return userDao.getUser(user);
     }
 
-    @Override
-    public User getUserAlerts(User user) {
-        return userDao.getUserAlerts(user);
-    }
 }

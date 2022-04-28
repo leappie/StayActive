@@ -8,5 +8,5 @@ public interface IUserDao {
     long deleteUser(User user);
 
     User getUser(User user);
-    User getUserAlerts(User user);
+
 }

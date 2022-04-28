@@ -46,6 +46,14 @@ public class Alert {
         return exerciseList;
     }
 
+    public void setInterval(Interval interval) {
+        this.interval = interval;
+    }
+
+    public void setExerciseList(List<Exercise> exerciseList) {
+        this.exerciseList = exerciseList;
+    }
+
     @Override
     public String toString() {
         return this.name + " "
