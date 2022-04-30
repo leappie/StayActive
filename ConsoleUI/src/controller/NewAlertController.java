@@ -43,8 +43,6 @@ public class NewAlertController implements Controller<AlertViewModel> {
             User loggedInUser = CurrentUserService.getLoggedInUser();
             alert = new UserAlerts().tryAddAlert(loggedInUser, alert);
 
-            System.out.println(loggedInUser);
-
             if (alert != null) {
                 // get all exercises to pair with alert
                 List<Exercise> exerciseList = new ExerciseService(new ExerciseDAO()).getAllExercises();// TODO: improve?

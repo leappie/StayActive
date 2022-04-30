@@ -85,7 +85,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
                 "Choose an option: \n" +
                         "\t1. Add new alert.\n" +
                         "\t2. Modify alert.\n" +
-                        "\t3. Delete alert \n" +
+                        "\t3. Delete alert. \n" +
                         "\t4. Trigger alert.\n" +
                         "\t5. Back.\n" +
                         "\t6. Quit."

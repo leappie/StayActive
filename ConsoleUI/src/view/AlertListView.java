@@ -30,7 +30,7 @@ public class AlertListView extends DataView<List<AlertViewModel>> {
             stringBuilder
                     .append("\t")
                     .append(count)
-                    .append(" ")
+                    .append(". ")
                     .append(alertViewModel.getAlertName())
                     .append(" (")
                     .append(alertViewModel.getStartTime())
