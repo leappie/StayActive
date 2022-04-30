@@ -34,7 +34,7 @@ public class LocalTimeConverter implements TimeConverter {
         return time;
     }
 
-    private static boolean checkChars(String[] array) {
+    private boolean checkChars(String[] array) {
         for (String item : array) {
             int itemLength = item.length();
 
