@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/StayActive.iml" filepath="$PROJECT_DIR$/StayActive.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Application/Application.iml" filepath="$PROJECT_DIR$/Application/Application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConsoleUI/ConsoleUI.iml" filepath="$PROJECT_DIR$/ConsoleUI/ConsoleUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Infrastructure/Infrastructure.iml" filepath="$PROJECT_DIR$/Infrastructure/Infrastructure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StayActive_v2.iml" filepath="$PROJECT_DIR$/StayActive_v2.iml" />
     </modules>
   </component>
 </project>
