@@ -7,8 +7,8 @@ import interfaces.Levelable;
 
 import java.util.List;
 
-//TODO: Question -> Extend ExerciseLevelCreatorA and use super?
-public class ExerciseLevelCreatorB implements Levelable {
+//TODO: Question -> Extend ExerciseLevelCreatorA and use super OR Interface?
+public class ExerciseLevelCreatorB extends ExerciseLevelCreatorA {
     public static final String TAG = "ExerciseLevelCreatorB";
 
     private User user;
@@ -27,7 +27,7 @@ public class ExerciseLevelCreatorB implements Levelable {
     @Override
     public List<Level> getExerciseDifficulty(Interval interval) {
         Level userLevel = this.user.getLevel();
-        List<Level> exerciseLevels = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
+        List<Level> exerciseLevels = super.getExerciseDifficulty(interval); // call parent class
 
         if (exerciseLevels.size() > 0) {
             Level level = exerciseLevels.get(exerciseLevels.size() - 1);

@@ -6,8 +6,8 @@ import interfaces.Notifiable;
 
 import java.time.LocalTime;
 
-// TODO: extend NotificationTimeCreatorA ??
-public class NotificationTimeCreatorB implements Notifiable {
+//TODO: Question -> Extend NotificationTimeCreatorB and use super OR Interface?
+public class NotificationTimeCreatorB extends NotificationTimeCreatorA {
     public static final String TAG = "NotificationTimeCreatorB"; // for debugging
 
     /**
@@ -36,8 +36,7 @@ public class NotificationTimeCreatorB implements Notifiable {
             interval.setTotalNotifications(total);
         }
 
-        NotificationTimeCreatorA notificationTimeCreatorA = new NotificationTimeCreatorA();
-        return notificationTimeCreatorA.calcNotificationTime(interval);
+        return super.calcNotificationTime(interval);
     }
 
 }
