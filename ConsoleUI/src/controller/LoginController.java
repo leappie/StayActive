@@ -24,7 +24,7 @@ public class LoginController implements Controller<UserLoginViewModel> {
         Display display;
 
         User user = new UserLoginViewMapping().mapTo(model);
-        user = new LoginService(new UserDAO()).authenticateUser(user); // TODO: improve?
+        user = new LoginService(new  UserDAO()).authenticateUser(user); // TODO: improve?
 
         if (user != null) {
             displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
