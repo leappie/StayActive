@@ -4,6 +4,7 @@ package services.user;
 import entity.Alert;
 import entity.Interval;
 import entity.User;
+import interfaces.UserAlertsControl;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -11,8 +12,8 @@ import java.util.List;
 /**
  * This class manages how User alerts are created and modified.
  */
-public class UserAlerts {
-    public Alert tryAddAlert(User user, Alert alert) {
+public class UserAlerts implements UserAlertsControl {
+    public Alert addAlert(User user, Alert alert) {
         Interval interval = alert.getInterval();
 
         // Difference startTime and endTime must be greater than 0
@@ -36,8 +37,7 @@ public class UserAlerts {
         return null;
     }
 
-    public boolean deleteAlert(User user, Alert alert) {
-        return false;
+    public void deleteAlert(User user, Alert alert) {
     }
 
     private Alert incrementAlertName(User user, Alert alert) {

@@ -41,7 +41,7 @@ public class NewAlertController implements Controller<AlertViewModel> {
         } else {
             // add alert to loggedInUser
             User loggedInUser = CurrentUserService.getLoggedInUser();
-            alert = new UserAlerts().tryAddAlert(loggedInUser, alert);
+            alert = new UserAlerts().addAlert(loggedInUser, alert);
 
             if (alert != null) {
                 // get all exercises to pair with alert
