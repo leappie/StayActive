@@ -57,10 +57,9 @@ class ExerciseLevelCreatorATest {
     /*
     Case 3: 1 accepted notifications in the list and 1 not accepted
     SITUATION 1: not accepted, accepted
-    SITUATION 2: accepted, not accepted
      */
     @Test
-    void getExerciseDifficultyCaseC() {
+    void getExerciseDifficultyCaseC_1() {
         // SITUATION 1
         //Arrange
         boolean accepted = true;
@@ -75,15 +74,23 @@ class ExerciseLevelCreatorATest {
 
         // Assert
         Assertions.assertEquals(Level.EASY, level);
-        // --------------------->
+    }
 
+    /*
+    Case 3: 1 accepted notifications in the list and 1 not accepted
+    SITUATION 2: accepted, not accepted
+    */
+    @Test
+    void getExerciseDifficultyCaseC_2() {
         // SITUATION 2
         //Arrange
+        boolean accepted = true;
+        List<Notification> notificationList = new ArrayList<>();
         notificationList = new ArrayList<>();
         notificationList.add(new Notification(LocalTime.of(8, 30), accepted));
         notificationList.add(new Notification(LocalTime.of(9, 15), !accepted)); // not accepted so empty list
 
-        interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, null, null, notificationList);
 
         // Act
         List<Level> levelList = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
@@ -93,22 +100,14 @@ class ExerciseLevelCreatorATest {
     }
 
     /*
-    Case 3: 3 accepted notifications in the list
+    Case 4: 3 accepted notifications in the list
     SITUATION 1: accepted, accepted, accepted
-    SITUATION 2: accepted, not accepted, accepted
-    SITUATION 3: accepted, accepted, not accepted
-    SITUATION 4: not accepted, not accepted, accepted
      */
     @Test
-    void getExerciseDifficultyCaseD() {
-        // SITUATION 1: accepted, accepted, accepted
+    void getExerciseDifficultyCaseD_1() {
         //Arrange
         boolean accepted = true;
-        List<Notification> notificationList = new ArrayList<>();
-        notificationList.add(new Notification(LocalTime.of(8, 45), accepted));
-        notificationList.add(new Notification(LocalTime.of(9, 3), accepted));
-        notificationList.add(new Notification(LocalTime.of(10, 45), accepted)); // time diff last 2 accepted > 40 -> HARD
-
+        List<Notification> notificationList = createNotificationListSize3(accepted, accepted, accepted);
         Interval interval = new Interval(0, null, null, notificationList);
 
         // Act
@@ -116,56 +115,72 @@ class ExerciseLevelCreatorATest {
 
         // Assert
         Assertions.assertEquals(Level.HARD, level);
-        // --------------------->
+    }
 
-        // SITUATION 2: accepted, not accepted, accepted
+    /*
+    Case 4: 3 accepted notifications in the list
+    SITUATION 2: accepted, not accepted, accepted
+     */
+    @Test
+    void getExerciseDifficultyCaseD_2() {
         //Arrange
-        notificationList = new ArrayList<>();
-        notificationList.add(new Notification(LocalTime.of(8, 45), accepted));
-        notificationList.add(new Notification(LocalTime.of(9, 3), !accepted));
-        notificationList.add(new Notification(LocalTime.of(10, 45), accepted)); // time diff last 2 accepted > 40 -> HARD
-
-        interval = new Interval(0, null, null, notificationList);
+        boolean accepted = true;
+        List<Notification> notificationList = createNotificationListSize3(accepted, !accepted, accepted);
+        Interval interval = new Interval(0, null, null, notificationList);
 
         // Act
-        level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
+        Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
 
         // Assert
         Assertions.assertEquals(Level.HARD, level);
-        // --------------------->
+    }
 
-        // SITUATION 3: accepted, accepted, not accepted
+    /*
+    Case 4: 3 accepted notifications in the list
+    SITUATION 3: accepted, accepted, not accepted
+     */
+    @Test
+    void getExerciseDifficultyCaseD_3() {
         //Arrange
-        notificationList = new ArrayList<>();
-        notificationList.add(new Notification(LocalTime.of(8, 45), accepted));
-        notificationList.add(new Notification(LocalTime.of(9, 3), accepted));
-        notificationList.add(new Notification(LocalTime.of(10, 45), !accepted)); // not accepted so empty list
-
-        interval = new Interval(0, null, null, notificationList);
+        boolean accepted = true;
+        List<Notification> notificationList = createNotificationListSize3(accepted, accepted, !accepted);
+        Interval interval = new Interval(0, null, null, notificationList);
 
         // Act
         List<Level> levelList = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
 
         // Assert
         Assertions.assertEquals(0, levelList.size());
-        // --------------------->
+    }
 
-        // SITUATION 4: not accepted, not accepted, accepted
+    /*
+    Case 4: 3 accepted notifications in the list
+    SITUATION 3: not accepted, not accepted, accepted
+     */
+    @Test
+    void getExerciseDifficultyCaseD_4() {
         //Arrange
-        notificationList = new ArrayList<>();
-        notificationList.add(new Notification(LocalTime.of(8, 45), !accepted));
-        notificationList.add(new Notification(LocalTime.of(9, 3), !accepted));
-        notificationList.add(new Notification(LocalTime.of(10, 45), accepted)); // time diff last accepted > 40 -> HARD
-
-        interval = new Interval(0, null, null, notificationList);
+        boolean accepted = true;
+        List<Notification> notificationList = createNotificationListSize3(!accepted, !accepted, accepted);
+        Interval interval = new Interval(0, null, null, notificationList);
 
         // Act
-        level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
+        Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
 
         // Assert
         Assertions.assertEquals(Level.HARD, level);
     }
 
 
+
+
+    private List<Notification> createNotificationListSize3(boolean accept1, boolean accept2, boolean accept3) {
+        List<Notification> notificationList = new ArrayList<>();
+        notificationList.add(new Notification(LocalTime.of(8, 45), accept1));
+        notificationList.add(new Notification(LocalTime.of(9, 3), accept2));
+        notificationList.add(new Notification(LocalTime.of(10, 45), accept3));
+
+        return notificationList;
+    }
 
 }

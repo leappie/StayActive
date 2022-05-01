@@ -12,12 +12,41 @@ import java.util.List;
 class AlertExerciseCreatorATest {
 
     @Test
-    void getExerciseOnNotification() {
-        // SITUATION 1
+    void getExerciseOnNotificationA() {
         // Arrange
-        List<Exercise> exerciseList = new ArrayList<>();
+        List<Exercise> exerciseList = createExerciseList();
         List<Level> levelList = new ArrayList<>();
         Alert alert = new Alert(0, "test", null, exerciseList);
+
+        levelList.add(Level.EASY);
+        levelList.add(Level.HARD);
+
+        // Act
+        Exercise exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alert, levelList);
+
+        // Assert
+        Assertions.assertTrue(exercise.getLevel() == Level.EASY || exercise.getLevel() == Level.HARD);
+    }
+
+    @Test
+    void getExerciseOnNotificationB() {
+        List<Exercise> exerciseList = createExerciseList();
+        List<Level> levelList = new ArrayList<>();
+        Alert alert = new Alert(0, "test", null, exerciseList);
+
+        // Arrange
+        levelList = new ArrayList<>();
+        levelList.add(Level.HARD);
+
+        // Act
+        Exercise exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alert, levelList);
+
+        // Assert
+        Assertions.assertTrue(exercise.getLevel() == Level.HARD);
+    }
+
+    private List<Exercise> createExerciseList() {
+        List<Exercise> exerciseList = new ArrayList<>();
 
         // 3 easy exercises
         exerciseList.add(new Exercise("Exercise 1", 15, 3, 0, Level.EASY));
@@ -34,27 +63,6 @@ class AlertExerciseCreatorATest {
         exerciseList.add(new Exercise("Exercise 8", 15, 3, 0, Level.HARD));
         exerciseList.add(new Exercise("Exercise 9", 15, 3, 0, Level.HARD));
 
-        levelList.add(Level.EASY);
-        levelList.add(Level.HARD);
-
-        // Act
-        Exercise exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alert, levelList);
-
-        // Assert
-        Assertions.assertTrue(exercise.getLevel() == Level.EASY || exercise.getLevel() == Level.HARD);
-        // -------------------------->
-
-        // SITUATION 2
-        // Arrange
-        levelList = new ArrayList<>();
-        levelList.add(Level.HARD);
-
-        // Act
-        exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alert, levelList);
-
-        // Assert
-        Assertions.assertTrue(exercise.getLevel() == Level.HARD);
-
-
+        return exerciseList;
     }
 }
