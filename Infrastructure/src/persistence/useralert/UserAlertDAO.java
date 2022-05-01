@@ -4,9 +4,6 @@ package persistence.useralert;
 import common.interfaces.DAO;
 import entity.User;
 import persistence.DataStore;
-import persistence.user.commands.DeleteUserCommand;
-import persistence.user.commands.InsertUserCommand;
-import persistence.user.commands.UpdateUserCommand;
 import persistence.useralert.commands.InsertUserAlertCommand;
 import persistence.useralert.queries.SelectUserAlertQuery;
 
