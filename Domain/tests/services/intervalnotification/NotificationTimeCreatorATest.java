@@ -90,8 +90,8 @@ public class NotificationTimeCreatorATest {
         }
     }
 
-    /**
-     * startTime > EndTime
+    /*
+    startTime > EndTime
      */
     @Test
     void constraintTest() {
@@ -112,6 +112,34 @@ public class NotificationTimeCreatorATest {
         Assertions.assertEquals(null, result);
 
     }
+
+    /*
+    start time = 09:00, end time = 09:15
+     */
+    @Test
+    void specificSituationTestA() {
+        // Arrange
+        int hourStartTime = 9;
+        int minutesStartTime = 00;
+        int hourEndTime = 9;
+        int minutesEndTime = 15;
+
+        LocalTime startTime = LocalTime.of(hourStartTime, minutesStartTime);
+        LocalTime endTime = LocalTime.of(hourEndTime, minutesEndTime);
+        Interval interval = new Interval(startTime, endTime);
+
+        // Act
+        LocalTime result = new NotificationTimeCreatorA().calcNotificationTime(interval);
+
+        //Assert
+        Assertions.assertTrue(
+                result.getHour() >= hourStartTime
+                        && result.getHour() <= hourEndTime
+                        && result.getMinute() >= minutesStartTime
+                        && result.getMinute() <= minutesEndTime);
+
+    }
+
 
 
 

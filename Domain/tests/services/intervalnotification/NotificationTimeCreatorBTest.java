@@ -37,7 +37,7 @@ class NotificationTimeCreatorBTest {
 
         while (interval.getTotalNotifications() != interval.getNotificationsTriggered()) {
             // Act
-            LocalTime result = new NotificationTimeCreatorA().calcNotificationTime(interval); // the result to be compared
+            LocalTime result = new NotificationTimeCreatorB().calcNotificationTime(interval); // the result to be compared
             int resultSeconds = result.toSecondOfDay();
 
             /*

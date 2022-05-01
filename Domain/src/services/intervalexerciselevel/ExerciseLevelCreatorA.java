@@ -33,25 +33,28 @@ public class ExerciseLevelCreatorA implements Levelable {
                 levels.add(level);
             }
         } else {
-            // get de last two 'accepted' notifications;
+            // get the last notification in the list
             int listSize = notificationList.size();
-            Notification acceptedNotificationA;
-            Notification acceptedOrNotNotificationB;
+            Notification checkNotificationA = notificationList.get(listSize - 1);
+            Notification checkNotificationB;
 
-            acceptedNotificationA = getAcceptedNotification(listSize, notificationList);
+            // if the last notification is not accepted don't continue
+            if (!checkNotificationA.isAccepted()) {
+                return levels;
+            } else {
+                // check from index of acceptedNotificationA to the next accepted or not notification
+                int index = notificationList.indexOf(checkNotificationA); // index = listSize - 1
+                checkNotificationB = getAcceptedNotification(index, notificationList);
 
-            // check from index of acceptedNotificationA
-            int index = notificationList.indexOf(acceptedNotificationA);
-            acceptedOrNotNotificationB = getAcceptedNotification(index, notificationList);
+                // if both are not null, get the difference between the two in minutes.
+                if (checkNotificationA != null && checkNotificationB != null) {
+                    LocalTime timeA = checkNotificationA.getNotificationTime();
+                    LocalTime timeB = checkNotificationB.getNotificationTime();
 
-            // if both are not null, get the difference between the two in minutes.
-            if (acceptedNotificationA != null && acceptedOrNotNotificationB != null) {
-                LocalTime timeA = acceptedNotificationA.getNotificationTime();
-                LocalTime timeB = acceptedOrNotNotificationB.getNotificationTime();
-
-                minutes = (int) timeB.until(timeA, ChronoUnit.MINUTES);
-                level = getExerciseLevel(minutes);
-                levels.add(level);
+                    minutes = (int) timeB.until(timeA, ChronoUnit.MINUTES);
+                    level = getExerciseLevel(minutes);
+                    levels.add(level);
+                }
             }
         }
         return levels;
