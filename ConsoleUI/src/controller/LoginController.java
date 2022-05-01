@@ -13,6 +13,8 @@ import factory.ViewFactory;
 import model.UserLoginViewModel;
 import persistence.user.UserDAO;
 import services.LoginService;
+import user.UserRepository;
+import user.services.Authenticate;
 
 import java.util.HashMap;
 
@@ -24,7 +26,8 @@ public class LoginController implements Controller<UserLoginViewModel> {
         Display display;
 
         User user = new UserLoginViewMapping().mapTo(model);
-        user = new LoginService(new  UserDAO()).authenticateUser(user); // TODO: improve?
+        UserRepository userRepository = new UserRepository(new UserDAO());
+        user = new LoginService(new Authenticate(userRepository)).authenticateUser(user); // TODO: improve?
 
         if (user != null) {
             displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
