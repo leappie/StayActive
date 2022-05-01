@@ -5,6 +5,9 @@ import entity.Interval;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -32,7 +35,7 @@ import static org.junit.Assert.*;
 public class NotificationTimeCreatorATest {
 
     @Test
-    void testCalcNotificationTime() {
+    void testCalcNotificationTime(String now) {
         // Arrange
         int hourStartTime = 9; // Note date time exception when you try values out of range of [00:00, 23:59]
         int minutesStartTime = 59;
