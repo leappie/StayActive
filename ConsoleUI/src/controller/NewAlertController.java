@@ -29,15 +29,17 @@ public class NewAlertController implements Controller<AlertViewModel> {
     @Override
     public DisplayScreen execute(HashMap<String, InputField> inputField, AlertViewModel model) {
         Displayable displayable;
-        Display display;
+        Display screen;
+        View view;
 
         // map alertViewModel to alert
         Alert alert = new AlertViewMapping().mapTo(model);
 
         // check if mapping succeeded
         if (alert == null) {
-            displayable = ViewFactory.getView(inputField, View.NEW_ALERT_VIEW);
-            display = Display.FAIL;
+            // failed on time interval
+            view = View.NEW_ALERT_VIEW;
+            screen = Display.FAIL;
         } else {
             // add alert to loggedInUser
             User loggedInUser = CurrentUserService.getLoggedInUser();
@@ -50,16 +52,17 @@ public class NewAlertController implements Controller<AlertViewModel> {
                 // add new alert
                 new NewAlertService(new UserAlertDAO(), new AlertExerciseDAO()).AddNewAlert(loggedInUser, exerciseList); // TODO: improve?
 
-                displayable = ViewFactory.getView(inputField, View.ALERT_OPTIONS_VIEW);
-                display = Display.MAIN;
+                view = View.ALERT_OPTIONS_VIEW;
+                screen = Display.MAIN;
             } else {
-                inputField.put("nameFail", new StringInputField("true"));
-                displayable = ViewFactory.getView(inputField, View.NEW_ALERT_VIEW);
-                display = Display.FAIL;
+                // failed on duplicate name
+                view = View.NEW_ALERT_VIEW;
+                screen = Display.FAIL;
             }
         }
 
-        return new DisplayScreen(displayable, display);
+        displayable = ViewFactory.getView(inputField, view);
+        return new DisplayScreen(displayable, screen);
     }
 
 

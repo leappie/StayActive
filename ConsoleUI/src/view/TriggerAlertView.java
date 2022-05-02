@@ -36,17 +36,27 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
         switch (display) {
             case MAIN:
                 createTitle();
-                displayAlerts();
+                System.out.println("Choose an alert number.");
+
+                try {
+                    int choice = getScanner().nextInt();
+                    getInputFields().put("alertIndexChoice", new IntegerInputField(choice));
+
+                    DisplayScreen displayScreen = submit(getInputFields(), getController());
+                    displayable = displayScreen.getFormView();
+                    screen = displayScreen.getDisplay();
+                    displayable.display(screen);
+
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input.");
+                    displayable = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
+                    displayable.display(Display.MAIN);
+                }
                 break;
             case FAIL:
-                System.out.println("Invalid option. Try again.");
-                displayAlerts();
+                System.out.println("Invalid option.");
+                display(Display.MAIN);
                 break;
-            case SUCCESS:
-                DisplayScreen displayScreen = submit(getInputFields(), getController());
-                displayable = displayScreen.getFormView();
-                screen = displayScreen.getDisplay();
-                displayable.display(screen);
             default:
                 break;
         }
@@ -57,46 +67,23 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
         return controller.execute(getInputFields(), null);
     }
 
+
+    // TODO: improve
     private void displayAlerts() {
         User loggedInUser = CurrentUserService.getLoggedInUser();
         List<Alert> alertList = loggedInUser.getAlertList();
 
-        System.out.println("Choose an alert number: ");
-        if (alertList.size() > 0) {
-            // map to AlertViewModel
-            List<AlertViewModel> alertViewModelList = new ArrayList<>();
-            for (Alert alert : alertList) {
-                AlertViewModel alertViewModel = new AlertViewMapping().mapFrom(alert);
-                alertViewModelList.add(alertViewModel);
-            }
-
-            Displayable displayable = new AlertListView(getInputFields(), alertViewModelList, "Alerts list");
-            displayable.display(Display.MAIN);
-
-            System.out.println("_____________________________");
-            displayChoice(alertList);
-        } else {
-            System.out.println("\tNo alerts ...");
-            Displayable displayable = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
-            displayable.display(Display.MAIN);
-            System.out.println("_____________________________");
+        // map to AlertViewModel
+        List<AlertViewModel> alertViewModelList = new ArrayList<>();
+        for (Alert alert : alertList) {
+            AlertViewModel alertViewModel = new AlertViewMapping().mapFrom(alert);
+            alertViewModelList.add(alertViewModel);
         }
-    }
 
-    private void displayChoice(List<Alert> alertList) {
-        int chosenNumber;
+        Displayable displayable = new AlertListView(getInputFields(), alertViewModelList, "Alerts list");
+        displayable.display(Display.MAIN);
 
-        try {
-            chosenNumber = getScanner().nextInt();
-            if (chosenNumber < 1 || chosenNumber > alertList.size()) {
-                display(Display.FAIL);
-            } else {
-                getInputFields().put("chosenAlertIndex", new IntegerInputField(chosenNumber - 1));
-                display(Display.SUCCESS);
-            }
-        } catch (InputMismatchException e) {
-            display(Display.FAIL);
-        }
+        System.out.println("_____________________________");
     }
 
 }

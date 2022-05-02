@@ -1,10 +1,12 @@
 package view;
 
 import common.enums.Display;
+import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
 import common.models.DisplayScreen;
 import common.models.InputField;
+import factory.ViewFactory;
 import model.AlertViewModel;
 import view.form.FormView;
 import view.form.input.StringInputField;
@@ -29,27 +31,24 @@ public class NewAlertView extends FormView<AlertViewModel> {
                 System.out.println("Enter alert name: ");
                 String alertName = getScanner().nextLine();
                 getInputFields().put("alertName", new StringInputField(alertName));
-                getInputFields().put("nameFail", new StringInputField("false"));
-                displayEnterTime();
-                break;
-            case FAIL:
-                String statusName = (String) getInputFields().get("nameFail").getValue();
 
-                if (statusName.equals("true")) {
-                    getInputFields().put("nameFail", new StringInputField("false"));
-                    System.out.println("Invalid name or alert interval. Try again.");
-                    display(Display.MAIN);
-                } else {
-                    System.out.println("Invalid time input. Try again.");
-                    displayEnterTime();
-                }
-                break;
-            case SUCCESS:
+                System.out.println("Enter start time (ex. 08:00): ");
+                String startTimeString = getScanner().nextLine();
+                getInputFields().put("startTime", new StringInputField(startTimeString));
+
+                System.out.println("Enter end time (ex. 17:00): ");
+                String endTimeString = getScanner().nextLine();
+                getInputFields().put("endTime", new StringInputField(endTimeString));
+
                 DisplayScreen displayScreen = submit(getInputFields(), getController());
                 displayable =  displayScreen.getFormView();
                 screen = displayScreen.getDisplay();
-
                 displayable.display(screen);
+                break;
+            case FAIL:
+                System.out.println("Duplicate name or invalid interval.");
+                displayable = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
+                displayable.display(Display.MAIN);
                 break;
             default:
                 break;
@@ -67,19 +66,6 @@ public class NewAlertView extends FormView<AlertViewModel> {
         AlertViewModel alertViewModel = new AlertViewModel(0, alertName, startTime, endTime);
 
         return controller.execute(getInputFields(), alertViewModel);
-    }
-
-
-    private void displayEnterTime() {
-        System.out.println("Enter start time (ex. 08:00): ");
-        String startTimeString = getScanner().nextLine();
-        System.out.println("Enter end time (ex. 17:00): ");
-        String endTimeString = getScanner().nextLine();
-
-        getInputFields().put("startTime", new StringInputField(startTimeString));
-        getInputFields().put("endTime", new StringInputField(endTimeString));
-
-        display(Display.SUCCESS);
     }
 
 }

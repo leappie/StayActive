@@ -15,6 +15,7 @@ import factory.ViewFactory;
 import model.AlertViewModel;
 import model.UserMainViewModel;
 import view.form.FormView;
+import view.form.input.IntegerInputField;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,50 +30,36 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
 
     @Override
     public void display(Display display) {
+        Displayable displayable;
+        Display screen;
+
         switch (display) {
             case MAIN:
                 createTitle();
                 displayAlerts();
                 displayInfo();
-                Displayable displayable;
 
                 try {
                     int choice = getScanner().nextInt();
+                    getScanner().nextLine();
+                    getInputFields().put("alertOptionsViewChoice", new IntegerInputField(choice));
 
-                    switch (choice) {
-                        case 1:
-                            displayable = ViewFactory.getView(getInputFields(), View.NEW_ALERT_VIEW);
-                            displayable.display(Display.MAIN);
-                            break;
-                        case 2:
-                            // TODO: Modify Alert
-                            System.out.println("TODO: Modify Alert");
-                            display(Display.MAIN);
-                            break;
-                        case 3:
-                            // TODO: Delete Alert
-                            System.out.println("TODO: Delete Alert");
-                            display(Display.MAIN);
-                            break;
-                        case 4:
-                            displayable = ViewFactory.getView(getInputFields(), View.TRIGGER_ALERT_VIEW);
-                            displayable.display(Display.MAIN);
-                            break;
-                        case 5:
-                            displayable = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
-                            displayable.display(Display.MAIN);
-                            break;
-                        case 6:
-                            // Quit
-                            break;
-                        default:
-                            break;
-                    }
+                    DisplayScreen displayScreen = submit(getInputFields(), getController());
+                    displayable = displayScreen.getFormView();
+                    screen = displayScreen.getDisplay();
+                    displayable.display(screen);
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
                     displayable = ViewFactory.getView(getInputFields(), View.ALERT_OPTIONS_VIEW);
                     displayable.display(Display.MAIN);
                 }
+                break;
+            case FAIL:
+                System.out.println("Invalid option.");
+                display(Display.MAIN);
+                break;
+            case QUIT:
+                // QUIT
                 break;
             default:
                 break;
@@ -82,7 +69,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
 
     @Override
     public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<UserMainViewModel> controller) {
-        return null;
+        return controller.execute(inputFields, null);
     }
 
     @Override
@@ -98,6 +85,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
         );
     }
 
+    // TODO: improve
     private void displayAlerts() {
         User loggedInUser = CurrentUserService.getLoggedInUser();
         List<Alert> alertList = loggedInUser.getAlertList();

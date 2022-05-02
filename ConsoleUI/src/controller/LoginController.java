@@ -24,20 +24,21 @@ public class LoginController implements Controller<UserLoginViewModel> {
     public DisplayScreen execute(HashMap<String, InputField> inputField, UserLoginViewModel model) {
         Displayable displayable;
         Display screen;
+        View view;
 
         User user = new UserLoginViewMapping().mapTo(model);
         UserRepository userRepository = new UserRepository(new UserDAO());
         user = new LoginService(new Authenticate(userRepository)).authenticateUser(user); // TODO: improve?
 
         if (user != null) {
-            displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
+            view = View.MAIN_VIEW;
             screen = Display.MAIN;
-
         } else {
-            displayable = ViewFactory.getView(inputField, View.LOGIN_VIEW);
+            view = View.LOGIN_VIEW;
             screen = Display.FAIL;
         }
 
+        displayable = ViewFactory.getView(inputField, view);
         return new DisplayScreen(displayable, screen);
     }
 

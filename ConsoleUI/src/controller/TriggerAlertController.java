@@ -17,6 +17,7 @@ import view.form.input.StringInputField;
 
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 
 public class TriggerAlertController implements Controller<NotificationViewModel> {
     public static final String TAG = "TriggerAlertController";
@@ -24,25 +25,37 @@ public class TriggerAlertController implements Controller<NotificationViewModel>
     @Override
     public DisplayScreen execute(HashMap<String, InputField> inputField, NotificationViewModel model) {
         Displayable displayable;
-        Display display;
+        Display screen;
+        View view;
 
-        // get alert
+        int chosenIndex = (int) inputField.get("alertIndexChoice").getValue();
         User loggedInUser = CurrentUserService.getLoggedInUser();
-        int chosenAlertIndex = (int) inputField.get("chosenAlertIndex").getValue();
-        Alert alert = loggedInUser.getAlertList().get(chosenAlertIndex);
+        List<Alert> alertList = loggedInUser.getAlertList();
 
-        // get notificationTime
-        LocalTime notificationTime = new TriggerAlertService(new AlertExerciseDAO()).triggerAlert(alert); // TODO: improve?
-
-        if (notificationTime != null) {
-            inputField.put("notificationTime", new StringInputField(notificationTime.toString()));
-            displayable = ViewFactory.getView(inputField, View.NOTIFICATION_VIEW);
-            display = Display.MAIN;
+        // validate choice
+        if (chosenIndex < 1 || chosenIndex > alertList.size()) {
+            view = View.TRIGGER_ALERT_VIEW;
+            screen = Display.FAIL;
         } else {
-            displayable = ViewFactory.getView(inputField, View.ALERT_OPTIONS_VIEW);
-            display = Display.MAIN;
+            // get alert
+            Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex);
+
+            // get notificationTime
+            LocalTime notificationTime = new TriggerAlertService(new AlertExerciseDAO()).triggerAlert(chosenAlert); // TODO: improve?
+
+            if (notificationTime != null) {
+                inputField.put("notificationTime", new StringInputField(notificationTime.toString()));
+                view = View.NOTIFICATION_VIEW;
+                screen = Display.MAIN;
+            } else {
+                // not notifications to trigger
+                view = View.ALERT_OPTIONS_VIEW;
+                screen = Display.MAIN;
+            }
         }
 
-        return new DisplayScreen(displayable, display);
+        displayable = ViewFactory.getView(inputField, view);
+        return new DisplayScreen(displayable, screen);
     }
+
 }

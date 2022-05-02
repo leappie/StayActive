@@ -10,35 +10,44 @@ import factory.ViewFactory;
 import model.UserMainViewModel;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
-public class StartViewController implements Controller<UserMainViewModel> {
+public class AlertOptionsController implements Controller<UserMainViewModel> {
     @Override
     public DisplayScreen execute(HashMap<String, InputField> inputField, UserMainViewModel model) {
         Displayable displayable;
         Display screen;
         View view;
 
-        int choice = (int) inputField.get("startViewChoice").getValue();
-
+        int choice = (int) inputField.get("alertOptionsViewChoice").getValue();
         switch (choice) {
             case 1:
-                view = View.LOGIN_VIEW;
+                view = View.NEW_ALERT_VIEW;
                 screen = Display.MAIN;
                 break;
 //            case 2:
-//                // TODO: NEW ACCOUNT
-//                view = View.NEW_ACCOUNT_VIEW;
+//                // TODO: Modify Alert
+//                view = View.MODIFY_ALERT_VIEW;
+//                screen = Display.MAIN;
 //                break;
 //            case 3:
-//                // TODO: FORGOT PASSWORD
+//                // TODO: Delete Alert
+//                view = View.DELETE_ALERT_VIEW;
+//                screen = Display.MAIN;
 //                break;
             case 4:
-                view = View.START_VIEW;
+                view = View.TRIGGER_ALERT_VIEW;
+                screen = Display.MAIN;
+                break;
+            case 5:
+                view = View.MAIN_VIEW;
+                screen = Display.MAIN;
+                break;
+            case 6:
+                view = View.ALERT_OPTIONS_VIEW;
                 screen = Display.QUIT;
                 break;
             default:
-                view = View.START_VIEW;
+                view = View.ALERT_OPTIONS_VIEW;
                 screen = Display.FAIL;
                 break;
         }
