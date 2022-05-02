@@ -44,8 +44,8 @@ public class OnExerciseView extends DataView<ExerciseViewModel> {
     @Override
     protected void returnToMainMenu() {
         // Trigger next notification
-        Displayable displayable = ViewFactory.getView(getInputFields(), View.NOTIFICATION_VIEW);
-        Display screen = Display.FAIL;
+        Displayable displayable = ViewFactory.getView(getInputFields(), View.TRIGGER_ALERT_VIEW);
+        Display screen = Display.SUCCESS;
 
         displayable.display(screen);
     }
