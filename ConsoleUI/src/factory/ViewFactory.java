@@ -36,9 +36,9 @@ public class ViewFactory {
             case MAIN_VIEW:
                 displayable = new MainView(inputField, controller,"Home");
                 break;
-            case EXERCISE_HISTORY_VIEW:
-                displayable = new ExerciseHistoryView(inputField, controller, "Exercise history");
-                break;
+//            case EXERCISE_HISTORY_VIEW:
+//                displayable = new ExerciseHistoryView(inputField, controller, "Exercise history");
+//                break;
             case MODIFY_ALERT_VIEW:
                 displayable = new ModifyAlertView(inputField, controller, "Change alert");
                 break;
@@ -48,9 +48,9 @@ public class ViewFactory {
             case NEW_ALERT_VIEW:
                 displayable = new NewAlertView(inputField, controller, "New alert");
                 break;
-            case PROFILE_VIEW:
-                displayable = new ProfileView(inputField, controller, "Profile");
-                break;
+//            case PROFILE_VIEW:
+//                displayable = new ProfileView(inputField, controller, "Profile");
+//                break;
             case NEW_ACCOUNT_VIEW:
                 displayable = new NewAccountView(inputField, controller, "Create account");
                 break;
