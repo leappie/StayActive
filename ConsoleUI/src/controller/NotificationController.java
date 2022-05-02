@@ -37,7 +37,7 @@ public class NotificationController implements Controller<NotificationViewModel>
             // get alert
             User loggedInUser = CurrentUserService.getLoggedInUser();
             int chosenIndex = (int) inputField.get("alertIndexChoice").getValue();
-            Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex);
+            Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex - 1);
 
             // get exercise
 //            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert, loggedInUser); // TODO: improve?

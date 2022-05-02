@@ -30,10 +30,8 @@ public class TriggerAlertService {
     public LocalTime triggerAlert(Alert alert) {
         // get alert with all exercise + weights paired to alert
         AlertRepository alertRepository = new AlertRepository(this.alertExerciseDAO);
-        List<Alert> alertList = alertRepository.get(alert);
+        List<Alert> alertList = alertRepository.get(alert);// -> Note the exercise will be paired to the alert, so same alert
         alert = alertList.get(alertList.size() - 1);
-
-        System.out.println(alert);
 
         // calculate notification time
         Interval interval = alert.getInterval();
@@ -64,6 +62,7 @@ public class TriggerAlertService {
                 alertList.set(i, alert);
             }
         }
+
 //        CurrentUserService.setLoggedInUser(loggedInUser);
     }
 
