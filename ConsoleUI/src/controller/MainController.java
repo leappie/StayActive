@@ -13,6 +13,7 @@ import factory.ViewFactory;
 import model.UserMainViewModel;
 import persistence.useralert.UserAlertDAO;
 import services.MainService;
+import view.form.input.StringInputField;
 
 import java.util.HashMap;
 
@@ -20,32 +21,39 @@ public class MainController implements Controller<UserMainViewModel> {
 
     @Override
     public DisplayScreen execute(HashMap<String, InputField> inputField, UserMainViewModel model) {
-        View view = View.valueOf((String) inputField.get("showNextView").getValue());
         Displayable displayable;
-        Display display;
+        Display screen;
+        View view;
 
-        switch (view) {
-            case PROFILE_VIEW:
-                // TODO: Get profile
-                displayable = ViewFactory.getView(inputField, View.PROFILE_VIEW);
-                break;
-            case ALERT_OPTIONS_VIEW:
+        int choice = (int) inputField.get("mainViewChoice").getValue();
+        switch (choice) {
+//            case 1:
+//                view = View.PROFILE_VIEW;
+//                screen = Display.MAIN;
+//                break;
+            case 2:
                 // get all alerts for current user
                 User loggedInUser = CurrentUserService.getLoggedInUser();
                 new MainService(new UserAlertDAO()).getUserNAlerts(loggedInUser); // TODO: improve?
 
-                displayable = ViewFactory.getView(inputField, View.ALERT_OPTIONS_VIEW);
+                view = View.ALERT_OPTIONS_VIEW;
+                screen = Display.MAIN;
                 break;
-            case EXERCISE_HISTORY_VIEW:
-                // TODO: Get exercise history
-                displayable = ViewFactory.getView(inputField, View.EXERCISE_HISTORY_VIEW);
+//            case 3:
+//                view = View.EXERCISE_HISTORY_VIEW;
+//                screen = Display.MAIN;
+//                break;
+            case 4:
+                view = View.MAIN_VIEW;
+                screen = Display.QUIT;
                 break;
             default:
-                displayable = null;
+                view = View.MAIN_VIEW;
+                screen = Display.FAIL;
                 break;
         }
-        display = Display.MAIN;
 
-        return new DisplayScreen(displayable, display);
+        displayable = ViewFactory.getView(inputField, view);
+        return new DisplayScreen(displayable, screen);
     }
 }

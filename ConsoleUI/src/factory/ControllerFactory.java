@@ -32,6 +32,9 @@ public class ControllerFactory {
             case NOTIFICATION_VIEW:
                 controller = new NotificationController();
                 break;
+            case START_VIEW:
+                controller = new StartViewController();
+                break;
             default:
                 controller = null;
                 break;

@@ -23,7 +23,7 @@ public class LoginController implements Controller<UserLoginViewModel> {
     @Override
     public DisplayScreen execute(HashMap<String, InputField> inputField, UserLoginViewModel model) {
         Displayable displayable;
-        Display display;
+        Display screen;
 
         User user = new UserLoginViewMapping().mapTo(model);
         UserRepository userRepository = new UserRepository(new UserDAO());
@@ -31,12 +31,14 @@ public class LoginController implements Controller<UserLoginViewModel> {
 
         if (user != null) {
             displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
-            display = Display.MAIN;
+            screen = Display.MAIN;
+
         } else {
-            displayable = ViewFactory.getView(inputField, this, View.LOGIN_VIEW);
-            display = Display.FAIL;
+            displayable = ViewFactory.getView(inputField, View.LOGIN_VIEW);
+            screen = Display.FAIL;
         }
-        return new DisplayScreen(displayable, display);
+
+        return new DisplayScreen(displayable, screen);
     }
 
 

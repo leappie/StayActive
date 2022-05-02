@@ -5,10 +5,12 @@ import common.enums.Display;
 import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
+import common.models.DisplayScreen;
 import common.models.InputField;
 import factory.ViewFactory;
 import model.UserLoginViewModel;
 import view.form.FormView;
+import view.form.input.IntegerInputField;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -26,39 +28,39 @@ public class StartView extends FormView<UserLoginViewModel> {
                 createTitle();
                 displayInfo();
                 Displayable displayable;
+                Display screen;
 
                 try {
                     int choice = getScanner().nextInt();
+                    getInputFields().put("startViewChoice", new IntegerInputField(choice));
 
-                    switch (choice) {
-                        case 1:
-                            displayable = ViewFactory.getView(View.LOGIN_VIEW);
-                            displayable.display(Display.MAIN);
-                            break;
-                        case 2:
-                            // TODO: NEW ACCOUNT
-                            displayable = ViewFactory.getView(View.NEW_ACCOUNT_VIEW);
-                            displayable.display(Display.MAIN);
-                            break;
-                        case 3:
-                            // TODO: FORGOT PASSWORD
-                            break;
-                        case 4:
-                            // Quit
-                            break;
-                        default:
-                            System.out.println("Invalid Option.");
-                            break;
-                    }
+                    DisplayScreen displayScreen = submit(getInputFields(), getController());
+                    displayable = displayScreen.getFormView();
+                    screen = displayScreen.getDisplay();
+
+                    displayable.display(screen);
+
+
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
                     displayable = ViewFactory.getView(View.START_VIEW);
                     displayable.display(Display.MAIN);
                 }
                 break;
+            case FAIL:
+                System.out.println("Invalid Option.");
+                display(Display.MAIN);
+                break;
+            case QUIT:
+                // quit
             default:
                 break;
         }
+    }
+
+    @Override
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<UserLoginViewModel> controller) {
+        return controller.execute(inputFields, null);
     }
 
     @Override
@@ -71,6 +73,7 @@ public class StartView extends FormView<UserLoginViewModel> {
                         "\t4. Quit."
         );
     }
+
 
 
 }

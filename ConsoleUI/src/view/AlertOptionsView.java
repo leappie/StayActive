@@ -6,6 +6,7 @@ import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
 import common.mapping.AlertViewMapping;
+import common.models.DisplayScreen;
 import common.models.InputField;
 import common.services.CurrentUserService;
 import entity.Alert;
@@ -77,6 +78,11 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
                 break;
         }
 
+    }
+
+    @Override
+    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<UserMainViewModel> controller) {
+        return null;
     }
 
     @Override

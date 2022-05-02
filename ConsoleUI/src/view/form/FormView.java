@@ -81,9 +81,4 @@ public abstract class FormView<T> implements Displayable, Submittable<T> {
 
         System.out.println(stringBuilder);
     }
-
-    @Override
-    public DisplayScreen submit(HashMap<String, InputField> inputFields, Controller<T> controller) {
-        return null;
-    }
 }

@@ -6,6 +6,7 @@ package common.enums;
 public enum Display {
     MAIN,
     SUCCESS,
-    FAIL
+    FAIL,
+    QUIT
 
 }

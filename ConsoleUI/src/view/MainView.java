@@ -10,6 +10,7 @@ import common.models.InputField;
 import factory.ViewFactory;
 import model.UserMainViewModel;
 import view.form.FormView;
+import view.form.input.IntegerInputField;
 import view.form.input.StringInputField;
 
 import java.util.HashMap;
@@ -32,42 +33,24 @@ public class MainView extends FormView<UserMainViewModel> {
 
                 try {
                     int choice = getScanner().nextInt();
+                    getInputFields().put("mainViewChoice", new IntegerInputField(choice));
 
-                    switch (choice) {
-                        case 1:
-                            // TODO: view profile
-                            System.out.println("TODO: view profile");
-//                            getInputFields().put("showNextView", new StringInputField(View.PROFILE_VIEW.toString()));
-                            display(Display.MAIN);
-                            break;
-                        case 2:
-                            getInputFields().put("showNextView", new StringInputField(View.ALERT_OPTIONS_VIEW.toString()));
-                            DisplayScreen displayScreen = submit(getInputFields(), getController());
-                            displayable = displayScreen.getFormView();
-                            screen = displayScreen.getDisplay();
-                            displayable.display(screen);
-                            break;
-                        case 3:
-                            // TODO: view exercise history
-                            System.out.println("TODO: view exercise history");
-//                            getInputFields().put("showNextView", new StringInputField(View.EXERCISE_HISTORY_VIEW.toString()));
-                            display(Display.MAIN);
-                            break;
-                        case 4:
-                            // Quit
-                            break;
-                        default:
-                            System.out.println("Invalid Option.");
-                            display(Display.MAIN);
-                            break;
-                    }
-
+                    DisplayScreen displayScreen = submit(getInputFields(), getController());
+                    displayable = displayScreen.getFormView();
+                    screen = displayScreen.getDisplay();
+                    displayable.display(screen);
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
                     displayable = ViewFactory.getView(getInputFields(), View.MAIN_VIEW);
                     displayable.display(Display.MAIN);
                 }
                 break;
+            case FAIL:
+                System.out.println("Invalid Option.");
+                display(Display.MAIN);
+                break;
+            case QUIT:
+                // Quit
             default:
                 break;
         }

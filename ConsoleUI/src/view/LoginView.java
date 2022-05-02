@@ -21,6 +21,9 @@ public class LoginView extends FormView<UserLoginViewModel> {
 
     @Override
     public void display(Display display) {
+        Displayable displayable;
+        Display screen;
+
         switch (display) {
             case MAIN:
                 createTitle();
@@ -33,21 +36,16 @@ public class LoginView extends FormView<UserLoginViewModel> {
                 getInputFields().put("username", new StringInputField(username));
                 getInputFields().put("password", new StringInputField(password));
 
-                display(Display.SUCCESS);
+                DisplayScreen displayScreen = submit(getInputFields(), getController());
+                displayable = displayScreen.getFormView();
+                screen = displayScreen.getDisplay();
+                displayable.display(screen);
                 break;
             case FAIL:
                 System.out.println("Incorrect password or username.");
-                System.out.println("Try again? [Y/N]");
 
-                String choice = getScanner().nextLine();
-                displayFail(choice);
-                break;
-            case SUCCESS:
-                DisplayScreen displayScreen = submit(getInputFields(), getController());
-                Displayable displayable = displayScreen.getFormView();
-                Display screen = displayScreen.getDisplay();
-
-                displayable.display(screen);
+                displayable = ViewFactory.getView(getInputFields(), View.START_VIEW);
+                displayable.display(Display.MAIN);
                 break;
             default:
                 break;
@@ -62,18 +60,6 @@ public class LoginView extends FormView<UserLoginViewModel> {
         UserLoginViewModel userLoginViewModel = new UserLoginViewModel(username, password);
 
         return controller.execute(getInputFields(), userLoginViewModel);
-    }
-
-    private void displayFail (String choice) {
-        if(choice.equalsIgnoreCase("y")) {
-            display(Display.MAIN);
-        } else if (choice.equalsIgnoreCase("n")){
-            Displayable displayable = ViewFactory.getView(View.START_VIEW);
-            displayable.display(Display.MAIN);
-        } else {
-            System.out.println("Invalid input.");
-            display(Display.FAIL);
-        }
     }
 
 }
