@@ -41,11 +41,7 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
                 try {
                     int choice = getScanner().nextInt();
                     getInputFields().put("alertIndexChoice", new IntegerInputField(choice));
-
-                    DisplayScreen displayScreen = submit(getInputFields(), getController());
-                    displayable = displayScreen.getFormView();
-                    screen = displayScreen.getDisplay();
-                    displayable.display(screen);
+                    display(Display.SUCCESS);
 
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
@@ -56,6 +52,12 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
             case FAIL:
                 System.out.println("Invalid option.");
                 display(Display.MAIN);
+                break;
+            case SUCCESS:
+                DisplayScreen displayScreen = submit(getInputFields(), getController());
+                displayable = displayScreen.getFormView();
+                screen = displayScreen.getDisplay();
+                displayable.display(screen);
                 break;
             default:
                 break;

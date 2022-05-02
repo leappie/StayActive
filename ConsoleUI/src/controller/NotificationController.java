@@ -30,26 +30,38 @@ public class NotificationController implements Controller<NotificationViewModel>
         Displayable displayable;
         Display screen;
 
-        // get alert
-        User loggedInUser = CurrentUserService.getLoggedInUser();
-        int chosenAlertIndex = (int) inputField.get("chosenAlertIndex").getValue();
-        Alert alert = loggedInUser.getAlertList().get(chosenAlertIndex);
+        String choice = (String) inputField.get("notificationViewChoice").getValue();
 
-//        Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(alert, loggedInUser); // TODO: improve?
-        Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(alert); // TODO: improve?
+        // validate choice
+        if (choice.equalsIgnoreCase("y")) { // Show exercise
+            // get alert
+            User loggedInUser = CurrentUserService.getLoggedInUser();
+            int chosenIndex = (int) inputField.get("alertIndexChoice").getValue();
+            Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex);
 
-        if (exercise != null) {
-            // map exercise to viewModel
-            ExerciseViewModel exerciseViewModel = new OnExerciseViewMapping().mapFrom(exercise);
+            // get exercise
+//            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert, loggedInUser); // TODO: improve?
+            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert); // TODO: improve?
 
-            // show display
-            displayable = new OnExerciseView(inputField, exerciseViewModel, "Todo exercise");
-        } else  {
-            displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
+            if (exercise != null) {
+                // map exercise to viewModel
+                ExerciseViewModel exerciseViewModel = new OnExerciseViewMapping().mapFrom(exercise);
+
+                // show display
+                displayable = new OnExerciseView(inputField, exerciseViewModel, "Todo exercise");
+            } else  {
+                displayable = ViewFactory.getView(inputField, View.MAIN_VIEW);
+            }
+            screen = Display.MAIN;
+        } else if (choice.equalsIgnoreCase("n")) { // Trigger next notification
+            displayable = ViewFactory.getView(inputField, View.TRIGGER_ALERT_VIEW);
+            screen = Display.SUCCESS;
+        } else { // invalid choice
+            displayable = ViewFactory.getView(inputField, View.NOTIFICATION_VIEW);
+            screen = Display.FAIL;
+
         }
-
-        screen = Display.MAIN;
-
         return new DisplayScreen(displayable, screen);
     }
+
 }

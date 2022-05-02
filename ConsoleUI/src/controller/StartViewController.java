@@ -32,6 +32,7 @@ public class StartViewController implements Controller<UserMainViewModel> {
 //                break;
 //            case 3:
 //                // TODO: FORGOT PASSWORD
+//                view = View.FORGOT_PASSWORD_VIEW;
 //                break;
             case 4:
                 view = View.START_VIEW;

@@ -38,7 +38,7 @@ public class TriggerAlertController implements Controller<NotificationViewModel>
             screen = Display.FAIL;
         } else {
             // get alert
-            Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex);
+            Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex - 1);
 
             // get notificationTime
             LocalTime notificationTime = new TriggerAlertService(new AlertExerciseDAO()).triggerAlert(chosenAlert); // TODO: improve?
@@ -48,7 +48,7 @@ public class TriggerAlertController implements Controller<NotificationViewModel>
                 view = View.NOTIFICATION_VIEW;
                 screen = Display.MAIN;
             } else {
-                // not notifications to trigger
+                // no notifications to trigger
                 view = View.ALERT_OPTIONS_VIEW;
                 screen = Display.MAIN;
             }

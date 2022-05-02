@@ -33,6 +33,8 @@ public class TriggerAlertService {
         List<Alert> alertList = alertRepository.get(alert);
         alert = alertList.get(alertList.size() - 1);
 
+        System.out.println(alert);
+
         // calculate notification time
         Interval interval = alert.getInterval();
         IntervalNotification intervalNotification = new IntervalNotification(new NotificationTimeCreatorA());
