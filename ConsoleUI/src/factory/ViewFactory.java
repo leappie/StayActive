@@ -63,6 +63,9 @@ public class ViewFactory {
             case NOTIFICATION_VIEW:
                 displayable = new NotificationView(inputField, controller,"!!Notification!!");
                 break;
+            case DELETE_ALERT_VIEW:
+                displayable = new DeleteAlertView(inputField, controller,"Delete alert");
+                break;
             default:
                 displayable = null;
                 break;

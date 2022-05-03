@@ -38,6 +38,9 @@ public class ControllerFactory {
             case ALERT_OPTIONS_VIEW:
                 controller = new AlertOptionsController();
                 break;
+            case DELETE_ALERT_VIEW:
+                controller = new DeleteAlertController();
+                break;
             default:
                 controller = null;
                 break;

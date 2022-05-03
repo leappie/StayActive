@@ -27,7 +27,7 @@ public class UpdateAlertCommand extends DatabaseCommand<Alert> implements AlertT
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error setting update statement: " + e);
+            System.out.println("Error setting statement: " + e);
         }
     }
 }
