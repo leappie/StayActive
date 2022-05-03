@@ -70,22 +70,22 @@ public class TriggerAlertView extends FormView<NotificationViewModel> {
     }
 
 
-    // TODO: improve
-    private void displayAlerts() {
-        User loggedInUser = CurrentUserService.getLoggedInUser();
-        List<Alert> alertList = loggedInUser.getAlertList();
-
-        // map to AlertViewModel
-        List<AlertViewModel> alertViewModelList = new ArrayList<>();
-        for (Alert alert : alertList) {
-            AlertViewModel alertViewModel = new AlertViewMapping().mapFrom(alert);
-            alertViewModelList.add(alertViewModel);
-        }
-
-        Displayable displayable = new AlertListView(getInputFields(), alertViewModelList, "Alerts list");
-        displayable.display(Display.MAIN);
-
-        System.out.println("_____________________________");
-    }
+//    // TODO: improve
+//    private void displayAlerts() {
+//        User loggedInUser = CurrentUserService.getLoggedInUser();
+//        List<Alert> alertList = loggedInUser.getAlertList();
+//
+//        // map to AlertViewModel
+//        List<AlertViewModel> alertViewModelList = new ArrayList<>();
+//        for (Alert alert : alertList) {
+//            AlertViewModel alertViewModel = new AlertViewMapping().mapFrom(alert);
+//            alertViewModelList.add(alertViewModel);
+//        }
+//
+//        Displayable displayable = new AlertListView(getInputFields(), alertViewModelList, "Alerts list");
+//        displayable.display(Display.MAIN);
+//
+//        System.out.println("_____________________________");
+//    }
 
 }

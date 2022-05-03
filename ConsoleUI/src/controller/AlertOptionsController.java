@@ -29,11 +29,10 @@ public class AlertOptionsController implements Controller<UserMainViewModel> {
 //                view = View.MODIFY_ALERT_VIEW;
 //                screen = Display.MAIN;
 //                break;
-//            case 3:
-//                // TODO: Delete Alert
-//                view = View.DELETE_ALERT_VIEW;
-//                screen = Display.MAIN;
-//                break;
+            case 3:
+                view = View.DELETE_ALERT_VIEW;
+                screen = Display.MAIN;
+                break;
             case 4:
                 view = View.TRIGGER_ALERT_VIEW;
                 screen = Display.MAIN;

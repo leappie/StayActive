@@ -33,11 +33,20 @@ public class UserAlerts implements UserAlertsControl {
         }
     }
 
+    // TODO
     public Alert updateAlert(User user, Alert alert) {
         return null;
     }
 
     public void deleteAlert(User user, Alert alert) {
+        List<Alert> userAlerts = user.getAlertList();
+
+        for (int i = 0; i < userAlerts.size(); i++) {
+            Alert checkAlert = userAlerts.get(i);
+            if (checkAlert.getId() == alert.getId()) {
+                userAlerts.remove(i);
+            }
+        }
     }
 
     private Alert incrementAlertName(User user, Alert alert) {
