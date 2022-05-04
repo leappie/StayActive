@@ -75,5 +75,4 @@ public class StartView extends FormView<UserLoginViewModel> {
     }
 
 
-
 }

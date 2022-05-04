@@ -4,24 +4,17 @@ import common.enums.Display;
 import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
-import common.mapping.AlertViewMapping;
 import common.models.DisplayScreen;
 import common.models.InputField;
-import common.services.CurrentUserService;
-import entity.Alert;
-import entity.User;
 import factory.ViewFactory;
 import model.AlertViewModel;
-import model.NotificationViewModel;
 import view.form.FormView;
 import view.form.input.IntegerInputField;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.List;
 
-// TODO: maybe reuse TriggerAlertView's case QUIT??
+// TODO: Make a general choose alert view for trigger and delete alert with display screen options 1 and option 2
 public class DeleteAlertView extends FormView<AlertViewModel> {
 
     public DeleteAlertView(HashMap<String, InputField> inputFields, Controller<AlertViewModel> controller, String screenTitle) {

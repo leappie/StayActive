@@ -41,7 +41,7 @@ public class NewAlertView extends FormView<AlertViewModel> {
                 getInputFields().put("endTime", new StringInputField(endTimeString));
 
                 DisplayScreen displayScreen = submit(getInputFields(), getController());
-                displayable =  displayScreen.getFormView();
+                displayable = displayScreen.getFormView();
                 screen = displayScreen.getDisplay();
                 displayable.display(screen);
                 break;

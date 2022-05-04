@@ -5,7 +5,6 @@ import common.interfaces.Controller;
 import common.interfaces.Displayable;
 import common.models.DisplayScreen;
 import common.models.InputField;
-import controller.TriggerAlertController;
 import model.NotificationViewModel;
 import view.form.FormView;
 import view.form.input.StringInputField;

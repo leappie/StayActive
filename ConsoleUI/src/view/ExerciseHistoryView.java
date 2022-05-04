@@ -1,11 +1,8 @@
 package view;
 
 import common.enums.Display;
-import common.interfaces.Controller;
-import common.models.DisplayScreen;
 import common.models.InputField;
 import view.data.DataView;
-import view.form.FormView;
 
 import java.util.HashMap;
 

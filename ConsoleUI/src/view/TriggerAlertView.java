@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
+// TODO: Make a general choose alert view for trigger and delete alert with display screen options 1 and option 2
 public class TriggerAlertView extends FormView<NotificationViewModel> {
 
     public TriggerAlertView(HashMap<String, InputField> inputFields, Controller<NotificationViewModel> controller, String screenTitle) {

@@ -9,7 +9,6 @@ import entity.User;
 import enums.Level;
 import model.NewUserViewModel;
 import view.form.FormView;
-import view.form.input.StringInputField;
 
 import java.util.HashMap;
 

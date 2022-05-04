@@ -11,7 +11,6 @@ import factory.ViewFactory;
 import model.UserMainViewModel;
 import view.form.FormView;
 import view.form.input.IntegerInputField;
-import view.form.input.StringInputField;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
