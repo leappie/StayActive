@@ -5,6 +5,7 @@ import common.enums.Display;
 import common.enums.View;
 import common.interfaces.DAO;
 import common.mapping.OnExerciseViewMapping;
+import common.services.ExerciseLevelService;
 import entity.*;
 import enums.Level;
 import factory.ViewFactory;
@@ -30,7 +31,13 @@ public class NotificationService {
         Interval interval = alert.getInterval();
 
         // get exercise level
-        List<Level> levelList = getExerciseLevel(interval,user);
+        List<Level> levelList;
+
+        if (user == null) {
+            levelList = new ExerciseLevelService().getExerciseLevel(interval);
+        } else {
+            levelList = new ExerciseLevelService().getExerciseLevel(interval, user);
+        }
 
         // get exercise
         Exercise exercise = getExercise(levelList, alert);
@@ -42,26 +49,6 @@ public class NotificationService {
         return getExerciseOnNotification(alert, null);
     }
 
-    private List<Level> getExerciseLevel(Interval interval, User user) {
-        List<Level> levelList;
-
-        // get last added notification
-        int size = interval.getNotificationList().size();
-        Notification notification = interval.getNotificationList().get(size - 1);
-
-        // set notification to accepted
-        notification.setAccepted(true);
-
-        if (user == null) {
-            levelList = new IntervalExerciseLevel(new ExerciseLevelCreatorA()).
-                    getExerciseDifficulty(interval);
-        } else {
-            // get exercise level
-            levelList = new IntervalExerciseLevel(new ExerciseLevelCreatorB(user)).
-                    getExerciseDifficulty(interval);
-        }
-        return levelList;
-    }
 
     private Exercise getExercise(List<Level> levelList, Alert alert) {
         Exercise exercise = null;

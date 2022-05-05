@@ -9,20 +9,14 @@ import common.models.DisplayScreen;
 import common.models.InputField;
 import common.services.CurrentUserService;
 import entity.*;
-import enums.Level;
 import factory.ViewFactory;
 import model.ExerciseViewModel;
 import model.NotificationViewModel;
 import persistence.alertexercise.AlertExerciseDAO;
 import services.NotificationService;
-import services.alertexercise.AlertExercise;
-import services.alertexercise.AlertExerciseCreatorA;
-import services.intervalexerciselevel.ExerciseLevelCreatorA;
-import services.intervalexerciselevel.IntervalExerciseLevel;
 import view.OnExerciseView;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class NotificationController implements Controller<NotificationViewModel> {
     @Override
