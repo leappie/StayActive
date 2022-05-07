@@ -6,14 +6,9 @@ import enums.Level;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 
@@ -26,7 +21,7 @@ class ExerciseLevelCreatorATest {
         boolean accepted = true;
         List<Notification> notificationList = new ArrayList<>();
         notificationList.add(new Notification(LocalTime.of(8, 30), accepted)); // time diff = 30 -> MEDIUM
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
@@ -44,7 +39,7 @@ class ExerciseLevelCreatorATest {
         notificationList.add(new Notification(LocalTime.of(8, 30), accepted));
         notificationList.add(new Notification(LocalTime.of(9, 15), accepted)); // time diff = 45 -> HARD
 
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
@@ -67,7 +62,7 @@ class ExerciseLevelCreatorATest {
         notificationList.add(new Notification(LocalTime.of(8, 45), !accepted));
         notificationList.add(new Notification(LocalTime.of(9, 3), accepted)); // time diff < 20 -> EASY
 
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
@@ -90,7 +85,7 @@ class ExerciseLevelCreatorATest {
         notificationList.add(new Notification(LocalTime.of(8, 30), accepted));
         notificationList.add(new Notification(LocalTime.of(9, 15), !accepted)); // not accepted so empty list
 
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         List<Level> levelList = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
@@ -108,7 +103,7 @@ class ExerciseLevelCreatorATest {
         //Arrange
         boolean accepted = true;
         List<Notification> notificationList = createNotificationListSize3(accepted, accepted, accepted);
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
@@ -126,7 +121,7 @@ class ExerciseLevelCreatorATest {
         //Arrange
         boolean accepted = true;
         List<Notification> notificationList = createNotificationListSize3(accepted, !accepted, accepted);
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
@@ -144,7 +139,7 @@ class ExerciseLevelCreatorATest {
         //Arrange
         boolean accepted = true;
         List<Notification> notificationList = createNotificationListSize3(accepted, accepted, !accepted);
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         List<Level> levelList = new ExerciseLevelCreatorA().getExerciseDifficulty(interval);
@@ -162,7 +157,7 @@ class ExerciseLevelCreatorATest {
         //Arrange
         boolean accepted = true;
         List<Notification> notificationList = createNotificationListSize3(!accepted, !accepted, accepted);
-        Interval interval = new Interval(0, null, null, notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);

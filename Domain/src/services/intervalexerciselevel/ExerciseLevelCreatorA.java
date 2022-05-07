@@ -28,7 +28,8 @@ public class ExerciseLevelCreatorA implements Levelable {
 
             // if notification is accepted
             if (notification.isAccepted()) {
-                minutes = notification.getNotificationTime().getMinute(); // returns the minutes ex.: 08:23 -> 23 minutes
+                LocalTime startTime = interval.getStartTime();
+                minutes = (int) startTime.until(notification.getNotificationTime(), ChronoUnit.MINUTES); // returns the minutes ex.: 08:23 -> 23 minutes
                 level = getExerciseLevel(minutes);
                 levels.add(level);
             }

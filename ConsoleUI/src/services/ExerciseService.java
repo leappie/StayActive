@@ -16,7 +16,7 @@ public class ExerciseService {
 
     public List<Exercise> getAllExercises() {
         ExerciseRepository exerciseRepository = new ExerciseRepository(this.exerciseDAO);
-        List<Exercise> exerciseList = exerciseRepository.get(null);
+        List<Exercise> exerciseList = exerciseRepository.get(null); // hoeft geen object mee te geven
 
         return exerciseList;
     }
