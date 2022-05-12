@@ -4,12 +4,8 @@ import alert.AlertRepository;
 import common.interfaces.DAO;
 import common.services.CurrentUserService;
 import entity.Alert;
-import entity.Exercise;
 import entity.User;
-import exercise.ExerciseRepository;
 import services.user.UserAlerts;
-
-import java.util.List;
 
 public class DeleteAlertService {
     private DAO<Alert> alertDAO;

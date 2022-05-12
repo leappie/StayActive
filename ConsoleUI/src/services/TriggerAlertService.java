@@ -1,21 +1,15 @@
 package services;
 
 import alert.AlertRepository;
-import common.enums.Display;
-import common.enums.View;
 import common.interfaces.DAO;
 import common.services.CurrentUserService;
-import entity.*;
-import enums.Level;
-import factory.ViewFactory;
-import interfaces.Exercisable;
-import services.alertexercise.AlertExerciseCreatorA;
+import entity.Alert;
+import entity.Interval;
+import entity.Notification;
+import entity.User;
 import services.intervalnotification.IntervalNotification;
 import services.intervalnotification.NotificationTimeCreatorA;
-import services.intervalnotification.NotificationTimeCreatorB;
-import view.form.input.StringInputField;
 
-import javax.swing.plaf.ColorUIResource;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;

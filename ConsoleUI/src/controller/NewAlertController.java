@@ -11,7 +11,6 @@ import common.services.CurrentUserService;
 import entity.Alert;
 import entity.Exercise;
 import entity.User;
-import exercise.ExerciseRepository;
 import factory.ViewFactory;
 import model.AlertViewModel;
 import persistence.alertexercise.AlertExerciseDAO;
@@ -20,7 +19,6 @@ import persistence.useralert.UserAlertDAO;
 import services.ExerciseService;
 import services.NewAlertService;
 import services.user.UserAlerts;
-import view.form.input.StringInputField;
 
 import java.util.HashMap;
 import java.util.List;

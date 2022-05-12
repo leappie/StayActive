@@ -3,13 +3,13 @@ package persistence.useralert.commands;
 import entity.Alert;
 import entity.User;
 import persistence.DatabaseCommand;
-import persistence.interfaces.AlertTable;
+import persistence.common.constants.AlertTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class InsertUserAlertCommand extends DatabaseCommand<User> implements AlertTable {
+public class InsertUserAlertCommand extends DatabaseCommand<User> {
 
     @Override
     protected String getCommandText() {
@@ -17,7 +17,8 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> implements Ale
                 "INSERT OR IGNORE INTO %s" +
                         "(%s, %s, %s, %s) " +
                         "VALUES(?, ?, ?, ?)",
-                A_TABLE, A_COLUMN_USER_ID, A_COLUMN_NAME, A_COLUMN_START_TIME, A_COLUMN_END_TIME);
+                AlertTable.TABLE, AlertTable.COLUMN_USER_ID, AlertTable.COLUMN_NAME, AlertTable.COLUMN_START_TIME,
+                AlertTable.COLUMN_END_TIME);
         return query;
     }
 

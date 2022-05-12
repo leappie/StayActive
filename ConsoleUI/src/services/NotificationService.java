@@ -1,21 +1,15 @@
 package services;
 
 import alert.AlertRepository;
-import common.enums.Display;
-import common.enums.View;
 import common.interfaces.DAO;
-import common.mapping.OnExerciseViewMapping;
 import common.services.ExerciseLevelService;
-import entity.*;
+import entity.Alert;
+import entity.Exercise;
+import entity.Interval;
+import entity.User;
 import enums.Level;
-import factory.ViewFactory;
-import model.ExerciseViewModel;
 import services.alertexercise.AlertExercise;
 import services.alertexercise.AlertExerciseCreatorA;
-import services.intervalexerciselevel.ExerciseLevelCreatorA;
-import services.intervalexerciselevel.ExerciseLevelCreatorB;
-import services.intervalexerciselevel.IntervalExerciseLevel;
-import view.OnExerciseView;
 
 import java.util.List;
 

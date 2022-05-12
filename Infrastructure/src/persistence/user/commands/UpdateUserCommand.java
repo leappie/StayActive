@@ -2,19 +2,20 @@ package persistence.user.commands;
 
 import entity.User;
 import persistence.DatabaseCommand;
-import persistence.interfaces.UserTable;
+import persistence.common.constants.UserTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UpdateUserCommand extends DatabaseCommand<User> implements UserTable {
+public class UpdateUserCommand extends DatabaseCommand<User> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "UPDATE %s " +
                 "SET %s = ?, %s = ?, %s = ? " +
                 "WHERE %s = ?",
-                U_TABLE, U_COLUMN_USERNAME, U_COLUMN_PASSWORD, U_COLUMN_LEVEL, U_COLUMN_ID);
+                UserTable.TABLE, UserTable.COLUMN_USERNAME, UserTable.COLUMN_PASSWORD, UserTable.COLUMN_LEVEL,
+                UserTable.COLUMN_ID);
         return query;
     }
 

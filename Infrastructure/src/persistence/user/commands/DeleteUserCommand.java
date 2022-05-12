@@ -2,18 +2,18 @@ package persistence.user.commands;
 
 import entity.User;
 import persistence.DatabaseCommand;
-import persistence.interfaces.UserTable;
+import persistence.common.constants.UserTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DeleteUserCommand extends DatabaseCommand<User> implements UserTable {
+public class DeleteUserCommand extends DatabaseCommand<User> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "DELETE FROM %s " +
                 "WHERE %s = ?",
-                U_TABLE, U_COLUMN_USERNAME);
+                UserTable.TABLE, UserTable.COLUMN_USERNAME);
         return query;
     }
 

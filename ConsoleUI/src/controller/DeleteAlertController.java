@@ -12,12 +12,8 @@ import entity.User;
 import factory.ViewFactory;
 import model.AlertViewModel;
 import persistence.alert.AlertDAO;
-import persistence.alertexercise.AlertExerciseDAO;
 import services.DeleteAlertService;
-import services.TriggerAlertService;
-import view.form.input.StringInputField;
 
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 

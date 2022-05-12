@@ -4,7 +4,7 @@ import common.util.LevelConverter;
 import entity.Exercise;
 import enums.Level;
 import persistence.DatabaseQuery;
-import persistence.interfaces.ExerciseTable;
+import persistence.common.constants.ExerciseTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,13 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectExerciseQuery extends DatabaseQuery<Exercise> implements ExerciseTable {
+public class SelectExerciseQuery extends DatabaseQuery<Exercise> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "SELECT %s, %s, %s, %s, %s, %s  " +
                 "FROM %s",
-                E_COLUMN_ID, E_COLUMN_NAME, E_COLUMN_REPS, E_COLUMN_SETS, E_COLUMN_LEVEL, E_COLUMN_TIME, E_TABLE);
+                ExerciseTable.COLUMN_ID, ExerciseTable.COLUMN_NAME, ExerciseTable.COLUMN_REPS, ExerciseTable.COLUMN_SETS,
+                ExerciseTable.COLUMN_LEVEL, ExerciseTable.COLUMN_TIME, ExerciseTable.TABLE);
 
         return query;
     }
@@ -41,12 +42,12 @@ public class SelectExerciseQuery extends DatabaseQuery<Exercise> implements Exer
         List<Exercise> exerciseList = new ArrayList<>();
         try {
             while(resultSet.next()) {
-                int id = resultSet.getInt(E_COLUMN_ID);
-                String name = resultSet.getString(E_COLUMN_NAME);
-                int reps = resultSet.getInt(E_COLUMN_REPS);
-                int sets = resultSet.getInt(E_COLUMN_SETS);
-                String levelString = resultSet.getString(E_COLUMN_LEVEL);
-                int timeMinutes = resultSet.getInt(E_COLUMN_TIME);
+                int id = resultSet.getInt(ExerciseTable.COLUMN_ID);
+                String name = resultSet.getString(ExerciseTable.COLUMN_NAME);
+                int reps = resultSet.getInt(ExerciseTable.COLUMN_REPS);
+                int sets = resultSet.getInt(ExerciseTable.COLUMN_SETS);
+                String levelString = resultSet.getString(ExerciseTable.COLUMN_LEVEL);
+                int timeMinutes = resultSet.getInt(ExerciseTable.COLUMN_TIME);
 
                 Level level = new LevelConverter().tryParse(levelString);
                 if (level != null) {

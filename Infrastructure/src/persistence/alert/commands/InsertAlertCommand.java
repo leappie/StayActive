@@ -2,12 +2,12 @@ package persistence.alert.commands;
 
 import entity.Alert;
 import persistence.DatabaseCommand;
-import persistence.interfaces.AlertTable;
+import persistence.common.constants.AlertTable;
 
 import java.sql.PreparedStatement;
 
 // TODO: Not used ..
-public class InsertAlertCommand extends DatabaseCommand<Alert> implements AlertTable {
+public class InsertAlertCommand extends DatabaseCommand<Alert> {
 
     @Override
     protected String getCommandText() {
@@ -15,7 +15,8 @@ public class InsertAlertCommand extends DatabaseCommand<Alert> implements AlertT
                 "INSERT OR IGNORE INTO %s" +
                 "(%s, %s, %s, %s, %s) " +
                 "VALUES(?, ?, ?, ?, ?)",
-                A_TABLE, A_COLUMN_ID, A_COLUMN_USER_ID, A_COLUMN_NAME, A_COLUMN_START_TIME, A_COLUMN_END_TIME);
+                AlertTable.TABLE, AlertTable.COLUMN_ID, AlertTable.COLUMN_USER_ID, AlertTable.COLUMN_NAME,
+                AlertTable.COLUMN_START_TIME, AlertTable.COLUMN_END_TIME);
         return query;
     }
 

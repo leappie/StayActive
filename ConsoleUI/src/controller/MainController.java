@@ -13,7 +13,6 @@ import factory.ViewFactory;
 import model.UserMainViewModel;
 import persistence.useralert.UserAlertDAO;
 import services.MainService;
-import view.form.input.StringInputField;
 
 import java.util.HashMap;
 

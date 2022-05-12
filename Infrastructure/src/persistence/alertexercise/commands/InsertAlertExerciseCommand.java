@@ -3,13 +3,13 @@ package persistence.alertexercise.commands;
 import entity.Alert;
 import entity.Exercise;
 import persistence.DatabaseCommand;
-import persistence.interfaces.AlertExerciseTable;
+import persistence.common.constants.AlertExerciseTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class InsertAlertExerciseCommand extends DatabaseCommand<Alert> implements AlertExerciseTable {
+public class InsertAlertExerciseCommand extends DatabaseCommand<Alert> {
 
     @Override
     protected String getCommandText() {
@@ -17,7 +17,8 @@ public class InsertAlertExerciseCommand extends DatabaseCommand<Alert> implement
                 "INSERT OR IGNORE INTO %s" +
                 "(%s, %s, %s) " +
                 "VALUES(?, ?, ?)",
-                AE_TABLE, AE_COLUMN_ALERT_ID, AE_COLUMN_EXERCISE_ID, AE_COLUMN_EXERCISE_WEIGHT);
+                AlertExerciseTable.TABLE, AlertExerciseTable.COLUMN_ALERT_ID, AlertExerciseTable.COLUMN_EXERCISE_ID,
+                AlertExerciseTable.COLUMN_EXERCISE_WEIGHT);
         return query;
     }
 

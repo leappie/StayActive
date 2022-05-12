@@ -2,19 +2,19 @@ package persistence.user.commands;
 
 import entity.User;
 import persistence.DatabaseCommand;
-import persistence.interfaces.UserTable;
+import persistence.common.constants.UserTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertUserCommand extends DatabaseCommand<User> implements UserTable {
+public class InsertUserCommand extends DatabaseCommand<User> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "INSERT INTO %s" +
                 "(%s, %s, %s) " +
                 "VALUES(?, ?, ?)",
-                U_TABLE, U_COLUMN_USERNAME, U_COLUMN_PASSWORD, U_COLUMN_LEVEL);
+                UserTable.TABLE, UserTable.COLUMN_USERNAME, UserTable.COLUMN_PASSWORD, UserTable.COLUMN_LEVEL);
         return query;
     }
 

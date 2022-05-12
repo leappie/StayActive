@@ -5,7 +5,7 @@ import entity.Alert;
 import entity.Interval;
 import entity.User;
 import persistence.DatabaseQuery;
-import persistence.interfaces.AlertTable;
+import persistence.common.constants.AlertTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SelectUserAlertQuery extends DatabaseQuery<User> implements AlertTable {
+public class SelectUserAlertQuery extends DatabaseQuery<User> {
     private User user;
 
     @Override
@@ -25,7 +25,8 @@ public class SelectUserAlertQuery extends DatabaseQuery<User> implements AlertTa
                 "SELECT %s, %s, %s, %s " +
                 "FROM %s " +
                 "WHERE user_id = ?",
-                A_COLUMN_ID, A_COLUMN_NAME, A_COLUMN_START_TIME, A_COLUMN_END_TIME, A_TABLE);
+                AlertTable.COLUMN_ID, AlertTable.COLUMN_NAME, AlertTable.COLUMN_START_TIME, AlertTable.COLUMN_END_TIME,
+                AlertTable.TABLE);
 
         return query;
     }
@@ -51,10 +52,10 @@ public class SelectUserAlertQuery extends DatabaseQuery<User> implements AlertTa
 
         try {
             while (resultSet.next()) {
-                int id = resultSet.getInt(A_COLUMN_ID);
-                String name = resultSet.getString(A_COLUMN_NAME);
-                String startTimeString = resultSet.getString(A_COLUMN_START_TIME);
-                String endTimeString = resultSet.getString(A_COLUMN_END_TIME);
+                int id = resultSet.getInt(AlertTable.COLUMN_ID);
+                String name = resultSet.getString(AlertTable.COLUMN_NAME);
+                String startTimeString = resultSet.getString(AlertTable.COLUMN_START_TIME);
+                String endTimeString = resultSet.getString(AlertTable.COLUMN_END_TIME);
 
                 LocalTimeConverter localTimeConverter = new LocalTimeConverter();
                 LocalTime startTime = localTimeConverter.tryParse(startTimeString);

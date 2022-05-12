@@ -10,7 +10,6 @@ import factory.ViewFactory;
 import model.UserMainViewModel;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class StartViewController implements Controller<UserMainViewModel> {
     @Override

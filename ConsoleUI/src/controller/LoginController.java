@@ -3,7 +3,6 @@ package controller;
 import common.enums.Display;
 import common.enums.View;
 import common.interfaces.Controller;
-import common.interfaces.DAO;
 import common.interfaces.Displayable;
 import common.mapping.UserLoginViewMapping;
 import common.models.DisplayScreen;

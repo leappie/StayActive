@@ -2,19 +2,19 @@ package persistence.alert.commands;
 
 import entity.Alert;
 import persistence.DatabaseCommand;
-import persistence.interfaces.AlertTable;
+import persistence.common.constants.AlertTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UpdateAlertCommand extends DatabaseCommand<Alert> implements AlertTable {
+public class UpdateAlertCommand extends DatabaseCommand<Alert> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "UPDATE %s " +
                         "SET %s = ?, %s = ? " +
                         "WHERE %s = ?",
-                A_TABLE, A_COLUMN_START_TIME, A_COLUMN_END_TIME, A_COLUMN_ID);
+                AlertTable.TABLE, AlertTable.COLUMN_START_TIME, AlertTable.COLUMN_END_TIME, AlertTable.COLUMN_ID);
         return query;
     }
 

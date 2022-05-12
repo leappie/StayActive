@@ -3,7 +3,6 @@ package view.form;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
 import common.interfaces.Submittable;
-import common.models.DisplayScreen;
 import common.models.InputField;
 
 import java.util.HashMap;

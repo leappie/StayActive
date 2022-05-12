@@ -2,18 +2,18 @@ package persistence.alertexercise.commands;
 
 import entity.Alert;
 import persistence.DatabaseCommand;
-import persistence.interfaces.AlertExerciseTable;
+import persistence.common.constants.AlertExerciseTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DeleteAlertExerciseCommand extends DatabaseCommand<Alert> implements AlertExerciseTable {
+public class DeleteAlertExerciseCommand extends DatabaseCommand<Alert> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "DELETE FROM %s " +
                 "WHERE %s = ?",
-                AE_TABLE, AE_COLUMN_ALERT_ID);
+                AlertExerciseTable.TABLE, AlertExerciseTable.COLUMN_ALERT_ID);
         return query;
     }
 

@@ -3,7 +3,6 @@ package persistence.alertexercise;
 import common.interfaces.DAO;
 import entity.Alert;
 import persistence.DataStore;
-import persistence.alert.queries.SelectAlertQuery;
 import persistence.alertexercise.commands.DeleteAlertExerciseCommand;
 import persistence.alertexercise.commands.InsertAlertExerciseCommand;
 import persistence.alertexercise.commands.UpdateAlertExerciseCommand;

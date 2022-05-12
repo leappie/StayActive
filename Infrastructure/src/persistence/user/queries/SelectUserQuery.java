@@ -5,7 +5,7 @@ import common.util.LevelConverter;
 import entity.User;
 import enums.Level;
 import persistence.DatabaseQuery;
-import persistence.interfaces.UserTable;
+import persistence.common.constants.UserTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,14 +14,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectUserQuery extends DatabaseQuery<User> implements UserTable {
+public class SelectUserQuery extends DatabaseQuery<User> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "SELECT %s, %s, %s, %s " +
                 "FROM %s " +
                 "WHERE username = ? AND password = ?",
-                U_COLUMN_ID, U_COLUMN_USERNAME, U_COLUMN_PASSWORD, U_COLUMN_LEVEL, U_TABLE);
+                UserTable.COLUMN_ID, UserTable.COLUMN_USERNAME, UserTable.COLUMN_PASSWORD, UserTable.COLUMN_LEVEL,
+                UserTable.TABLE);
 
         return query;
     }
@@ -45,10 +46,10 @@ public class SelectUserQuery extends DatabaseQuery<User> implements UserTable {
         List<User> usersList = new ArrayList<>();
         try {
             while(resultSet.next()) {
-                int id = resultSet.getInt(U_COLUMN_ID);
-                String username = resultSet.getString(U_COLUMN_USERNAME);
-                String password = resultSet.getString(U_COLUMN_PASSWORD);
-                String levelString = resultSet.getString(U_COLUMN_LEVEL);
+                int id = resultSet.getInt(UserTable.COLUMN_ID);
+                String username = resultSet.getString(UserTable.COLUMN_USERNAME);
+                String password = resultSet.getString(UserTable.COLUMN_PASSWORD);
+                String levelString = resultSet.getString(UserTable.COLUMN_LEVEL);
 
                 Level level = new LevelConverter().tryParse(levelString);
                 if (level != null) {

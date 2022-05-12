@@ -1,11 +1,8 @@
 package services;
 
-import common.interfaces.DAO;
 import common.services.CurrentUserService;
 import entity.User;
 import interfaces.Authenticator;
-import user.UserRepository;
-import user.services.Authenticate;
 
 public class LoginService {
 

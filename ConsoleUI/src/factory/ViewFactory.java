@@ -6,7 +6,6 @@ import common.interfaces.Controller;
 import common.interfaces.Displayable;
 import common.models.InputField;
 import view.*;
-import view.form.FormView;
 
 import java.util.HashMap;
 

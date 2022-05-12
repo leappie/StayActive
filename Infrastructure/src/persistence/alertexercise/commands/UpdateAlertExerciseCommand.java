@@ -3,20 +3,21 @@ package persistence.alertexercise.commands;
 import entity.Alert;
 import entity.Exercise;
 import persistence.DatabaseCommand;
-import persistence.interfaces.AlertExerciseTable;
+import persistence.common.constants.AlertExerciseTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UpdateAlertExerciseCommand extends DatabaseCommand<Alert> implements AlertExerciseTable {
+public class UpdateAlertExerciseCommand extends DatabaseCommand<Alert> {
     @Override
     protected String getCommandText() {
         String query = String.format(
                 "UPDATE %s " +
                         "SET %s = ? " +
                         "WHERE %s = ? AND %s = ? ",
-                AE_TABLE, AE_COLUMN_EXERCISE_WEIGHT, AE_COLUMN_ALERT_ID, AE_COLUMN_EXERCISE_ID);
+                AlertExerciseTable.TABLE, AlertExerciseTable.COLUMN_EXERCISE_WEIGHT, AlertExerciseTable.COLUMN_ALERT_ID,
+                AlertExerciseTable.COLUMN_EXERCISE_ID);
         return query;
     }
 
