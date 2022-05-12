@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <packaging>pom</packaging>
+
+    <groupId>stayactive</groupId>
+    <artifactId>StayActive</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>StayActive</name>
+    <description>ConsoleUI Application</description>
+
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>stayactive.consoleui</groupId>-->
+<!--            <artifactId>ConsoleUI</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <scope>runtime</scope>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>stayactive.consoleui</groupId>-->
+<!--                    <artifactId>ConsoleUI</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>stayactive.domain</groupId>
+                <artifactId>Domain</artifactId>
+                <version>1.0-SNAPSHOT</version>
+<!--                <exclusions>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>stayactive.domain</groupId>-->
+<!--                        <artifactId>Domain</artifactId>-->
+<!--                    </exclusion>-->
+<!--                </exclusions>-->
+            </dependency>
+
+            <dependency>
+                <groupId>stayactive.application</groupId>
+                <artifactId>Application</artifactId>
+                <version>1.0-SNAPSHOT</version>
+<!--                <exclusions>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>stayactive.application</groupId>-->
+<!--                        <artifactId>Application</artifactId>-->
+<!--                    </exclusion>-->
+<!--                </exclusions>-->
+            </dependency>
+
+            <dependency>
+                <groupId>stayactive.infrastructure</groupId>
+                <artifactId>Infrastructure</artifactId>
+                <version>1.0-SNAPSHOT</version>
+<!--                <exclusions>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>stayactive.infrastructure</groupId>-->
+<!--                        <artifactId>Infrastructure</artifactId>-->
+<!--                    </exclusion>-->
+<!--                </exclusions>-->
+            </dependency>
+
+            <dependency>
+                <groupId>stayactive.consoleui</groupId>
+                <artifactId>ConsoleUI</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>stayactive.consoleui</groupId>
+                        <artifactId>ConsoleUI</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.8.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-testng</artifactId>
+                <version>0.4.22</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>4.5.1</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>Application</module>
+        <module>Domain</module>
+        <module>ConsoleUI</module>
+        <module>Infrastructure</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+
+    
+</project>
