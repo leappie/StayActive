@@ -3,11 +3,9 @@ package services.intervalexerciselevel;
 import entity.Interval;
 import entity.User;
 import enums.Level;
-import interfaces.Levelable;
 
 import java.util.List;
 
-//TODO: Question -> Extend ExerciseLevelCreatorA and use super OR Interface?
 public class ExerciseLevelCreatorB extends ExerciseLevelCreatorA {
     public static final String TAG = "ExerciseLevelCreatorB";
 

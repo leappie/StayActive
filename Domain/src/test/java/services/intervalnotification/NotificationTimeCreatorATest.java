@@ -2,11 +2,15 @@ package services.intervalnotification;
 
 import common.Constants;
 import entity.Interval;
+import entity.Notification;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * The notification time returned depends on the start and end time.
@@ -27,7 +31,7 @@ import java.time.temporal.ChronoUnit;
 public class NotificationTimeCreatorATest {
 
     @Test
-    void testCalcNotificationTime(String now) {
+    void testCalcNotificationTime() {
         // Arrange
         int hourStartTime = 9; // Note date time exception when you try values out of range of [00:00, 23:59]
         int minutesStartTime = 59;
@@ -105,7 +109,6 @@ public class NotificationTimeCreatorATest {
 
         //Assert
         Assertions.assertEquals(null, result);
-
     }
 
     /*

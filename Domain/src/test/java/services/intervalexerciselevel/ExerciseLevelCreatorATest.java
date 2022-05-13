@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 class ExerciseLevelCreatorATest {
 
     // Case 1: 1 accepted notification in the list

@@ -8,12 +8,12 @@ import java.time.LocalTime;
 class IntervalTest {
 
     @Test
-    void getTotalNotifications() {
+    void calcTotalNotificationsTest() {
         // Arrange
-        int hourStartTime = 9;
-        int minutesStartTime = 59;
-        int hourEndTime = 17;
-        int minutesEndTime = 59;
+        final int hourStartTime = 9;
+        final int minutesStartTime = 59;
+        final int hourEndTime = 17;
+        final int minutesEndTime = 59;
 
         LocalTime startTime = LocalTime.of(hourStartTime, minutesStartTime);
         LocalTime endTime = LocalTime.of(hourEndTime, minutesEndTime);
