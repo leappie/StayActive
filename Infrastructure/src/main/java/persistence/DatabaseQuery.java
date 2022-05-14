@@ -1,9 +1,9 @@
 package persistence;
 
+import persistence.common.constants.Constants;
+
 import java.sql.*;
 import java.util.List;
-
-import static persistence.DataStore.CONNECTION_STRING;
 
 public abstract class DatabaseQuery<T> {
     protected abstract String getCommandText();
@@ -16,7 +16,7 @@ public abstract class DatabaseQuery<T> {
         /*
         The connection, statement and result will be automatically closed inside try
          */
-        try (Connection connection = DriverManager.getConnection(CONNECTION_STRING);
+        try (Connection connection = DriverManager.getConnection(Constants.CONNECTION_STRING);
              PreparedStatement statement = createPreparedStatement(connection, param);
              ResultSet resultSet = statement.executeQuery()) {
 

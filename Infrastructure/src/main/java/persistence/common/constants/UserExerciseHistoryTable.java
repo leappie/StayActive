@@ -1,6 +1,8 @@
 package persistence.common.constants;
 
 public class UserExerciseHistoryTable {
+    private UserExerciseHistoryTable(){}
+
     public static final String TABLE = "user_exercise_history";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_USER_ID = "user_id";

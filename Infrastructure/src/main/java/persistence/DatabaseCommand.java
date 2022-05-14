@@ -1,8 +1,8 @@
 package persistence;
 
-import java.sql.*;
+import persistence.common.constants.Constants;
 
-import static persistence.DataStore.CONNECTION_STRING;
+import java.sql.*;
 
 public abstract class DatabaseCommand<T> {
     protected abstract String getCommandText();
@@ -14,7 +14,7 @@ public abstract class DatabaseCommand<T> {
          /*
         The connection, statement and result will be automatically closed inside try
          */
-        try (Connection connection = DriverManager.getConnection(CONNECTION_STRING);
+        try (Connection connection = DriverManager.getConnection(Constants.CONNECTION_STRING);
              PreparedStatement statement = connection.prepareStatement(
                      getCommandText(), Statement.RETURN_GENERATED_KEYS)) {
 
