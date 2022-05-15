@@ -61,6 +61,13 @@
             <version>2.1.212</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.36</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     
 </project>
