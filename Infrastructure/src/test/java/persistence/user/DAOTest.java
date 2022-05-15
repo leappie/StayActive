@@ -10,23 +10,22 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.sqlite.SQLiteDataSource;
 
 import javax.sql.DataSource;
+import java.io.FileInputStream;
 
 public class DAOTest extends DataSourceBasedDBTestCase {
 
-    private static final String XML_TEST_DATA = "D:\\GitHubRep\\StayActive\\Infrastructure\\src\\test\\resources\\data.xml";
+    private static final String XML_TEST_DATA = "src/test/resources/data.xml";
 
     @Override
     protected DataSource getDataSource() {
         SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:D:\\GitHubRep\\StayActive\\Infrastructure\\src\\test\\resources\\stayactive_testdb.db");
+        dataSource.setUrl("jdbc:sqlite:src/test/resources/stayactive_testdb.db");
         return dataSource;
     }
 
     @Override
     protected IDataSet getDataSet() throws Exception {
-//        return new FlatXmlDataSetBuilder().build(getClass().getClassLoader()
-//                .getResourceAsStream(XML_TEST_DATA));
-        return null;
+        return new FlatXmlDataSetBuilder().build(new FileInputStream(XML_TEST_DATA));
     }
 
     @Override
