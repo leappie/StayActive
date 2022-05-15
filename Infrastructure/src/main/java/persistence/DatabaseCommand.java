@@ -1,12 +1,31 @@
 package persistence;
 
-import persistence.common.constants.Constants;
-
+import javax.sql.DataSource;
 import java.sql.*;
 
+/**
+ * Template pattern for db commands.
+ * @param <T>
+ */
 public abstract class DatabaseCommand<T> {
+    /**
+     * Command text example: Insert ...
+     * @return
+     */
     protected abstract String getCommandText();
+
+    /**
+     * Creates statement
+     * @param preparedStatement
+     * @param data
+     */
     protected abstract void setParams(PreparedStatement preparedStatement, T data);
+
+    private final DataSource dataSource;
+
+    public DatabaseCommand(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public long execute(T data) {
         long id = -1;
@@ -14,7 +33,7 @@ public abstract class DatabaseCommand<T> {
          /*
         The connection, statement and result will be automatically closed inside try
          */
-        try (Connection connection = DriverManager.getConnection(Constants.CONNECTION_STRING);
+        try (Connection connection = this.dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      getCommandText(), Statement.RETURN_GENERATED_KEYS)) {
 

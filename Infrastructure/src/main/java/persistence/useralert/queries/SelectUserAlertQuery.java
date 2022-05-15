@@ -5,8 +5,9 @@ import entity.Alert;
 import entity.Interval;
 import entity.User;
 import persistence.DatabaseQuery;
-import persistence.common.constants.AlertTable;
+import persistence.common.Constants.AlertTable;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,10 @@ import java.util.List;
 
 public class SelectUserAlertQuery extends DatabaseQuery<User> {
     private User user;
+
+    public SelectUserAlertQuery(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected String getCommandText() {

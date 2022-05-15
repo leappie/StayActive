@@ -4,8 +4,9 @@ import common.util.LevelConverter;
 import entity.Exercise;
 import enums.Level;
 import persistence.DatabaseQuery;
-import persistence.common.constants.ExerciseTable;
+import persistence.common.Constants.ExerciseTable;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectExerciseQuery extends DatabaseQuery<Exercise> {
+
+    public SelectExerciseQuery(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
     protected String getCommandText() {
         String query = String.format(

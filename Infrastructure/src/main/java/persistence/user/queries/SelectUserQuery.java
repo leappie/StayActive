@@ -5,8 +5,9 @@ import common.util.LevelConverter;
 import entity.User;
 import enums.Level;
 import persistence.DatabaseQuery;
-import persistence.common.constants.UserTable;
+import persistence.common.Constants.UserTable;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectUserQuery extends DatabaseQuery<User> {
+
+    public SelectUserQuery(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
     protected String getCommandText() {
         String query = String.format(

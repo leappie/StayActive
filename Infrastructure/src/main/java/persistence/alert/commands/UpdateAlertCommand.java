@@ -2,12 +2,17 @@ package persistence.alert.commands;
 
 import entity.Alert;
 import persistence.DatabaseCommand;
-import persistence.common.constants.AlertTable;
+import persistence.common.Constants.AlertTable;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateAlertCommand extends DatabaseCommand<Alert> {
+    public UpdateAlertCommand(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
     protected String getCommandText() {
         String query = String.format(

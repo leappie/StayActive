@@ -2,12 +2,17 @@ package persistence.user.commands;
 
 import entity.User;
 import persistence.DatabaseCommand;
-import persistence.common.constants.UserTable;
+import persistence.common.Constants.UserTable;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DeleteUserCommand extends DatabaseCommand<User> {
+    public DeleteUserCommand(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
     protected String getCommandText() {
         String query = String.format(

@@ -3,13 +3,18 @@ package persistence.useralert.commands;
 import entity.Alert;
 import entity.User;
 import persistence.DatabaseCommand;
-import persistence.common.constants.AlertTable;
+import persistence.common.Constants.AlertTable;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 public class InsertUserAlertCommand extends DatabaseCommand<User> {
+
+    public InsertUserAlertCommand(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected String getCommandText() {

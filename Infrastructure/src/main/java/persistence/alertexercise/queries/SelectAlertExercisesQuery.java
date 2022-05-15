@@ -5,9 +5,10 @@ import entity.Alert;
 import entity.Exercise;
 import enums.Level;
 import persistence.DatabaseQuery;
-import persistence.common.constants.AlertExerciseTable;
-import persistence.common.constants.ExerciseTable;
+import persistence.common.Constants.AlertExerciseTable;
+import persistence.common.Constants.ExerciseTable;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,10 @@ import java.util.List;
 
 public class SelectAlertExercisesQuery extends DatabaseQuery<Alert> {
     private Alert alert;
+
+    public SelectAlertExercisesQuery(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected String getCommandText() {

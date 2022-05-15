@@ -3,13 +3,18 @@ package persistence.alertexercise.commands;
 import entity.Alert;
 import entity.Exercise;
 import persistence.DatabaseCommand;
-import persistence.common.constants.AlertExerciseTable;
+import persistence.common.Constants.AlertExerciseTable;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 public class InsertAlertExerciseCommand extends DatabaseCommand<Alert> {
+
+    public InsertAlertExerciseCommand(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected String getCommandText() {

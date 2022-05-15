@@ -5,9 +5,11 @@ import common.util.LocalTimeConverter;
 import entity.Alert;
 import entity.Interval;
 import entity.User;
+import org.sqlite.SQLiteDataSource;
 import persistence.DatabaseQuery;
-import persistence.common.constants.AlertTable;
+import persistence.common.Constants.AlertTable;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,10 @@ import java.util.List;
 
 public class SelectAlertQuery extends DatabaseQuery<Alert> {
     private User user;
+
+    public SelectAlertQuery(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected String getCommandText() {
