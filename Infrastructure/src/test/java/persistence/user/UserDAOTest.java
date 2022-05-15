@@ -26,8 +26,8 @@ class UserDAOTest extends DAOTest {
         IDataSet databaseDataSet = getConnection().createDataSet();
 
         // Act;
-        long idInsert1 = this.userDAO.insert(new User("test1", "1234"));
-        long idInsert2 = this.userDAO.insert(new User("test2", "1234"));
+        int userId1= (int) this.userDAO.insert(new User("test1", "1234"));
+        int userId2 = (int) this.userDAO.insert(new User("test2", "1234"));
 
         //Assert
         ITable actualTable = databaseDataSet.getTable("user");
@@ -36,10 +36,9 @@ class UserDAOTest extends DAOTest {
         /*
         UPDATE
          */
-        //Arrange
         // Act;
-        this.userDAO.update(new User((int) idInsert1, "updatedUser1", "updatedPassword1", Level.HARD));
-        this.userDAO.update(new User((int) idInsert2, "updatedUser2", "updatedPassword2", Level.HARD));
+        this.userDAO.update(new User(userId1, "updatedUser1", "updatedPassword1", Level.HARD));
+        this.userDAO.update(new User(userId2, "updatedUser2", "updatedPassword2", Level.HARD));
 
         //Assert
         String username1 = (String) databaseDataSet.getTable("user").getValue(0, "username"); // get row 0, column username
@@ -54,7 +53,6 @@ class UserDAOTest extends DAOTest {
         /*
         DELETE
          */
-        //Arrange
         // Act;
         this.userDAO.delete(new User("updatedUser1", "updatedPassword1"));
 
@@ -62,11 +60,9 @@ class UserDAOTest extends DAOTest {
         actualTable = databaseDataSet.getTable("user");
         Assertions.assertEquals(1, actualTable.getRowCount());
 
-
         /*
         Query
          */
-        //Arrange
         // Act;
         List<User> userList = this.userDAO.query(new User("updatedUser2", "updatedPassword2"));
 
