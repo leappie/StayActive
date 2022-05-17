@@ -25,7 +25,7 @@ public class LoginController implements Controller<UserLoginViewModel> {
         Display screen;
         View view;
 
-        User user = new UserLoginViewMapping().mapTo(model);
+        User user = new UserLoginViewMapping().mapToEntity(model);
         UserRepository userRepository = new UserRepository(new UserDAO());
         user = new LoginService(new Authenticate(userRepository)).authenticateUser(user); // TODO: improve?
 

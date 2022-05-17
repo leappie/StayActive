@@ -31,7 +31,7 @@ public class NewAlertController implements Controller<AlertViewModel> {
         View view;
 
         // map alertViewModel to alert
-        Alert alert = new AlertViewMapping().mapTo(model);
+        Alert alert = new AlertViewMapping().mapToEntity(model);
 
         // check if mapping succeeded
         if (alert == null) {

@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 public class AlertViewMapping implements Mapping<AlertViewModel, Alert> {
     @Override
-    public Alert mapTo(AlertViewModel viewModel) {
+    public Alert mapToEntity(AlertViewModel viewModel) {
         LocalTimeConverter localTimeConverter = new LocalTimeConverter();
         LocalTime startTime = localTimeConverter.tryParse(viewModel.getStartTime());
         LocalTime endTime = localTimeConverter.tryParse(viewModel.getEndTime());
@@ -22,7 +22,7 @@ public class AlertViewMapping implements Mapping<AlertViewModel, Alert> {
     }
 
     @Override
-    public AlertViewModel mapFrom(Alert entity) {
+    public AlertViewModel mapToModel(Alert entity) {
         return new AlertViewModel(entity.getId(), entity.getName(), entity.getInterval().getStartTime().toString(),
                 entity.getInterval().getEndTime().toString());
     }

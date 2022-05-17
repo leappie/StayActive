@@ -8,12 +8,12 @@ import model.UserLoginViewModel;
 public class UserLoginViewMapping implements Mapping<UserLoginViewModel, User> {
 
     @Override
-    public User mapTo(UserLoginViewModel viewModel) {
+    public User mapToEntity(UserLoginViewModel viewModel) {
         return new User(viewModel.getUsername(), viewModel.getPassword());
     }
 
     @Override
-    public UserLoginViewModel mapFrom(User entity) {
+    public UserLoginViewModel mapToModel(User entity) {
         return new UserLoginViewModel(entity.getUsername(), entity.getPassword());
     }
 }

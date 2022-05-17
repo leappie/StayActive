@@ -7,7 +7,7 @@ package common.interfaces;
  * @param <V>
  */
 public interface Mapping<T, V> {
-    public V mapTo(T viewModel);
-    public T mapFrom(V entity);
+    public V mapToEntity(T viewModel);
+    public T mapToModel(V entity);
 
 }

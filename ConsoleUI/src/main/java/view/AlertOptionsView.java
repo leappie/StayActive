@@ -93,7 +93,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
         // map to AlertViewModel
         List<AlertViewModel> alertViewModelList = new ArrayList<>();
         for (Alert alert : alertList) {
-            AlertViewModel alertViewModel = new AlertViewMapping().mapFrom(alert);
+            AlertViewModel alertViewModel = new AlertViewMapping().mapToModel(alert);
             alertViewModelList.add(alertViewModel);
         }
 

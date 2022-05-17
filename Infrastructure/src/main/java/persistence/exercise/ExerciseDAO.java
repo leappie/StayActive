@@ -23,16 +23,19 @@ public class ExerciseDAO implements DAO<Exercise> {
 
     @Override
     public long insert(Exercise entity) {
+        // TODO
         return 0;
     }
 
     @Override
     public long update(Exercise entity) {
+        // TODO
         return 0;
     }
 
     @Override
     public long delete(Exercise entity) {
+        // TODO
         return 0;
     }
 

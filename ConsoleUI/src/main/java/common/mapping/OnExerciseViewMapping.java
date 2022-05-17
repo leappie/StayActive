@@ -8,7 +8,7 @@ import model.ExerciseViewModel;
 
 public class OnExerciseViewMapping implements Mapping<ExerciseViewModel, Exercise> {
     @Override
-    public Exercise mapTo(ExerciseViewModel viewModel) {
+    public Exercise mapToEntity(ExerciseViewModel viewModel) {
         Level level = new LevelConverter().tryParse(viewModel.getLevel());
 
         if (level != null) {
@@ -19,7 +19,7 @@ public class OnExerciseViewMapping implements Mapping<ExerciseViewModel, Exercis
     }
 
     @Override
-    public ExerciseViewModel mapFrom(Exercise entity) {
+    public ExerciseViewModel mapToModel(Exercise entity) {
         return new ExerciseViewModel(entity.getName(), entity.getReps(), entity.getSets(),
                 entity.getExerciseTimeMinutes(), entity.getLevel().toString());
     }

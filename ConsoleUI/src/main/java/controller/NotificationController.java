@@ -39,7 +39,7 @@ public class NotificationController implements Controller<NotificationViewModel>
 
             if (exercise != null) {
                 // map exercise to viewModel
-                ExerciseViewModel exerciseViewModel = new OnExerciseViewMapping().mapFrom(exercise);
+                ExerciseViewModel exerciseViewModel = new OnExerciseViewMapping().mapToModel(exercise);
 
                 // show display
                 displayable = new OnExerciseView(inputField, exerciseViewModel, "Todo exercise");

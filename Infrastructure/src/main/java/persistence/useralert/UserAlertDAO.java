@@ -30,11 +30,13 @@ public class UserAlertDAO implements DAO<User> {
 
     @Override
     public long update(User entity) {
+        // TODO
         return 0;
     }
 
     @Override
     public long delete(User entity) {
+        // TODO
         return 0;
     }
 
