@@ -69,7 +69,7 @@ class NotificationTimeCreatorBTest {
 
     /**
      * This test checks specific Notification moments depending on the Interval and the amount of notifications already
-     * triggered.
+     * triggered. To do this I needed mock objects.
      *
      * @throws Exception
      */
