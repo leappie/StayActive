@@ -2,6 +2,7 @@ package persistence.useralert;
 
 
 import common.interfaces.DAO;
+import common.interfaces.daos.IUserAlertDAO;
 import entity.User;
 import persistence.DataStore;
 import persistence.StayActiveDataSource;
@@ -11,7 +12,7 @@ import persistence.useralert.queries.SelectUserAlertQuery;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class UserAlertDAO implements DAO<User> {
+public class UserAlertDAO implements IUserAlertDAO {
     private DataStore<User> dataStore = new DataStore<>();
     private DataSource dataSource;
 
@@ -24,24 +25,12 @@ public class UserAlertDAO implements DAO<User> {
     }
 
     @Override
-    public long insert(User entity) {
-        return this.dataStore.execute(new InsertUserAlertCommand(this.dataSource), entity);
+    public long insert(User user) {
+        return this.dataStore.execute(new InsertUserAlertCommand(this.dataSource), user);
     }
 
     @Override
-    public long update(User entity) {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public long delete(User entity) {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public List<User> query(User entity) {
-        return this.dataStore.query(new SelectUserAlertQuery(this.dataSource), entity);
+    public List<User> query(User user) {
+        return this.dataStore.query(new SelectUserAlertQuery(this.dataSource, user));
     }
 }

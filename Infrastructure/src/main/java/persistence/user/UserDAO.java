@@ -1,7 +1,7 @@
 package persistence.user;
 
 
-import common.interfaces.DAO;
+import common.interfaces.daos.IUserDAO;
 import entity.User;
 import persistence.DataStore;
 import persistence.StayActiveDataSource;
@@ -13,7 +13,7 @@ import persistence.user.queries.SelectUserQuery;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class UserDAO implements DAO<User> {
+public class UserDAO implements IUserDAO {
     private DataStore<User> dataStore = new DataStore<>();
     private DataSource dataSource;
 
@@ -26,22 +26,22 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public long insert(User entity) {
-        return this.dataStore.execute(new InsertUserCommand(this.dataSource), entity);
+    public long insert(User user) {
+        return this.dataStore.execute(new InsertUserCommand(this.dataSource), user);
     }
 
     @Override
-    public long update(User entity) {
-        return this.dataStore.execute(new UpdateUserCommand(this.dataSource), entity);
+    public long update(User user) {
+        return this.dataStore.execute(new UpdateUserCommand(this.dataSource), user);
     }
 
     @Override
-    public long delete(User entity) {
-        return this.dataStore.execute(new DeleteUserCommand(this.dataSource), entity);
+    public void delete(User user) {
+        this.dataStore.execute(new DeleteUserCommand(this.dataSource), user);
     }
 
     @Override
-    public List<User> query(User entity) {
-        return this.dataStore.query(new SelectUserQuery(this.dataSource), entity);
+    public List<User> query(User user) {
+        return this.dataStore.query(new SelectUserQuery(this.dataSource, user));
     }
 }

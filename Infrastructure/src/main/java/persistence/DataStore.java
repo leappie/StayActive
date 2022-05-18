@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class DataStore<T> {
 
-    public List<T> query(DatabaseQuery<T> query, T param) {
-        return query.execute(param);
+    public List<T> query(DatabaseQuery<T> query) {
+        return query.execute();
     }
 
     public long execute(DatabaseCommand<T> command, T param) {

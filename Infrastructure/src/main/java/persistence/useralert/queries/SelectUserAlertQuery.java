@@ -8,7 +8,6 @@ import persistence.DatabaseQuery;
 import persistence.common.Constants.AlertTable;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,8 +19,9 @@ import java.util.List;
 public class SelectUserAlertQuery extends DatabaseQuery<User> {
     private User user;
 
-    public SelectUserAlertQuery(DataSource dataSource) {
+    public SelectUserAlertQuery(DataSource dataSource, User user) {
         super(dataSource);
+        this.user = user;
     }
 
     @Override
@@ -37,16 +37,12 @@ public class SelectUserAlertQuery extends DatabaseQuery<User> {
     }
 
     @Override
-    protected PreparedStatement createPreparedStatement(Connection connection, User param) {
+    protected void setParams(PreparedStatement statement) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(getCommandText());
-            this.user = param;
-            preparedStatement.setInt(1, param.getId());
+            statement.setInt(1, this.user.getId());
 
-            return preparedStatement;
         } catch (SQLException e) {
             System.out.println("Error setting statement: " + e);
-            return null;
         }
     }
 

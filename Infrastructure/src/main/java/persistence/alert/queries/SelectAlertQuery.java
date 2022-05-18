@@ -5,12 +5,10 @@ import common.util.LocalTimeConverter;
 import entity.Alert;
 import entity.Interval;
 import entity.User;
-import org.sqlite.SQLiteDataSource;
 import persistence.DatabaseQuery;
 import persistence.common.Constants.AlertTable;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,16 +37,7 @@ public class SelectAlertQuery extends DatabaseQuery<Alert> {
     }
 
     @Override
-    protected PreparedStatement createPreparedStatement(Connection connection, Alert param) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(getCommandText());
-
-            return preparedStatement;
-        } catch (SQLException e) {
-            System.out.println("Error setting statement: " + e);
-            return null;
-        }
-    }
+    protected void setParams(PreparedStatement statement) {}
 
     @Override
     protected List<Alert> map(ResultSet resultSet) {

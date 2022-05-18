@@ -1,6 +1,6 @@
 package persistence.exercise;
 
-import common.interfaces.DAO;
+import common.interfaces.daos.IExerciseDAO;
 import entity.Exercise;
 import persistence.DataStore;
 import persistence.StayActiveDataSource;
@@ -9,7 +9,7 @@ import persistence.exercise.queries.SelectExerciseQuery;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class ExerciseDAO implements DAO<Exercise> {
+public class ExerciseDAO implements IExerciseDAO {
     private DataStore<Exercise> dataStore = new DataStore<>();
     private DataSource dataSource;
 
@@ -22,25 +22,7 @@ public class ExerciseDAO implements DAO<Exercise> {
     }
 
     @Override
-    public long insert(Exercise entity) {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public long update(Exercise entity) {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public long delete(Exercise entity) {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public List<Exercise> query(Exercise entity) {
-        return this.dataStore.query(new SelectExerciseQuery(this.dataSource), entity);
+    public List<Exercise> queryAll() {
+        return this.dataStore.query(new SelectExerciseQuery(this.dataSource));
     }
 }

@@ -1,35 +1,45 @@
 package user;
 
-import common.interfaces.DAO;
-import common.interfaces.Repository;
+import common.interfaces.daos.IUserDAO;
+import common.interfaces.repositories.IUserRepository;
 import entity.User;
 
 import java.util.List;
 
-public class UserRepository implements Repository<User> {
-    private DAO<User> userDao;
+public class UserRepository implements IUserRepository {
+    private IUserDAO userDao;
 
-    public UserRepository(DAO<User> userDao) {
+    public UserRepository(IUserDAO userDao) {
         this.userDao = userDao;
     }
 
     @Override
-    public long add(User entity) {
-        return this.userDao.insert(entity);
+    public long addUser(User user) {
+        return this.userDao.insert(user);
     }
 
     @Override
-    public long update(User entity) {
-        return this.userDao.update(entity);
+    public long updateUser(User user) {
+        return this.userDao.update(user);
     }
 
     @Override
-    public long remove(User entity) {
-        return userDao.delete(entity);
+    public void deleteUser(User user) {
+        this.userDao.delete(user);
     }
 
     @Override
-    public List<User> get(User entity) {
-        return this.userDao.query(entity);
+    public User getUser(User user) {
+        User getUser = null;
+        List<User> userList = this.userDao.query(user);
+
+        // Username and id is unique. This will always return 1 item
+        if (userList.size() != 0) {
+            getUser = userList.get(userList.size() - 1);
+        }
+
+        return getUser;
     }
+
+
 }

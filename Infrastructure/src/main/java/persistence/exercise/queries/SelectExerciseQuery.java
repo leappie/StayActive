@@ -32,16 +32,7 @@ public class SelectExerciseQuery extends DatabaseQuery<Exercise> {
     }
 
     @Override
-    protected PreparedStatement createPreparedStatement(Connection connection, Exercise param) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(getCommandText());
-
-            return preparedStatement;
-        } catch (SQLException e) {
-            System.out.println("Error setting statement: " + e);
-            return null;
-        }
-    }
+    protected void setParams(PreparedStatement preparedStatement) {}
 
     @Override
     protected List<Exercise> map(ResultSet resultSet) {

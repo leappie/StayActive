@@ -1,7 +1,10 @@
 package services;
 
 import alert.AlertRepository;
+import alertexercise.AlertExerciseRepository;
 import common.interfaces.DAO;
+import common.interfaces.daos.IAlertExerciseDAO;
+import common.interfaces.repositories.IAlertExerciseRepository;
 import common.services.ExerciseLevelService;
 import entity.Alert;
 import entity.Exercise;
@@ -14,9 +17,9 @@ import services.alertexercise.AlertExerciseCreatorA;
 import java.util.List;
 
 public class NotificationService {
-    private DAO<Alert> alertExerciseDAO;
+    private IAlertExerciseDAO alertExerciseDAO;
 
-    public NotificationService(DAO<Alert> alertExerciseDAO) {
+    public NotificationService(IAlertExerciseDAO alertExerciseDAO) {
         this.alertExerciseDAO = alertExerciseDAO;
     }
 
@@ -52,8 +55,8 @@ public class NotificationService {
             exercise = new AlertExercise(new AlertExerciseCreatorA()).getExerciseOnNotification(alert, levelList);
 
             // update exercise weight
-            AlertRepository alertRepository = new AlertRepository(this.alertExerciseDAO);
-            alertRepository.update(alert);
+            IAlertExerciseRepository alertExerciseRepository = new AlertExerciseRepository(this.alertExerciseDAO);
+            alertExerciseRepository.updateAlertExercise(alert);
         }
         return exercise;
     }

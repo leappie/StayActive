@@ -8,7 +8,6 @@ import persistence.DatabaseQuery;
 import persistence.common.Constants.UserTable;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectUserQuery extends DatabaseQuery<User> {
+    private User user;
 
-    public SelectUserQuery(DataSource dataSource) {
+    public SelectUserQuery(DataSource dataSource, User user) {
         super(dataSource);
+        this.user = user;
     }
 
     @Override
@@ -34,16 +35,13 @@ public class SelectUserQuery extends DatabaseQuery<User> {
     }
 
     @Override
-    protected PreparedStatement createPreparedStatement(Connection connection, User param) {
+    protected void setParams(PreparedStatement statement) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(getCommandText());
-            preparedStatement.setString(1, param.getUsername());
-            preparedStatement.setString(2, param.getPassword());
+            statement.setString(1, this.user.getUsername());
+            statement.setString(2, this.user.getPassword());
 
-            return preparedStatement;
         } catch (SQLException e) {
             System.out.println("Error setting statement: " + e);
-            return null;
         }
     }
 
@@ -69,4 +67,6 @@ public class SelectUserQuery extends DatabaseQuery<User> {
             return null;
         }
     }
+
+
 }

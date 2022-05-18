@@ -3,6 +3,8 @@ package alert;
 
 import common.interfaces.DAO;
 import common.interfaces.Repository;
+import common.interfaces.daos.IAlertDAO;
+import common.interfaces.repositories.IAlertRepository;
 import entity.Alert;
 
 import java.util.List;
@@ -10,30 +12,27 @@ import java.util.List;
 /**
  * Repository to get and sets alert or alert exercises.
  */
-public class AlertRepository implements Repository<Alert> {
-    private DAO<Alert> alertDAO;
+public class AlertRepository implements IAlertRepository {
+    private IAlertDAO alertDAO;
 
-    public AlertRepository(DAO<Alert> alertDAO) {
+    public AlertRepository(IAlertDAO alertDAO) {
         this.alertDAO = alertDAO;
     }
 
     @Override
-    public long add(Alert entity) {
-        return this.alertDAO.insert(entity);
+    public long updateAlert(Alert alert) {
+        return this.alertDAO.update(alert);
     }
 
     @Override
-    public long update(Alert entity) {
-        return this.alertDAO.update(entity);
+    public void deleteAlert(Alert alert) {
+        this.alertDAO.delete(alert);
     }
 
     @Override
-    public long remove(Alert entity) {
-        return this.alertDAO.delete(entity);
+    public List<Alert> getAllAlerts() {
+        return this.alertDAO.queryAll();
     }
 
-    @Override
-    public List<Alert> get(Alert entity) {
-        return this.alertDAO.query(entity);
-    }
+
 }

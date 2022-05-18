@@ -19,8 +19,9 @@ import java.util.List;
 public class SelectAlertExercisesQuery extends DatabaseQuery<Alert> {
     private Alert alert;
 
-    public SelectAlertExercisesQuery(DataSource dataSource) {
+    public SelectAlertExercisesQuery(DataSource dataSource, Alert alert) {
         super(dataSource);
+        this.alert = alert;
     }
 
     @Override
@@ -40,16 +41,11 @@ public class SelectAlertExercisesQuery extends DatabaseQuery<Alert> {
     }
 
     @Override
-    protected PreparedStatement createPreparedStatement(Connection connection, Alert param) {
+    protected void setParams(PreparedStatement statement) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(getCommandText());
-            this.alert = param;
-            preparedStatement.setInt(1, param.getId());
-
-            return preparedStatement;
+            statement.setInt(1, this.alert.getId());
         } catch (SQLException e) {
             System.out.println("Error setting statement: " + e);
-            return null;
         }
     }
 

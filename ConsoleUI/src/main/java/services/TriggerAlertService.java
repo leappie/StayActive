@@ -1,7 +1,8 @@
 package services;
 
-import alert.AlertRepository;
-import common.interfaces.DAO;
+import alertexercise.AlertExerciseRepository;
+import common.interfaces.daos.IAlertExerciseDAO;
+import common.interfaces.repositories.IAlertExerciseRepository;
 import common.services.CurrentUserService;
 import entity.Alert;
 import entity.Interval;
@@ -15,17 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriggerAlertService {
-    private DAO<Alert> alertExerciseDAO;
+    private IAlertExerciseDAO alertExerciseDAO;
 
-    public TriggerAlertService(DAO<Alert> alertExerciseDAO) {
+    public TriggerAlertService(IAlertExerciseDAO alertExerciseDAO) {
         this.alertExerciseDAO = alertExerciseDAO;
     }
 
     public LocalTime triggerAlert(Alert alert) {
         // get alert with all exercise + weights paired to alert
-        AlertRepository alertRepository = new AlertRepository(this.alertExerciseDAO);
-        List<Alert> alertList = alertRepository.get(alert);// -> Note the exercise will be paired to the alert, so same alert
-        alert = alertList.get(alertList.size() - 1);
+        IAlertExerciseRepository alertExerciseRepository = new AlertExerciseRepository(this.alertExerciseDAO);
+        alert = alertExerciseRepository.getAlertExercise(alert);
 
         // calculate notification time
         Interval interval = alert.getInterval();

@@ -1,35 +1,21 @@
 package exercise;
 
-import common.interfaces.DAO;
-import common.interfaces.Repository;
+import common.interfaces.daos.IExerciseDAO;
+import common.interfaces.repositories.IExerciseRepository;
 import entity.Exercise;
 
 import java.util.List;
 
-public class ExerciseRepository implements Repository<Exercise> {
-    private DAO<Exercise> exerciseDao;
+public class ExerciseRepository implements IExerciseRepository {
+    private IExerciseDAO exerciseDao;
 
-    public ExerciseRepository(DAO<Exercise> exerciseDao) {
+    public ExerciseRepository(IExerciseDAO exerciseDao) {
         this.exerciseDao = exerciseDao;
     }
 
     @Override
-    public long add(Exercise entity) {
-        return this.exerciseDao.insert(entity);
-    }
+    public List<Exercise> getAllExercises() {
+        return this.exerciseDao.queryAll();
 
-    @Override
-    public long update(Exercise entity) {
-        return this.exerciseDao.update(entity);
-    }
-
-    @Override
-    public long remove(Exercise entity) {
-        return this.exerciseDao.delete(entity);
-    }
-
-    @Override
-    public List<Exercise> get(Exercise entity) {
-        return this.exerciseDao.query(entity);
     }
 }

@@ -1,7 +1,5 @@
 package persistence;
 
-import org.sqlite.SQLiteDataSource;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
@@ -18,12 +16,11 @@ public abstract class DatabaseQuery<T> {
     protected abstract String getCommandText();
 
     /**
-     * Prepare statement
-     * @param connection
-     * @param param can be null, example -> select all
+     *
+     * @param statement
      * @return
      */
-    protected abstract PreparedStatement createPreparedStatement(Connection connection, T param);
+    protected abstract void setParams(PreparedStatement statement);
 
     /**
      * Returns a list of items.
@@ -38,15 +35,21 @@ public abstract class DatabaseQuery<T> {
         this.dataSource = dataSource;
     }
 
-    public List<T> execute(T param) {
+    public List<T> execute() {
         /*
         The connection, statement and result will be automatically closed inside try
          */
         try (Connection connection = this.dataSource.getConnection();
-             PreparedStatement statement = createPreparedStatement(connection, param);
-             ResultSet resultSet = statement.executeQuery()) {
+             PreparedStatement statement = connection.prepareStatement(getCommandText())) {
+            setParams(statement);
 
-            return map(resultSet);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                return map(resultSet);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
