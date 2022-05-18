@@ -45,27 +45,3 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> {
         }
     }
 }
-
-
-
-//        try {
-//                List<Alert> alertList = data.getAlertList();
-//        int count = 0;
-//
-//        for (Alert alert : alertList) {
-//
-//        preparedStatement.setInt(1, data.getId());
-//        preparedStatement.setString(2, alert.getName());
-//        preparedStatement.setString(3, alert.getInterval().getStartTime().toString());
-//        preparedStatement.setString(4, alert.getInterval().getEndTime().toString());
-//
-//        preparedStatement.addBatch();
-//        count++;
-//        }
-//
-//        if (count % 100 == 0 || count == alertList.size() || customBreak) {
-//        preparedStatement.executeBatch();
-//        }
-//        } catch (SQLException e) {
-//        System.out.println("Error setting insert statement user alerts: " + e);
-//        }

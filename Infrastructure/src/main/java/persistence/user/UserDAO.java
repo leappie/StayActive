@@ -44,4 +44,6 @@ public class UserDAO implements IUserDAO {
     public List<User> query(User user) {
         return this.dataStore.query(new SelectUserQuery(this.dataSource, user));
     }
+
+
 }

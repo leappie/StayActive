@@ -28,7 +28,7 @@ public class DeleteAlertCommand extends DatabaseCommand<Alert> {
         try {
             preparedStatement.setInt(1, data.getId());
 
-            preparedStatement.executeUpdate();
+            preparedStatement.addBatch();
         } catch (SQLException e) {
             System.out.println("Error setting statement: " + e);
         }

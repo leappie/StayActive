@@ -30,7 +30,7 @@ public class UpdateAlertCommand extends DatabaseCommand<Alert> {
             preparedStatement.setString(2, data.getInterval().getEndTime().toString());
             preparedStatement.setInt(3, data.getId());
 
-            preparedStatement.executeUpdate();
+            preparedStatement.addBatch();
         } catch (SQLException e) {
             System.out.println("Error setting statement: " + e);
         }
