@@ -24,7 +24,7 @@ public class NotificationTimeCreatorA implements Notifiable {
         LocalTime notificationTimeHigh; // used to set the highest time of the interval, interval ex. [08:00, 09:00]
 
         // If all notifications in an interval are triggered -> end. No more notifications.
-        if (interval.getNotificationsTriggered() >= interval.getTotalNotifications()) {
+        if (interval.getNotificationsTriggered() == interval.getTotalNotifications()) {
             return null;
         } else {
             // if only one notification to trigger, then start and end time are equal to the interval

@@ -78,6 +78,11 @@ public class NotificationTimeCreatorATest {
                     subEndTimeSeconds = subEndTime.toSecondOfDay();
                 }
             }
+            System.out.println(LocalTime.ofSecondOfDay(subStartTimeSeconds));
+            System.out.println(result);
+            System.out.println(LocalTime.ofSecondOfDay(subEndTimeSeconds));
+            System.out.println("-------------------------");
+
             subStartTime = LocalTime.ofSecondOfDay(subEndTimeSeconds);
 
             // Assert

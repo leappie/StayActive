@@ -18,7 +18,7 @@ public class NotificationTimeCreatorB extends NotificationTimeCreatorA {
      */
     @Override
     public LocalTime calcNotificationTime(Interval interval) {
-        LocalTime startTime = interval.getStartTime();
+        LocalTime startTime = interval.getSubInterval().getStartTime();
         LocalTime now = LocalTime.now();
 
         /*
