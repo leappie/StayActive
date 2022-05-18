@@ -1,5 +1,5 @@
 # StayActive
-## HBO - ICT: Semester 2 project
+## HBO - ICT: Year 1: Semester 2 project
 The goal of the project is to design a modular application using OOP principles (e.g. SOLID), design patterns (e.g. Factory patter, Template pattern)  and testing (e.g. Acceptancy test, Intergration test, Unit test). To do this, we had to first make a functional and technical design of our application. 
 
 ## 4 - Tier architecture 
