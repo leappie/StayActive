@@ -1,6 +1,9 @@
 # StayActive
 ## HBO - ICT: Semester 2 project
-4 - tier architecture based on [CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture). The dependencies 
+The goal of the project is to design a modular application using OOP principles (e.g. SOLID), design patterns (e.g. Factory patter, Template pattern)  and testing (e.g. Acceptancy test, Intergration test, Unit test). To do this, we had to first make a functional and technical design of our application. 
+
+## 4 - Tier architecture 
+Based on [CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture). The dependencies 
 between the layers are as following:
 
 ![4-tier](assets/n-tier.png)
@@ -18,3 +21,5 @@ injection.
 - ### [Infrastructure layer](Infrastructure)
 I have used the provided class diagram for the template pattern provided by HBO ICT to make the database layer modular. To access the database layer
 I make use of DAO's and Repositories.
+
+
