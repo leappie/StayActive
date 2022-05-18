@@ -26,7 +26,7 @@ public class NewAlertService {
         this.alertExerciseDAO = alertExerciseDAO;
     }
 
-    public void AddNewAlert(User loggedInUser, List<Exercise> exerciseList) {
+    public void addNewAlert(User loggedInUser, List<Exercise> exerciseList) {
         // add alert to db
         IUserAlertRepository userAlertRepository = new UserAlertRepository(this.userAlertDAO);
         userAlertRepository.insertUserAlert(loggedInUser);

@@ -5,7 +5,7 @@ import common.interfaces.Mapping;
 import entity.User;
 import model.UserLoginViewModel;
 
-public class UserLoginViewMapping implements Mapping<UserLoginViewModel, User> {
+public class UserLoginViewModelMapping implements Mapping<UserLoginViewModel, User> {
 
     @Override
     public User mapToEntity(UserLoginViewModel viewModel) {

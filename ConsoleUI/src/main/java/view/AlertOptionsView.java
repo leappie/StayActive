@@ -5,7 +5,7 @@ import common.enums.Display;
 import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
-import common.mapping.AlertViewMapping;
+import common.mapping.AlertViewModelMapping;
 import common.models.DisplayScreen;
 import common.models.InputField;
 import common.services.CurrentUserService;
@@ -93,7 +93,7 @@ public class AlertOptionsView extends FormView<UserMainViewModel> {
         // map to AlertViewModel
         List<AlertViewModel> alertViewModelList = new ArrayList<>();
         for (Alert alert : alertList) {
-            AlertViewModel alertViewModel = new AlertViewMapping().mapToModel(alert);
+            AlertViewModel alertViewModel = new AlertViewModelMapping().mapToModel(alert);
             alertViewModelList.add(alertViewModel);
         }
 

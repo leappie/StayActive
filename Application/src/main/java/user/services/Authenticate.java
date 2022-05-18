@@ -11,7 +11,7 @@ import user.UserRepository;
 public class Authenticate implements Authenticator {
     private IUserRepository userRepository;
 
-    public Authenticate(UserRepository userRepository) {
+    public Authenticate(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

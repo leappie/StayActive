@@ -27,8 +27,7 @@ public class DeleteAlertExerciseCommand extends DatabaseCommand<Alert> {
     protected void setParams(PreparedStatement preparedStatement, Alert data) {
         try {
             preparedStatement.setInt(1, data.getId());
-
-            preparedStatement.executeUpdate();
+            preparedStatement.addBatch();
         } catch (SQLException e) {
             System.out.println("Error setting update statement: " + e);
         }

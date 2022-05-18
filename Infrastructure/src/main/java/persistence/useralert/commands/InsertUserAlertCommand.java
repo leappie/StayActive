@@ -19,7 +19,7 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> {
     @Override
     protected String getCommandText() {
         String query = String.format(
-                "INSERT OR IGNORE INTO %s" +
+                "INSERT INTO %s" +
                         "(%s, %s, %s, %s) " +
                         "VALUES(?, ?, ?, ?)",
                 AlertTable.TABLE, AlertTable.COLUMN_USER_ID, AlertTable.COLUMN_NAME, AlertTable.COLUMN_START_TIME,
@@ -39,8 +39,7 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> {
             preparedStatement.setString(2, alert.getName());
             preparedStatement.setString(3, alert.getInterval().getStartTime().toString());
             preparedStatement.setString(4, alert.getInterval().getEndTime().toString());
-
-            preparedStatement.executeUpdate();
+            preparedStatement.addBatch();
         } catch (SQLException e) {
             System.out.println("Error setting insert statement user alerts: " + e);
         }

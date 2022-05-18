@@ -6,7 +6,7 @@ import entity.Exercise;
 import enums.Level;
 import model.ExerciseViewModel;
 
-public class OnExerciseViewMapping implements Mapping<ExerciseViewModel, Exercise> {
+public class OnExerciseViewModelMapping implements Mapping<ExerciseViewModel, Exercise> {
     @Override
     public Exercise mapToEntity(ExerciseViewModel viewModel) {
         Level level = new LevelConverter().tryParse(viewModel.getLevel());

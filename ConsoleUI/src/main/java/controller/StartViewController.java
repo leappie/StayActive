@@ -25,10 +25,10 @@ public class StartViewController implements Controller<UserMainViewModel> {
                 view = View.LOGIN_VIEW;
                 screen = Display.MAIN;
                 break;
-//            case 2:
-//                // TODO: NEW ACCOUNT
-//                view = View.NEW_ACCOUNT_VIEW;
-//                break;
+            case 2:
+                view = View.NEW_ACCOUNT_VIEW;
+                screen = Display.MAIN;
+                break;
 //            case 3:
 //                // TODO: FORGOT PASSWORD
 //                view = View.FORGOT_PASSWORD_VIEW;

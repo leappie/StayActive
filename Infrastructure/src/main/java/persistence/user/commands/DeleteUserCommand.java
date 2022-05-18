@@ -26,7 +26,7 @@ public class DeleteUserCommand extends DatabaseCommand<User> {
     protected void setParams(PreparedStatement preparedStatement, User data) {
         try {
             preparedStatement.setString(1, data.getUsername());
-
+            preparedStatement.addBatch();
         } catch (SQLException e) {
             System.out.println("Error setting delete statement: " + e);
 

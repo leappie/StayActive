@@ -31,7 +31,6 @@ public class InsertAlertExerciseCommand extends DatabaseCommand<Alert> {
     protected void setParams(PreparedStatement preparedStatement, Alert data) {
         try {
             List<Exercise> exerciseList = data.getExerciseList();
-            int count = 0;
 
             for (Exercise exercise : exerciseList) {
                 preparedStatement.setInt(1, data.getId());
@@ -39,12 +38,8 @@ public class InsertAlertExerciseCommand extends DatabaseCommand<Alert> {
                 preparedStatement.setInt(3, exercise.getWeight());
 
                 preparedStatement.addBatch();
-                count++;
             }
 
-            if (count % 100 == 0 || count == exerciseList.size()) {
-                preparedStatement.executeBatch();
-            }
         } catch (SQLException e) {
             System.out.println("Error setting insert statement user alerts: " + e);
 

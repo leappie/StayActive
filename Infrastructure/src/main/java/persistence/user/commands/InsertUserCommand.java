@@ -29,6 +29,7 @@ public class InsertUserCommand extends DatabaseCommand<User> {
             preparedStatement.setString(1, data.getUsername());
             preparedStatement.setString(2, data.getPassword());
             preparedStatement.setString(3, data.getLevel().toString());
+            preparedStatement.addBatch();
 
         } catch (SQLException e) {
             System.out.println("Error setting insert statement: " + e);

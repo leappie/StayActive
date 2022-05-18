@@ -31,7 +31,6 @@ public class UpdateAlertExerciseCommand extends DatabaseCommand<Alert> {
     protected void setParams(PreparedStatement preparedStatement, Alert data) {
         try {
             List<Exercise> exerciseList = data.getExerciseList();
-            int count = 0;
 
             for (Exercise exercise : exerciseList) {
                 preparedStatement.setInt(1, exercise.getWeight());
@@ -39,9 +38,8 @@ public class UpdateAlertExerciseCommand extends DatabaseCommand<Alert> {
                 preparedStatement.setInt(3, exercise.getId());
 
                 preparedStatement.addBatch();
-                count++;
             }
-            preparedStatement.executeBatch();
+
         } catch (SQLException e) {
             System.out.println("Error setting update statement: " + e);
         }

@@ -4,7 +4,7 @@ import common.enums.Display;
 import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
-import common.mapping.OnExerciseViewMapping;
+import common.mapping.OnExerciseViewModelMapping;
 import common.models.DisplayScreen;
 import common.models.InputField;
 import common.services.CurrentUserService;
@@ -39,7 +39,7 @@ public class NotificationController implements Controller<NotificationViewModel>
 
             if (exercise != null) {
                 // map exercise to viewModel
-                ExerciseViewModel exerciseViewModel = new OnExerciseViewMapping().mapToModel(exercise);
+                ExerciseViewModel exerciseViewModel = new OnExerciseViewModelMapping().mapToModel(exercise);
 
                 // show display
                 displayable = new OnExerciseView(inputField, exerciseViewModel, "Todo exercise");

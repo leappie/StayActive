@@ -8,7 +8,7 @@ import model.AlertViewModel;
 
 import java.time.LocalTime;
 
-public class AlertViewMapping implements Mapping<AlertViewModel, Alert> {
+public class AlertViewModelMapping implements Mapping<AlertViewModel, Alert> {
     @Override
     public Alert mapToEntity(AlertViewModel viewModel) {
         LocalTimeConverter localTimeConverter = new LocalTimeConverter();

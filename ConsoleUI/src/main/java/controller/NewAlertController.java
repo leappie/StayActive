@@ -4,7 +4,7 @@ import common.enums.Display;
 import common.enums.View;
 import common.interfaces.Controller;
 import common.interfaces.Displayable;
-import common.mapping.AlertViewMapping;
+import common.mapping.AlertViewModelMapping;
 import common.models.DisplayScreen;
 import common.models.InputField;
 import common.services.CurrentUserService;
@@ -31,7 +31,7 @@ public class NewAlertController implements Controller<AlertViewModel> {
         View view;
 
         // map alertViewModel to alert
-        Alert alert = new AlertViewMapping().mapToEntity(model);
+        Alert alert = new AlertViewModelMapping().mapToEntity(model);
 
         // check if mapping succeeded
         if (alert == null) {
@@ -45,10 +45,10 @@ public class NewAlertController implements Controller<AlertViewModel> {
 
             if (alert != null) {
                 // get all exercises to pair with alert
-                List<Exercise> exerciseList = new ExerciseService(new ExerciseDAO()).getAllExercises();// TODO: improve?
+                List<Exercise> exerciseList = new ExerciseService(new ExerciseDAO()).getAllExercises();
 
                 // add new alert
-                new NewAlertService(new UserAlertDAO(), new AlertExerciseDAO()).AddNewAlert(loggedInUser, exerciseList); // TODO: improve?
+                new NewAlertService(new UserAlertDAO(), new AlertExerciseDAO()).addNewAlert(loggedInUser, exerciseList);
 
                 view = View.ALERT_OPTIONS_VIEW;
                 screen = Display.MAIN;

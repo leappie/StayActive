@@ -31,6 +31,7 @@ public class UpdateUserCommand extends DatabaseCommand<User> {
             preparedStatement.setString(2, data.getPassword());
             preparedStatement.setString(3, data.getLevel().toString());
             preparedStatement.setInt(4, data.getId());
+            preparedStatement.addBatch();
 
         } catch (SQLException e) {
             System.out.println("Error setting update statement: " + e);

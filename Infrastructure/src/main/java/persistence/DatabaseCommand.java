@@ -38,12 +38,12 @@ public abstract class DatabaseCommand<T> {
                      getCommandText(), Statement.RETURN_GENERATED_KEYS)) {
 
             setParams(statement, data);
-            int affectedRows = statement.executeUpdate();
+            int[] affectedRows = statement.executeBatch();
 
             /*
             Get the id back
              */
-            if (affectedRows > 0) {
+            if (affectedRows.length > 0) {
                 try (ResultSet resultSet = statement.getGeneratedKeys()) {
                     if (resultSet.next()) {
                         id = resultSet.getLong(1);
