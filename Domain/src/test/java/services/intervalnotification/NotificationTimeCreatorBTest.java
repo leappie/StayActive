@@ -94,7 +94,7 @@ class NotificationTimeCreatorBTest {
         final LocalTime END_TIME = LocalTime.of(END_HOUR,END_MINUTE);
 
         // Play with this to get different notification time
-        int notificationsTriggered = 7; // must be smaller than 8, else calcNotificationTime will return null because all notifications are already triggered
+        int notificationsTriggered = 1; // must be smaller than 8, else calcNotificationTime will return null because all notifications are already triggered
         LocalTime subStartTime = getStartTimeSubInterval(notificationsTriggered, START_TIME);
 
         Mockito.when(interval.getTotalNotifications()).thenReturn(TOTAL_NOTIFICATIONS);

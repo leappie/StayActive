@@ -1,8 +1,6 @@
 package alert;
 
 
-import common.interfaces.DAO;
-import common.interfaces.Repository;
 import common.interfaces.daos.IAlertDAO;
 import common.interfaces.repositories.IAlertRepository;
 import entity.Alert;
