@@ -2,8 +2,7 @@
 ## HBO - ICT: Year 1: Semester 2 project
 The goal of the project is to design a modular application using OOP principles (e.g. SOLID), design patterns and testing. To do this, we had to first make a functional and technical design of our application. 
 
-This application's purposes is to provide notifications in a certain time interval on which the user can act. If the user accepts the notification an exercises is shown.
-The goal is to keep the user active once every hour.
+This application's purposes is to provide notifications in a certain time interval on which the user can act. If the user accepts the notification an exercises is shown what the user can do. The goal is to keep the user active once every hour.
 
 ## 4 - Tier architecture 
 Based on [CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture). The dependencies 
