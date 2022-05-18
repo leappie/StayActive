@@ -156,7 +156,7 @@ class ExerciseLevelCreatorATest {
         //Arrange
         boolean accepted = true;
         List<Notification> notificationList = createNotificationListSize3(!accepted, !accepted, accepted);
-        Interval interval = new Interval(0, LocalTime.of(8,0), LocalTime.of(17,0), notificationList);
+        Interval interval = new Interval(0, LocalTime.of(8, 0), LocalTime.of(17, 0), notificationList);
 
         // Act
         Level level = new ExerciseLevelCreatorA().getExerciseDifficulty(interval).get(0);
@@ -164,8 +164,6 @@ class ExerciseLevelCreatorATest {
         // Assert
         Assertions.assertEquals(Level.HARD, level);
     }
-
-
 
 
     private List<Notification> createNotificationListSize3(boolean accept1, boolean accept2, boolean accept3) {

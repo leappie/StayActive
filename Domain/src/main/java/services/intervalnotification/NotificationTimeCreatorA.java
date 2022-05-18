@@ -24,29 +24,29 @@ public class NotificationTimeCreatorA implements Notifiable {
         LocalTime notificationTimeHigh; // used to set the highest time of the interval, interval ex. [08:00, 09:00]
 
         // If all notifications in an interval are triggered -> end. No more notifications.
-        if (interval.getNotificationsTriggered() == interval.getTotalNotifications()) {
+        if (interval.getNotificationsTriggered() >= interval.getTotalNotifications()) {
             return null;
         } else {
             // if only one notification to trigger, then start and end time are equal to the interval
             if (interval.getTotalNotifications() == 1) {
-                notificationTimeLow = interval.getStartTime();
-                notificationTimeHigh = interval.getEndTime();
+                notificationTimeLow = interval.getSubInterval().getStartTime();
+                notificationTimeHigh = interval.getSubInterval().getEndTime();
             } else {
-                notificationTimeLow = interval.getIntermediateInterval().getStartTime(); // get the start time of the sub interval
+                notificationTimeLow = interval.getSubInterval().getStartTime(); // get the start time of the sub interval
                 if (interval.getNotificationsTriggered() == 0) {
                     // If first notification to trigger, then ex.: start time = 08.21 -> 09:00 = end time
                     notificationTimeHigh = notificationTimeLow.truncatedTo(ChronoUnit.HOURS).
                             plusMinutes(Constants.INTERVAL_LENGTH_MINUTES);
                 } else if (interval.getNotificationsTriggered() == interval.getTotalNotifications() - 1) {
                     // If last notification 16:00 -> 16:30
-                    notificationTimeHigh = interval.getIntermediateInterval().getEndTime();
+                    notificationTimeHigh = interval.getSubInterval().getEndTime();
                 } else {
                     // every other notification 09:00 -> 10:00
                     notificationTimeHigh = notificationTimeLow.plus(Constants.INTERVAL_LENGTH_MINUTES, ChronoUnit.MINUTES);
                 }
             }
         }
-        interval.getIntermediateInterval().setStartTime(notificationTimeHigh); // update the next sub interval start time
+        interval.getSubInterval().setStartTime(notificationTimeHigh); // update the next sub interval start time
 
         // covert times to seconds
         int secondsLow = notificationTimeLow.toSecondOfDay();

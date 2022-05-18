@@ -19,16 +19,16 @@ public class Interval {
      * start and end time are updated when a notification has taken place.
      *
      */
-    private Interval intermediateInterval; // used for calculating notification time
+    private Interval subInterval; // used for calculating notification time
 
-    public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList, Interval intermediateInterval) {
+    public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList, Interval subInterval) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.totalNotifications = calcTotalNotifications();
         this.notificationsTriggered = Constants.DEFAULT_ZERO;
         this.notificationList = notificationList;
-        this.intermediateInterval = intermediateInterval;
+        this.subInterval = subInterval;
     }
 
     public Interval(int id, LocalTime startTime, LocalTime endTime, List<Notification> notificationList) {
@@ -80,8 +80,8 @@ public class Interval {
         this.notificationsTriggered = notificationsTriggered;
     }
 
-    public Interval getIntermediateInterval() {
-        return intermediateInterval;
+    public Interval getSubInterval() {
+        return subInterval;
     }
 
     public void setTotalNotifications(int totalNotifications) {

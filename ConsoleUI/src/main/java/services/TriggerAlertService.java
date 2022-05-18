@@ -62,8 +62,8 @@ public class TriggerAlertService {
 
     private Interval resetInterval(Interval interval) {
         interval.setNotificationsTriggered(0);
-        interval.getIntermediateInterval().setStartTime(interval.getStartTime());
-        interval.getIntermediateInterval().setEndTime(interval.getEndTime());
+        interval.getSubInterval().setStartTime(interval.getStartTime());
+        interval.getSubInterval().setEndTime(interval.getEndTime());
         interval.setNotificationList(new ArrayList<>());
 
         return interval;

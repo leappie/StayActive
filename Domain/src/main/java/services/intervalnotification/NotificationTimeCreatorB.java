@@ -2,7 +2,6 @@ package services.intervalnotification;
 
 
 import entity.Interval;
-import interfaces.Notifiable;
 
 import java.time.LocalTime;
 
@@ -19,7 +18,7 @@ public class NotificationTimeCreatorB extends NotificationTimeCreatorA {
      */
     @Override
     public LocalTime calcNotificationTime(Interval interval) {
-        LocalTime startTime = interval.getIntermediateInterval().getStartTime();
+        LocalTime startTime = interval.getStartTime();
         LocalTime now = LocalTime.now();
 
         /*
@@ -27,12 +26,12 @@ public class NotificationTimeCreatorB extends NotificationTimeCreatorA {
          * Example if start time is 08:00 but now is 09:00, show only notification from 09:00
          */
         if (startTime.compareTo(now) < 0) {
-            interval.getIntermediateInterval().setStartTime(now);
+            interval.getSubInterval().setStartTime(now);
 
             /* Change total notifications because now is later than start time interval.
              * So in this means less notifications.
              */
-            int total = interval.getIntermediateInterval().getTotalNotifications();
+            int total = interval.getSubInterval().getTotalNotifications();
             interval.setTotalNotifications(total);
         }
 

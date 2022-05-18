@@ -22,7 +22,7 @@ class UserDAOTest extends DAOTest {
     @Test
     void testInsert() throws Exception {
         // Arrange
-        tearDown();
+        tearDown(); // empty the table user
         IDataSet databaseDataSet = getConnection().createDataSet();
         IDataSet expectedDataSet = getDataSet();
         ITable expectedTable = expectedDataSet.getTable("user");
@@ -45,7 +45,7 @@ class UserDAOTest extends DAOTest {
     @Test
     void testUpdate() throws Exception {
         // Arrange
-        setUp();
+        setUp(); // set up the table with the xml test user data
         IDataSet databaseDataSet = getConnection().createDataSet();
         int userId1 = (int) databaseDataSet.getTable("user").getValue(0, "id"); // get row 0, column id
         int userId2 = (int) databaseDataSet.getTable("user").getValue(1, "id");
