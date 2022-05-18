@@ -20,6 +20,6 @@ However, I did give my own implementation to it. The console UI  depends on the 
 injection.
 - ### [Infrastructure layer](Infrastructure)
 I have used the provided class diagram for the template pattern provided by HBO ICT to make the database layer modular. To access the database layer
-I make use of DAO's and Repositories.
+I make use of DAOs and Repositories.
 
 
