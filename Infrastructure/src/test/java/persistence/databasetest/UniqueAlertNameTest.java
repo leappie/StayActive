@@ -1,10 +1,7 @@
 package persistence.databasetest;
 
-import common.util.LevelConverter;
 import entity.Alert;
 import entity.Interval;
-import entity.User;
-import enums.Level;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import persistence.common.Constants;
@@ -58,23 +55,26 @@ public class UniqueAlertNameTest extends DatabaseTests{
     public void testUniqueKeyAlertName() {
         initialize();
         final String commandText = String.format(
-                "INSERT OR IGNORE INTO %s" +
-                        "(%s, %s, %s, %s) " +
-                        "VALUES(?, ?, ?, ?)",
-                Constants.AlertTable.TABLE, Constants.AlertTable.COLUMN_ID, Constants.AlertTable.COLUMN_NAME,
-                Constants.AlertTable.COLUMN_START_TIME, Constants.AlertTable.COLUMN_END_TIME);
+                "INSERT INTO %s" +
+                        "(%s, %s, %s, %s, %s) " +
+                        "VALUES(?, ?, ?, ?, ?)",
+                Constants.AlertTable.TABLE, Constants.AlertTable.COLUMN_ID, Constants.AlertTable.COLUMN_USER_ID,
+                Constants.AlertTable.COLUMN_NAME, Constants.AlertTable.COLUMN_START_TIME,
+                Constants.AlertTable.COLUMN_END_TIME);
         final Alert alert = new Alert(1, "Alert 1", new Interval(LocalTime.of(8, 0),
                 LocalTime.of(12, 0)));
+        final int USER_ID = 1;
 
         try (Connection connection = getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(commandText)) {
 
             // Insert same alert twice
             for (int i = 1; i <= 2; i++) {
-                statement.setInt(1, alert.getId());
-                statement.setString(2, alert.getName());
-                statement.setString(3, alert.getInterval().getStartTime().toString());
-                statement.setString(3, alert.getInterval().getEndTime().toString());
+                statement.setInt(1, i);
+                statement.setInt(2, 1);
+                statement.setString(3, alert.getName());
+                statement.setString(4, alert.getInterval().getStartTime().toString());
+                statement.setString(5, alert.getInterval().getEndTime().toString());
                 statement.addBatch();
             }
 
