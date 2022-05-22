@@ -1,20 +1,27 @@
 # StayActive
-## HBO - ICT: Semester 2 project
-4 - tier architecture based on [CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture). The dependencies 
+## HBO - ICT: Year 1: Semester 2 project
+The goal of the project is to design a modular application using OOP principles, SOLID, design patterns and testing. To do this, we had to first make a functional and technical design of our application. 
+
+This application's purposes is to provide notifications in a certain time interval on which the user can act. If the user accepts the notification an exercises is shown what the user can do. The goal is to keep the user active once every hour.
+
+## 4 - Tier architecture 
+Based on [CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture). The dependencies 
 between the layers are as following:
 
 ![4-tier](assets/n-tier.png)
 
-- ###[Application layer](Application)
+- ### [Application layer](Application)
 The application layer depends only on the domain layer. Furthermore, it contains all the application logic. The application
 layer contains the interfaces and logic what are used throughout the whole application. 
-- ###[Domain layer](Domain)
+- ### [Domain layer](Domain)
 The domain layer has no dependency on the other layers. It contains all entities, enums, exceptions, interfaces, 
 types and logic specific to the domain layer.
-- ###[ConsolUi layer](ConsoleUI)
+- ### [ConsolUI layer](ConsoleUI)
 For the console UI I have used the MVC design pattern. A class diagram was provided by HBO ICT for inspiration.
 However, I did give my own implementation to it. The console UI  depends on the infrastructure layer through dependency 
 injection.
-- ###[Infrastructure layer](Infrastructure)
+- ### [Infrastructure layer](Infrastructure)
 I have used the provided class diagram for the template pattern provided by HBO ICT to make the database layer modular. To access the database layer
-I make use of DAO's and Repositories.
+I make use of DAOs and Repositories.
+
+
