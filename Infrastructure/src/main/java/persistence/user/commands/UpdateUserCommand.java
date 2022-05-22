@@ -1,4 +1,4 @@
-package persistence.daotests.user.commands;
+package persistence.user.commands;
 
 import entity.User;
 import persistence.DatabaseCommand;

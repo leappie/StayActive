@@ -10,7 +10,7 @@ import common.models.InputField;
 import entity.User;
 import factory.ViewFactory;
 import model.UserLoginViewModel;
-import persistence.daotests.user.UserDAO;
+import persistence.user.UserDAO;
 import services.LoginService;
 import user.UserRepository;
 import user.services.Authenticate;

@@ -11,7 +11,7 @@ import common.models.InputField;
 import entity.User;
 import factory.ViewFactory;
 import model.NewUserViewModel;
-import persistence.daotests.user.UserDAO;
+import persistence.user.UserDAO;
 import services.NewAccountService;
 import user.UserRepository;
 import user.services.Authenticate;

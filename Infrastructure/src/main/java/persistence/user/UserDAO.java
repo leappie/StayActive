@@ -1,14 +1,14 @@
-package persistence.daotests.user;
+package persistence.user;
 
 
 import common.interfaces.daos.IUserDAO;
 import entity.User;
 import persistence.DataStore;
 import persistence.StayActiveDataSource;
-import persistence.daotests.user.commands.DeleteUserCommand;
-import persistence.daotests.user.commands.InsertUserCommand;
-import persistence.daotests.user.commands.UpdateUserCommand;
-import persistence.daotests.user.queries.SelectUserQuery;
+import persistence.user.commands.DeleteUserCommand;
+import persistence.user.commands.InsertUserCommand;
+import persistence.user.commands.UpdateUserCommand;
+import persistence.user.queries.SelectUserQuery;
 
 import javax.sql.DataSource;
 import java.util.List;

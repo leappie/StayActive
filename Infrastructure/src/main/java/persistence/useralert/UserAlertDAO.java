@@ -1,7 +1,6 @@
 package persistence.useralert;
 
 
-import common.interfaces.DAO;
 import common.interfaces.daos.IUserAlertDAO;
 import entity.User;
 import persistence.DataStore;

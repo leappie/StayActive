@@ -1,4 +1,4 @@
-package persistence.daotests.user;
+package persistence.daotests;
 
 import entity.User;
 import enums.Level;
@@ -6,7 +6,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import persistence.daotests.DAOTest;
+import persistence.user.UserDAO;
 
 import java.util.List;
 

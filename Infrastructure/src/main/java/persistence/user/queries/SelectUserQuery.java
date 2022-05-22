@@ -1,4 +1,4 @@
-package persistence.daotests.user.queries;
+package persistence.user.queries;
 
 
 import common.util.LevelConverter;
