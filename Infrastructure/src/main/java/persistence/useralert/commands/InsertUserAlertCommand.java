@@ -19,7 +19,7 @@ public class InsertUserAlertCommand extends DatabaseCommand<User> {
     @Override
     protected String getCommandText() {
         String query = String.format(
-                "INSERT INTO %s" +
+                "INSERT INTO OR IGNORE %s" +
                         "(%s, %s, %s, %s) " +
                         "VALUES(?, ?, ?, ?)",
                 AlertTable.TABLE, AlertTable.COLUMN_USER_ID, AlertTable.COLUMN_NAME, AlertTable.COLUMN_START_TIME,

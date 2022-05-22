@@ -1,4 +1,4 @@
-package persistence;
+package persistence.daotests;
 
 import org.dbunit.DataSourceBasedDBTestCase;
 import org.dbunit.dataset.IDataSet;

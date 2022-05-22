@@ -1,4 +1,4 @@
-package persistence.user;
+package persistence.daotests.user;
 
 import entity.User;
 import enums.Level;
@@ -6,7 +6,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import persistence.DAOTest;
+import persistence.daotests.DAOTest;
 
 import java.util.List;
 
@@ -14,10 +14,9 @@ import java.util.List;
 /**
  * This class tests the CRUD operations for the UserDAO
  */
-class UserDAOTest extends DAOTest {
+public class UserDAOTest extends DAOTest {
 
     private UserDAO userDAO = new UserDAO(getDataSource());
-    private String testData = "src/test/resources/user_testdata.xml";
 
     @Test
     void testInsert() throws Exception {
@@ -105,7 +104,7 @@ class UserDAOTest extends DAOTest {
 
     @Override
     protected String getTestData() {
-        return testData;
+        return "src/test/resources/user_testdata.xml";
     }
 }
 
