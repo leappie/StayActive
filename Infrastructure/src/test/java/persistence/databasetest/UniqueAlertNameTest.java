@@ -14,48 +14,52 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniqueAlertNameTest extends DatabaseTests{
+public class UniqueAlertNameTest extends DatabaseTests<Alert> {
 
-    private List<Alert> getAllAlerts() {
-        List<Alert> alertList = new ArrayList<>();
-        final String query = String.format(
+    @Override
+    protected String getCommandText() {
+        return String.format(
                 "SELECT %s, %s, %s, %s " +
                         "FROM %s",
                 Constants.AlertTable.COLUMN_ID, Constants.AlertTable.COLUMN_NAME, Constants.AlertTable.COLUMN_START_TIME,
                 Constants.AlertTable.COLUMN_END_TIME, Constants.AlertTable.TABLE);
+    }
 
-        try (Connection connection = getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)){
+    @Override
+    protected void setParams(PreparedStatement statement) {}
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
-                while(resultSet.next()) {
-                    int id = resultSet.getInt(Constants.AlertTable.COLUMN_ID);
-                    String name = resultSet.getString(Constants.AlertTable.COLUMN_NAME);
-                    String startTimeStr = resultSet.getString(Constants.AlertTable.COLUMN_START_TIME);
-                    String endTimeStr = resultSet.getString(Constants.AlertTable.COLUMN_END_TIME);
+    @Override
+    protected List<Alert> map(ResultSet resultSet) {
+        List<Alert> alertList = new ArrayList<>();
+        try {
+            while(resultSet.next()) {
+                int id = resultSet.getInt(Constants.AlertTable.COLUMN_ID);
+                String name = resultSet.getString(Constants.AlertTable.COLUMN_NAME);
+                String startTimeStr = resultSet.getString(Constants.AlertTable.COLUMN_START_TIME);
+                String endTimeStr = resultSet.getString(Constants.AlertTable.COLUMN_END_TIME);
 
-                    LocalTime startTime = LocalTime.parse(startTimeStr);
-                    LocalTime endTime = LocalTime.parse(endTimeStr);
-                    if (startTime != null && endTime != null) {
-                        Alert alert = new Alert(id, name, new Interval(startTime, endTime));
-                        alertList.add(alert);
-                    }
+                LocalTime startTime = LocalTime.parse(startTimeStr);
+                LocalTime endTime = LocalTime.parse(endTimeStr);
+                if (startTime != null && endTime != null) {
+                    Alert alert = new Alert(id, name, new Interval(startTime, endTime));
+                    alertList.add(alert);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return alertList;
     }
 
+    /*
+    user_id and alert name combination is unique
+     */
     @Test
     public void testUniqueKeyAlertName() {
         initialize();
         final String commandText = String.format(
-                "INSERT INTO %s" +
+                "INSERT OR IGNORE INTO %s" +
                         "(%s, %s, %s, %s, %s) " +
                         "VALUES(?, ?, ?, ?, ?)",
                 Constants.AlertTable.TABLE, Constants.AlertTable.COLUMN_ID, Constants.AlertTable.COLUMN_USER_ID,
@@ -83,7 +87,7 @@ public class UniqueAlertNameTest extends DatabaseTests{
             System.out.println("Error executing command " + e);
         }
 
-        Assertions.assertEquals(1, getAllAlerts().size());
+        Assertions.assertEquals(1, executeQuery().size());
 
     }
 }

@@ -5,48 +5,50 @@ import entity.User;
 import enums.Level;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.sqlite.SQLiteDataSource;
 import persistence.common.Constants;
 
-import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniqueUsernameTest extends DatabaseTests {
+public class UniqueUsernameTest extends DatabaseTests<User> {
 
-    private List<User> getAllUsers() {
-        List<User> userList = new ArrayList<>();
-        final String query = String.format(
+    @Override
+    protected String getCommandText() {
+        return String.format(
                 "SELECT %s, %s, %s, %s " +
                         "FROM %s",
                 Constants.UserTable.COLUMN_ID, Constants.UserTable.COLUMN_USERNAME, Constants.UserTable.COLUMN_PASSWORD,
                 Constants.UserTable.COLUMN_LEVEL,
                 Constants.UserTable.TABLE);
+    }
 
-        try (Connection connection = getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)){
+    @Override
+    protected void setParams(PreparedStatement statement) {}
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
-                while(resultSet.next()) {
-                    int id = resultSet.getInt(Constants.UserTable.COLUMN_ID);
-                    String username = resultSet.getString(Constants.UserTable.COLUMN_USERNAME);
-                    String password = resultSet.getString(Constants.UserTable.COLUMN_PASSWORD);
-                    String levelString = resultSet.getString(Constants.UserTable.COLUMN_LEVEL);
+    @Override
+    protected List<User> map(ResultSet resultSet) {
+        List<User> userList = new ArrayList<>();
+        try {
+            while(resultSet.next()) {
+                int id = resultSet.getInt(Constants.UserTable.COLUMN_ID);
+                String username = resultSet.getString(Constants.UserTable.COLUMN_USERNAME);
+                String password = resultSet.getString(Constants.UserTable.COLUMN_PASSWORD);
+                String levelString = resultSet.getString(Constants.UserTable.COLUMN_LEVEL);
 
-                    Level level = new LevelConverter().tryParse(levelString);
-                    if (level != null) {
-                        User user = new User(id, username, password, level);
-                        userList.add(user);
-                    }
+                Level level = new LevelConverter().tryParse(levelString);
+                if (level != null) {
+                    User user = new User(id, username, password, level);
+                    userList.add(user);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return userList;
     }
 
@@ -77,10 +79,7 @@ public class UniqueUsernameTest extends DatabaseTests {
             System.out.println("Error executing command " + e);
         }
 
-        Assertions.assertEquals(1, getAllUsers().size());
-
+        Assertions.assertEquals(1, executeQuery().size());
     }
-
-
 
 }

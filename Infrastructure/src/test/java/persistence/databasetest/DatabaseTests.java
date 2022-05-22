@@ -4,11 +4,10 @@ import org.sqlite.SQLiteDataSource;
 import persistence.common.Constants;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.List;
 
-public class DatabaseTests {
+public abstract class DatabaseTests<T> {
     protected DataSource getDataSource() {
         SQLiteDataSource dataSource = new SQLiteDataSource();
         dataSource.setUrl("jdbc:sqlite:src/test/resources/stayactive_testdb.db");
@@ -37,6 +36,32 @@ public class DatabaseTests {
             e.printStackTrace();
         }
     }
+
+    protected abstract String getCommandText();
+    protected abstract void setParams(PreparedStatement statement);
+    protected abstract List<T> map(ResultSet resultSet);
+
+    public List<T> executeQuery() {
+        /*
+        The connection, statement and result will be automatically closed inside try
+         */
+        try (Connection connection = getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(getCommandText())) {
+            setParams(statement);
+
+            try(ResultSet resultSet = statement.executeQuery()) {
+                return map(resultSet);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
 }
