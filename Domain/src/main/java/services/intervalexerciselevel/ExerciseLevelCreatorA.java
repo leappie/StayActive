@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntPredicate;
 
 public class ExerciseLevelCreatorA implements Levelable {
     public static final String TAG = "ExerciseLevelCreatorA";
@@ -62,9 +63,14 @@ public class ExerciseLevelCreatorA implements Levelable {
     }
 
     private Level getExerciseLevel(int minutes) {
-        if (minutes >= 0 && minutes < 20) {
+        IntPredicate greaterEqualThan0 = i -> i >= 0;
+        IntPredicate smallerThan20 = i -> i < 20;
+        IntPredicate greaterEqualThan20 = i -> i >= 20;
+        IntPredicate smallerThan40 = i -> i < 40;
+
+        if (greaterEqualThan0.and(smallerThan20).test(minutes)) {
             return Level.EASY;
-        } else if (minutes >= 20 && minutes < 40) {
+        } else if (greaterEqualThan20.and(smallerThan40).test(minutes)) {
             return Level.MEDIUM;
         } else {
             return Level.HARD;

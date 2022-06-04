@@ -1,8 +1,6 @@
 package services;
 
-import common.services.CurrentUserService;
 import entity.User;
-import enums.Level;
 import interfaces.Authenticator;
 
 public class NewAccountService {

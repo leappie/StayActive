@@ -1,6 +1,5 @@
 package services;
 
-import common.interfaces.DAO;
 import common.interfaces.daos.IExerciseDAO;
 import entity.Exercise;
 import exercise.ExerciseRepository;

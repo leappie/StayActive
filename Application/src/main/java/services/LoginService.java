@@ -1,6 +1,5 @@
 package services;
 
-import common.services.CurrentUserService;
 import entity.User;
 import interfaces.Authenticator;
 
@@ -14,10 +13,6 @@ public class LoginService {
 
     public User authenticateUser(User user) {
         user = this.authenticator.authenticateUser(user);
-
-        if (user != null) {
-            CurrentUserService.setLoggedInUser(user);
-        }
 
         return user;
     }

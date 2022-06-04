@@ -48,7 +48,9 @@ public class NewAlertController implements Controller<AlertViewModel> {
                 List<Exercise> exerciseList = new ExerciseService(new ExerciseDAO()).getAllExercises();
 
                 // add new alert
-                new NewAlertService(new UserAlertDAO(), new AlertExerciseDAO()).addNewAlert(loggedInUser, exerciseList);
+                User updatedUser = new NewAlertService(new UserAlertDAO(), new AlertExerciseDAO())
+                        .addNewAlert(loggedInUser, exerciseList);
+                CurrentUserService.setLoggedInUser(updatedUser);
 
                 view = View.ALERT_OPTIONS_VIEW;
                 screen = Display.MAIN;

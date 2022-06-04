@@ -1,4 +1,4 @@
-package common.services;
+package services;
 
 import entity.Interval;
 import entity.Notification;

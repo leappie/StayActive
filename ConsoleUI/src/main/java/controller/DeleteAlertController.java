@@ -37,7 +37,7 @@ public class DeleteAlertController implements Controller<AlertViewModel> {
             Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex - 1);
 
             // Delete alert
-            new DeleteAlertService(new AlertDAO()).deleteAlert(chosenAlert);
+            new DeleteAlertService(new AlertDAO(), loggedInUser).deleteAlert(chosenAlert);
 
             // next view
             view = View.ALERT_OPTIONS_VIEW;

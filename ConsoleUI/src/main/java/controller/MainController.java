@@ -33,7 +33,8 @@ public class MainController implements Controller<UserMainViewModel> {
             case 2:
                 // get all alerts for current user
                 User loggedInUser = CurrentUserService.getLoggedInUser();
-                new MainService(new UserAlertDAO()).getUserNAlerts(loggedInUser); // TODO: improve?
+                User updatedUser = new MainService(new UserAlertDAO()).getUserNAlerts(loggedInUser); // TODO: improve?
+                CurrentUserService.setLoggedInUser(updatedUser);
 
                 view = View.ALERT_OPTIONS_VIEW;
                 screen = Display.MAIN;

@@ -1,11 +1,8 @@
 package services;
 
-import alert.AlertRepository;
 import alertexercise.AlertExerciseRepository;
-import common.interfaces.DAO;
 import common.interfaces.daos.IAlertExerciseDAO;
 import common.interfaces.repositories.IAlertExerciseRepository;
-import common.services.ExerciseLevelService;
 import entity.Alert;
 import entity.Exercise;
 import entity.Interval;

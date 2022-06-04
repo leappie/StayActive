@@ -1,18 +1,18 @@
 package services;
 
 import alert.AlertRepository;
-import common.interfaces.DAO;
 import common.interfaces.daos.IAlertDAO;
-import common.services.CurrentUserService;
 import entity.Alert;
 import entity.User;
 import services.user.UserAlerts;
 
 public class DeleteAlertService {
     private IAlertDAO alertDAO;
+    private User loggedInUser;
 
-    public DeleteAlertService(IAlertDAO alertDAO) {
+    public DeleteAlertService(IAlertDAO alertDAO, User loggedInUser) {
         this.alertDAO = alertDAO;
+        this.loggedInUser = loggedInUser;
     }
 
     public void deleteAlert(Alert alert) {
@@ -21,7 +21,6 @@ public class DeleteAlertService {
         alertRepository.deleteAlert(alert);
 
         // update user alerts
-        User loggedInUser = CurrentUserService.getLoggedInUser();
         new UserAlerts().deleteAlert(loggedInUser, alert);
 
 

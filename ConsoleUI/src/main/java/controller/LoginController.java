@@ -7,6 +7,7 @@ import common.interfaces.Displayable;
 import common.mapping.UserLoginViewModelMapping;
 import common.models.DisplayScreen;
 import common.models.InputField;
+import common.services.CurrentUserService;
 import entity.User;
 import factory.ViewFactory;
 import model.UserLoginViewModel;
@@ -27,9 +28,10 @@ public class LoginController implements Controller<UserLoginViewModel> {
 
         User user = new UserLoginViewModelMapping().mapToEntity(model);
         UserRepository userRepository = new UserRepository(new UserDAO());
-        user = new LoginService(new Authenticate(userRepository)).authenticateUser(user); // TODO: improve?
+        user = new LoginService(new Authenticate(userRepository)).authenticateUser(user);
 
         if (user != null) {
+            CurrentUserService.setLoggedInUser(user);
             view = View.MAIN_VIEW;
             screen = Display.MAIN;
         } else {

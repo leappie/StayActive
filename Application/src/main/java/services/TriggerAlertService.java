@@ -3,7 +3,6 @@ package services;
 import alertexercise.AlertExerciseRepository;
 import common.interfaces.daos.IAlertExerciseDAO;
 import common.interfaces.repositories.IAlertExerciseRepository;
-import common.services.CurrentUserService;
 import entity.Alert;
 import entity.Interval;
 import entity.Notification;
@@ -17,9 +16,11 @@ import java.util.List;
 
 public class TriggerAlertService {
     private IAlertExerciseDAO alertExerciseDAO;
+    private User loggedInUser;
 
-    public TriggerAlertService(IAlertExerciseDAO alertExerciseDAO) {
+    public TriggerAlertService(IAlertExerciseDAO alertExerciseDAO, User loggedInUser) {
         this.alertExerciseDAO = alertExerciseDAO;
+        this.loggedInUser = loggedInUser;
     }
 
     public LocalTime triggerAlert(Alert alert) {
@@ -47,8 +48,7 @@ public class TriggerAlertService {
     }
 
     private void updateUserAlert(Alert alert) {
-        User loggedInUser = CurrentUserService.getLoggedInUser();
-        List<Alert> alertList = loggedInUser.getAlertList();
+        List<Alert> alertList = this.loggedInUser.getAlertList();
 
         for (int i = 0; i < alertList.size(); i ++) {
             Alert checkAlert = alertList.get(i);

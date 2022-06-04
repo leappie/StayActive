@@ -41,7 +41,7 @@ public class TriggerAlertController implements Controller<NotificationViewModel>
             Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex - 1);
 
             // get notificationTime
-            LocalTime notificationTime = new TriggerAlertService(new AlertExerciseDAO()).triggerAlert(chosenAlert); // TODO: improve?
+            LocalTime notificationTime = new TriggerAlertService(new AlertExerciseDAO(), loggedInUser).triggerAlert(chosenAlert); // TODO: improve?
 
             if (notificationTime != null) {
                 inputField.put("notificationTime", new StringInputField(notificationTime.toString()));
