@@ -1,19 +1,14 @@
 package services;
 
-import alertexercise.AlertExerciseRepository;
 import common.interfaces.daos.IAlertExerciseDAO;
-import common.interfaces.daos.IExerciseDAO;
 import entity.Alert;
 import entity.Exercise;
 import entity.Interval;
 import entity.Notification;
 import enums.Level;
-import exercise.ExerciseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Any;
-import services.alertexercise.AlertExerciseCreatorA;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
