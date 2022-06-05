@@ -21,6 +21,10 @@ public class NotificationService {
     }
 
     public Exercise getExerciseOnNotification(Alert alert, User user) {
+        // get alert with all exercise + weights paired to alert
+        IAlertExerciseRepository alertExerciseRepository = new AlertExerciseRepository(this.alertExerciseDAO);
+        alert = alertExerciseRepository.getAlertExercise(alert);
+
         // get interval
         Interval interval = alert.getInterval();
 

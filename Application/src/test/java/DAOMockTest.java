@@ -1,48 +1,38 @@
-package services.alertexercise;
-
+import common.interfaces.daos.IExerciseDAO;
 import entity.Alert;
 import entity.Exercise;
+import entity.Interval;
 import enums.Level;
+import exercise.ExerciseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import services.alertexercise.AlertExerciseCreatorA;
+import services.intervalnotification.NotificationTimeCreatorB;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class AlertExerciseCreatorATest {
-
+class DAOMockTest {
     @Test
-    void getExerciseOnNotificationA() {
+    void getExerciseOnNotification() {
         // Arrange
-        List<Exercise> exerciseList = createExerciseList();
+        IExerciseDAO exerciseDAOMock = Mockito.mock(IExerciseDAO.class);
+        ExerciseRepository exerciseRepository = new ExerciseRepository(exerciseDAOMock);
+        Alert alertMock = Mockito.mock(Alert.class);
         List<Level> levelList = new ArrayList<>();
-        Alert alert = new Alert(0, "test", null, exerciseList);
-
-        levelList.add(Level.EASY);
         levelList.add(Level.HARD);
 
-        // Act
-        Exercise exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alert, levelList);
-
-        // Assert
-        Assertions.assertTrue(exercise.getLevel() == Level.EASY || exercise.getLevel() == Level.HARD);
-    }
-
-    @Test
-    void getExerciseOnNotificationB() {
-        // Arrange
-        List<Exercise> exerciseList = createExerciseList();
-        List<Level> levelList = new ArrayList<>();
-        Alert alert = new Alert(0, "test", null, exerciseList);
-
-        levelList = new ArrayList<>();
-        levelList.add(Level.HARD);
+        Mockito.when(exerciseDAOMock.queryAll()).thenReturn(createExerciseList());
+        List<Exercise> exerciseList = exerciseRepository.getAllExercises();
+        Mockito.when(alertMock.getExerciseList()).thenReturn(exerciseList);
 
         // Act
-        Exercise exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alert, levelList);
+        Exercise exercise = new AlertExerciseCreatorA().getExerciseOnNotification(alertMock, levelList);
 
         // Assert
-        Assertions.assertTrue(exercise.getLevel() == Level.HARD);
+        Assertions.assertSame(exercise.getLevel(), Level.HARD);
     }
 
     private List<Exercise> createExerciseList() {
@@ -65,4 +55,6 @@ class AlertExerciseCreatorATest {
 
         return exerciseList;
     }
+
+
 }

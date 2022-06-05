@@ -34,8 +34,8 @@ public class NotificationController implements Controller<NotificationViewModel>
             Alert chosenAlert = loggedInUser.getAlertList().get(chosenIndex - 1);
 
             // get exercise
-//            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert, loggedInUser); // TODO: improve?
-            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert); // TODO: improve?
+//            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert, loggedInUser);
+            Exercise exercise = new NotificationService(new AlertExerciseDAO()).getExerciseOnNotification(chosenAlert);
 
             if (exercise != null) {
                 // map exercise to viewModel

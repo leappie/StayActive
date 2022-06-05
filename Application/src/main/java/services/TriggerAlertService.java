@@ -24,10 +24,6 @@ public class TriggerAlertService {
     }
 
     public LocalTime triggerAlert(Alert alert) {
-        // get alert with all exercise + weights paired to alert
-        IAlertExerciseRepository alertExerciseRepository = new AlertExerciseRepository(this.alertExerciseDAO);
-        alert = alertExerciseRepository.getAlertExercise(alert);
-
         // calculate notification time
         Interval interval = alert.getInterval();
         IntervalNotification intervalNotification = new IntervalNotification(new NotificationTimeCreatorA());
